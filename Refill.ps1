@@ -18,3 +18,4 @@ choco install google-backup-and-sync -y
 choco install git -y
 choco install nodejs -y
 choco install lbry -y
+choco install steam -y

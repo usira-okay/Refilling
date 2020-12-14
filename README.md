@@ -25,4 +25,5 @@ Google Backup And Sync (Google Drive)
 Git
 Nodejs
 LBRY
+Steam
 ```
