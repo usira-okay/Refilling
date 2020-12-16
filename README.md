@@ -1,8 +1,8 @@
 # 使用方式
 
-開啟PowerShell
+以工作管理員開啟PowerShell
 
-執行 PowerShell.exe -ExecutionPolicy UnRestricted -File {Refill.ps1的實體路徑}
+輸入 PowerShell.exe -ExecutionPolicy UnRestricted -File {Refill.ps1的實體路徑}
 
 
 ## 安裝程式清單
