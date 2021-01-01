@@ -4,7 +4,6 @@ choco install googlechrome -y
 choco install line -y
 choco install teamviewer -y
 choco install telegram -y
-choco install spotify -y
 choco install 7zip -y
 choco install adobereader -y
 choco install google-backup-and-sync -y
