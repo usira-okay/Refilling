@@ -1,6 +1,6 @@
 # 使用方式
 
-以工作管理員開啟PowerShell
+以工作管理員開啟Cmd
 
 輸入 PowerShell.exe -ExecutionPolicy UnRestricted -File {Refill.ps1的實體路徑}
 
