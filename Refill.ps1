@@ -9,6 +9,7 @@ choco install adobereader -y
 choco install google-backup-and-sync -y
 choco install lbry -y
 choco install steam -y
+choco install libreoffice-fresh -y
 
 choco install filezilla -y
 choco install postman -y
