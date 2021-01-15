@@ -30,3 +30,4 @@ choco install visualstudio2019-workload-netcorebuildtools -y
 choco install visualstudio2019-workload-azurebuildtools -y
 choco install visualstudio2019-workload-manageddesktopbuildtools -y
 choco install sql-server-management-studio -y
+choco install spotify -y
