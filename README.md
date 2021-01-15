@@ -27,4 +27,6 @@ Git
 Nodejs
 LBRY
 Steam
+libreoffice
+Spotify
 ```
