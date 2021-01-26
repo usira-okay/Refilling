@@ -29,4 +29,5 @@ LBRY
 Steam
 libreoffice
 Spotify
+Discord
 ```
