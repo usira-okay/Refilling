@@ -31,3 +31,10 @@ libreoffice
 Spotify
 Discord
 ```
+
+## 選擇安裝
+
+#### Vue.js
+```
+npm install -g @vue/cli
+```
