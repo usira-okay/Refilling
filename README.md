@@ -41,5 +41,6 @@ npm install -g @vue/cli-service-global
 ```
 ### VSCode
 ```
-command 下 code --install-extension "shan.code-settings-sync"
+同步設定
+code --install-extension "shan.code-settings-sync"
 ```
