@@ -6,9 +6,6 @@ choco install teamviewer -y
 choco install telegram -y
 choco install 7zip -y
 choco install adobereader -y
-choco install google-backup-and-sync -y
-choco install lbry -y
-choco install steam -y
 choco install libreoffice-fresh -y
 choco install discord -y
 
@@ -31,4 +28,3 @@ choco install visualstudio2019-workload-netcorebuildtools -y
 choco install visualstudio2019-workload-azurebuildtools -y
 choco install visualstudio2019-workload-manageddesktopbuildtools -y
 choco install sql-server-management-studio -y
-choco install spotify -y
