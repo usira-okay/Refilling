@@ -23,8 +23,4 @@ choco install visualstudio2019-workload-visualstudioextension -y
 choco install visualstudio2019-workload-data -y
 choco install visualstudio2019-workload-netcoretools -y
 choco install visualstudio2019-workload-manageddesktop -y
-choco install visualstudio2019-workload-databuildtools -y
-choco install visualstudio2019-workload-netcorebuildtools -y
-choco install visualstudio2019-workload-azurebuildtools -y
-choco install visualstudio2019-workload-manageddesktopbuildtools -y
 choco install sql-server-management-studio -y
