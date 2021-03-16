@@ -14,7 +14,7 @@ Line
 SSMS
 Postman
 Fiddler
-File Zilla
+WinScp - FTP
 TeamViewer
 Visual Studio Code
 Visual Studio 2019 - Community

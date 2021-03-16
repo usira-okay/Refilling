@@ -9,7 +9,7 @@ choco install adobereader -y
 choco install libreoffice-fresh -y
 choco install discord -y
 
-choco install filezilla -y
+choco install winscp -y
 choco install postman -y
 choco install vscode -y
 choco install fiddler -y
