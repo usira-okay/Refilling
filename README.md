@@ -36,6 +36,7 @@ Discord
 
 #### Vue.js
 ```
+npm install -g vue
 npm install -g @vue/cli
 npm install -g @vue/cli-service-global
 ```
