@@ -32,12 +32,18 @@ SSMS
 
 ## 選擇安裝
 
-#### Vue.js
+### Vue.js
 
 ```
 npm install -g vue
 npm install -g @vue/cli
 npm install -g @vue/cli-service-global
+```
+
+### Angular
+
+```
+npm install -g @angular/cli
 ```
 
 ### VSCode
