@@ -51,4 +51,6 @@ npm install -g @angular/cli
 ```
 同步設定
 code --install-extension "shan.code-settings-sync"
+alt + shift + U -> 上傳設定
+clt + shift + D -> 下載設定
 ```
