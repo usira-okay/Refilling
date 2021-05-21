@@ -28,6 +28,10 @@ SourceTree
 Visual Studio 2019 - Community
 SSMS
 
+PotPlayer
+Teams
+Docker
+
 ```
 
 ## 選擇安裝
