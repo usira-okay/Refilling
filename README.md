@@ -31,6 +31,7 @@ SSMS
 PotPlayer
 Teams
 Docker
+PowerToys
 
 ```
 
