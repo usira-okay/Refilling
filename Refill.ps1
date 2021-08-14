@@ -23,4 +23,4 @@ choco install potplayer -y
 choco install microsoft-teams -y
 choco install docker-desktop -y
 choco install powertoys -y
-
+choco install openshot -y

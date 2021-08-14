@@ -27,6 +27,7 @@
 - Teams
 - Docker
 - PowerToys
+- OpenShot
 
 ## 選擇安裝
 
