@@ -21,6 +21,7 @@ choco install sql-server-management-studio -y
 
 choco install potplayer -y
 choco install microsoft-teams -y
+choco install wsl2 -y
 choco install docker-desktop -y
 choco install powertoys -y
 choco install openshot -y

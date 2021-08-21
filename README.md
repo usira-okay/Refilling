@@ -17,7 +17,7 @@
 - libreoffice
 - Discord
 - Postman
-- Visual Studio Code
+- Visual Studio Code.
 - Nodejs
 - Git
 - SourceTree
@@ -25,6 +25,7 @@
 - SSMS
 - PotPlayer
 - Teams
+- WSL2
 - Docker
 - PowerToys
 - OpenShot
