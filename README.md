@@ -2,9 +2,7 @@
 
 先確定 Windows Update 都更新完，不然裝 SSMS 會失敗
 
-以工作管理員開啟 Cmd
-
-輸入 PowerShell.exe -ExecutionPolicy UnRestricted -File {Refill.ps1 的實體路徑}
+以工作管理員開啟 Process.bat，然後就不用管他了
 
 ## 安裝程式清單
 
