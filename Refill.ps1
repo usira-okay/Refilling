@@ -29,4 +29,6 @@ choco install microsoft-teams -y
 choco install wsl2 -y
 choco install docker-desktop -y
 choco install powertoys -y
+
 choco install openshot -y
+choco install obs-studio -y

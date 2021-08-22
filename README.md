@@ -29,6 +29,7 @@
 - Docker
 - PowerToys
 - OpenShot
+- OBS
 
 ## 選擇安裝
 
@@ -60,3 +61,6 @@ code --install-extension "doggy8088.markdown-extension-pack"
 # 保哥的angular擴充套件包
 code --install-extension "doggy8088.angular-extension-pack"
 ```
+
+npm i -g nswag
+npm install -g ng-openapi-gen
