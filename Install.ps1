@@ -1,29 +1,23 @@
+# Add US and TW Keyboard
+$UserLanguageList = New-WinUserLanguageList -Language "zh-TW"
+$UserLanguageList.Add("en-US")
+Set-WinUserLanguageList -LanguageList $UserLanguageList -Force
+Set-WinDefaultInputMethodOverride -InputTip "0409:00000409"
+
+# Install Applications by Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-choco install googlechrome -y
-choco install line -y
-choco install teamviewer -y
-choco install telegram -y
-choco install 7zip -y
+choco install googlechrome line teamviewer telegram 7zip adobereader libreoffice-fresh discord postman vscode nodejs git sourcetree visualstudio2019community sql-server-management-studio potplayer microsoft-teams docker-desktop wsl2 powertoys openshot obs-studio -y
 
-choco install adobereader -y
-choco install libreoffice-fresh -y
-choco install discord -y
-choco install postman -y
-choco install vscode -y
+# Refresh Chocolatey environment 
+$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."   
 
-choco install nodejs -y
-choco install git -y
-choco install sourcetree -y
-choco install visualstudio2019community -y
-choco install sql-server-management-studio -y
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 
-choco install potplayer -y
-choco install microsoft-teams -y
-choco install wsl2 -y
-choco install docker-desktop -y
-choco install powertoys -y
+refreshenv
 
-choco install openshot -y
-choco install obs-studio -y
-
+# Install develoment tools
+npm install -g @angular/cli
+code --install-extension "shan.code-settings-sync"
+npm i -g nswag
+npm install -g ng-openapi-gen
