@@ -1,1 +1,0 @@
-PowerShell.exe -ExecutionPolicy UnRestricted -File Install.ps1
