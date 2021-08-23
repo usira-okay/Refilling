@@ -17,7 +17,6 @@ Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 refreshenv
 
 # Install develoment tools
-npm install -g @angular/cli
+npm i -g @angular/cli
 code --install-extension "shan.code-settings-sync"
 npm i -g nswag
-npm install -g ng-openapi-gen
