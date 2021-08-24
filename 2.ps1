@@ -20,3 +20,4 @@ refreshenv
 npm i -g @angular/cli
 code --install-extension "shan.code-settings-sync"
 npm i -g nswag
+Restart-Computer
