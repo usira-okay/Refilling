@@ -12,7 +12,6 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - Telegram
 - 7zip
 - AdobeReader(PDF)
-- libreoffice
 - Discord
 - Postman
 - Visual Studio Code.
