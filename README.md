@@ -14,7 +14,7 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - AdobeReader(PDF)
 - Discord
 - Postman
-- Visual Studio Code.
+- Visual Studio Code
 - Nodejs
 - Git
 - SourceTree
@@ -28,6 +28,7 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - OpenShot
 - OBS
 - office 365 business
+- Zoom
 
 ## 選擇安裝
 
