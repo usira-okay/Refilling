@@ -28,6 +28,7 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - PowerToys
 - OpenShot
 - OBS
+- office 365 business
 
 ## 選擇安裝
 
