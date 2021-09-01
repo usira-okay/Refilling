@@ -21,4 +21,8 @@ refreshenv
 npm i -g @angular/cli
 code --install-extension "shan.code-settings-sync"
 npm i -g nswag
+
+# Add Nuget Offical Source
+nuget source add -name nuget -source https://api.nuget.org/v3/index.json
+
 Restart-Computer
