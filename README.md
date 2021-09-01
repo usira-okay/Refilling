@@ -29,16 +29,9 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - OBS
 - office 365 business
 - Zoom
+- nuget.commandline
 
 ## 選擇安裝
-
-### Vue.js
-
-```powershell
-npm install -g vue
-npm install -g @vue/cli
-npm install -g @vue/cli-service-global
-```
 
 ### Angular
 
