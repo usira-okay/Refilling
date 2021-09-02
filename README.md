@@ -33,6 +33,14 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 
 ## 選擇安裝
 
+### docker 預留 port
+
+```ps
+dism.exe /Online /Disable-Feature:Microsoft-Hyper-V
+netsh int ipv4 add excludedportrange protocol=tcp startport=1433 numberofports=1
+dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All
+```
+
 ### Angular
 
 ```powershell
@@ -54,5 +62,8 @@ code --install-extension "doggy8088.markdown-extension-pack"
 code --install-extension "doggy8088.angular-extension-pack"
 ```
 
+### Nswag
+
+```powershell
 npm i -g nswag
-npm install -g ng-openapi-gen
+```
