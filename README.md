@@ -6,6 +6,7 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 
 ## 安裝程式清單
 
+- sqlpackage
 - Google Chrome
 - Line
 - TeamViewer
