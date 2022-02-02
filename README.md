@@ -68,3 +68,7 @@ code --install-extension "doggy8088.angular-extension-pack"
 ```powershell
 npm i -g nswag
 ```
+
+```powershell
+choco upgrade all
+```
