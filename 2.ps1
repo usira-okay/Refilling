@@ -7,7 +7,7 @@ Set-WinDefaultInputMethodOverride -InputTip "0409:00000409"
 # Install Applications by Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-choco install sqlpackage googlechrome line teamviewer telegram 7zip adobereader discord postman vscode nodejs-lts git sourcetree visualstudio2019community visualstudio2019enterprise visualstudio2022community sql-server-management-studio potplayer microsoft-teams docker-desktop wsl2 openshot obs-studio zoom nuget.commandline stream-client ngrok skype office365business yt-dlp ffmpeg -y
+choco install sqlpackage googlechrome line teamviewer telegram 7zip adobereader discord postman vscode nodejs-lts git sourcetree visualstudio2019community visualstudio2019enterprise visualstudio2022community sql-server-management-studio potplayer microsoft-teams docker-desktop wsl2 openshot obs-studio zoom nuget.commandline steam-client ngrok skype office365business yt-dlp ffmpeg -y
 
 
 # Refresh Chocolatey environment 
@@ -24,5 +24,13 @@ npm i -g nswag
 
 # Add Nuget Offical Source
 nuget source add -name nuget -source https://api.nuget.org/v3/index.json
+
+# 右鍵選單設定成 win10 版的
+reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+
+# 清除右鍵選單的按鈕
+reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\git_gui" /f
+reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\git_shell" /f
+reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\AnyCode" /f
 
 Restart-Computer
