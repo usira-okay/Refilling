@@ -40,5 +40,5 @@ reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\AnyCode" /f
 Restart-Computer
 
 }else{
-    Write-Host "Not admin or dir not found !"
+    Write-Host "Not admin!"
 }
