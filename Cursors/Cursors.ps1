@@ -13,7 +13,7 @@ $RegCursors = $RegConnect.OpenSubKey("Control Panel\Cursors",$true)
 
 $RegCursors.SetValue("",$cursors)
 
-$RegCursors.SetValue("AppStarting","$cursors\ait.ani")
+$RegCursors.SetValue("AppStarting","$cursors\AppStarting.ani")
 
 $RegCursors.SetValue("Arrow","$cursors\Arrow.cur")
 
