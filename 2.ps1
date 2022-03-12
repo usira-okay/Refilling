@@ -1,3 +1,7 @@
+function Test-Administrator { $user = [Security.Principal.WindowsIdentity]::GetCurrent(); (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) } 
+
+if (Test-Administrator){   
+
 # Add US and TW Keyboard
 $UserLanguageList = New-WinUserLanguageList -Language "zh-TW"
 $UserLanguageList.Add("en-US")
@@ -34,3 +38,7 @@ reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\git_shell" /f
 reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\AnyCode" /f
 
 Restart-Computer
+
+}else{
+    Write-Host "Not admin or dir not found !"
+}
