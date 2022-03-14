@@ -7,30 +7,37 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 ## 安裝程式清單
 
 - sqlpackage
-- Google Chrome
-- Line
-- TeamViewer
-- Telegram
+- googlechrome
+- line
+- teamviewer
+- telegram
 - 7zip
-- AdobeReader(PDF)
-- Discord
-- Postman
-- Visual Studio Code
-- Nodejs
-- Git
-- SourceTree
-- Visual Studio 2019 - Community
-- SSMS
-- PotPlayer
-- Teams
-- WSL2
-- Docker
-- PowerToys
-- OpenShot
-- OBS
-- office 365 business
-- Zoom
+- adobereader
+- discord
+- postman
+- vscode
+- nodejs-lts
+- git
+- sourcetree
+- visualstudio2019community
+- visualstudio2019enterprise
+- visualstudio2022community
+- sql-server-management-studio
+- potplayer
+- microsoft-teams
+- docker-desktop
+- wsl2
+- openshot
+- obs-studio
+- zoom
 - nuget.commandline
+- steam-client
+- ngrok
+- skype
+- office365business
+- yt-dlp
+- ffmpeg
+- picpick.portable
 
 ## 選擇安裝
 
@@ -69,6 +76,8 @@ code --install-extension "doggy8088.angular-extension-pack"
 npm i -g nswag
 ```
 
+### chocolately 更新
+
 ```powershell
-choco upgrade all
+choco upgrade all -y
 ```
