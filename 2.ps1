@@ -30,12 +30,12 @@ if (Test-Administrator) {
     nuget source add -name nuget -source https://api.nuget.org/v3/index.json
 
     # 右鍵選單設定成 win10 版的
-    # reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+    reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
 
     # 清除右鍵選單的按鈕
-    # reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\git_gui" /f
-    # reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\git_shell" /f
-    # reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\AnyCode" /f
+    reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\git_gui" /f
+    reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\git_shell" /f
+    reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\AnyCode" /f
 
     Restart-Computer
 
