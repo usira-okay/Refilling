@@ -1,6 +1,6 @@
 function Test-Administrator { $user = [Security.Principal.WindowsIdentity]::GetCurrent(); (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) } 
 
-if (Test-Administrator) {   
+if (Test-Administrator) { 
 
     # Add US and TW Keyboard
     $UserLanguageList = New-WinUserLanguageList -Language "zh-TW"
@@ -11,11 +11,47 @@ if (Test-Administrator) {
     # Install Applications by Chocolatey
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-    choco install tortoisegit linqpad sqlpackage googlechrome line teamviewer telegram 7zip adobereader discord postman vscode nodejs-lts git sourcetree potplayer microsoft-teams docker-desktop wsl2 openshot obs-studio zoom nuget.commandline steam-client ngrok skype filezilla yt-dlp ffmpeg flameshot devtoys dropbox visualstudio2019community visualstudio2019enterprise visualstudio2022community visualstudio2022enterprise sql-server-management-studio office365business -y
-
+    choco install tortoisegit `
+        linqpad `
+        sqlpackage `
+        googlechrome `
+        line `
+        teamviewer `
+        telegram `
+        7zip `
+        adobereader `
+        discord `
+        postman `
+        vscode `
+        nodejs-lts `
+        git `
+        sourcetree `
+        potplayer `
+        microsoft-teams `
+        docker-desktop `
+        wsl2 `
+        openshot `
+        obs-studio `
+        zoom `
+        nuget.commandline `
+        steam-client `
+        ngrok `
+        skype `
+        filezilla `
+        yt-dlp `
+        ffmpeg `
+        flameshot `
+        devtoys `
+        dropbox `
+        sql-server-management-studio `
+        visualstudio2019community --package-parameters "--allWorkloads --passive --locale en-US" `
+        visualstudio2019enterprise --package-parameters "--allWorkloads --passive --locale en-US" `
+        visualstudio2022community --package-parameters "--allWorkloads --passive --locale en-US" `
+        visualstudio2022enterprise --package-parameters "--allWorkloads --passive --locale en-US" `
+        office365business -y
 
     # Refresh Chocolatey environment 
-    $env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."   
+    $env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.." 
 
     Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 
