@@ -10,6 +10,8 @@ if (Test-Administrator) {
 
     dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All /norestart
 
+    dism.exe /online /Enable-Feature:Containers-DisposableClientVM /All /norestart
+
     Restart-Computer
 
 } else {

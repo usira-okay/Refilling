@@ -11,7 +11,7 @@ if (Test-Administrator) {
     # Install Applications by Chocolatey
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-    choco install sqlpackage googlechrome line teamviewer telegram 7zip adobereader discord postman vscode nodejs-lts git sourcetree visualstudio2019community visualstudio2019enterprise visualstudio2022community visualstudio2022enterprise sql-server-management-studio potplayer microsoft-teams docker-desktop wsl2 openshot obs-studio zoom nuget.commandline steam-client ngrok skype office365business yt-dlp ffmpeg flameshot devtoys dropbox -y
+    choco install sqlpackage googlechrome line teamviewer telegram 7zip adobereader discord postman vscode nodejs-lts git sourcetree potplayer microsoft-teams docker-desktop wsl2 openshot obs-studio zoom nuget.commandline steam-client ngrok skype filezilla yt-dlp ffmpeg flameshot devtoys dropbox visualstudio2019community visualstudio2019enterprise visualstudio2022community visualstudio2022enterprise sql-server-management-studio office365business -y
 
 
     # Refresh Chocolatey environment 
