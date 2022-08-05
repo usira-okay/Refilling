@@ -43,6 +43,8 @@ if (Test-Administrator) {
         flameshot `
         devtoys `
         dropbox `
+        hwinfo `
+        coretemp `
         sql-server-management-studio `
         visualstudio2019community --package-parameters "--allWorkloads --passive --locale en-US" `
         visualstudio2019enterprise --package-parameters "--allWorkloads --passive --locale en-US" `
@@ -75,6 +77,7 @@ if (Test-Administrator) {
 
     Restart-Computer
 
-} else {
+}
+else {
     Write-Host "Not admin!"
 }
