@@ -77,7 +77,6 @@ if (Test-Administrator) {
 
     Restart-Computer
 
-}
-else {
+} else {
     Write-Host "Not admin!"
 }
