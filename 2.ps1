@@ -45,6 +45,7 @@ if (Test-Administrator) {
         dropbox `
         hwinfo `
         coretemp `
+        speedtest-by-ookla `
         sql-server-management-studio `
         visualstudio2019community --package-parameters "--allWorkloads --passive --locale en-US" `
         visualstudio2019enterprise --package-parameters "--allWorkloads --passive --locale en-US" `
