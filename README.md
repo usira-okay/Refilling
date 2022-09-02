@@ -38,7 +38,6 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - flameshot
 - devtoys
 - dropbox
-- hwinfo
 - coretemp
 - speedtest
 - sql server management studio
