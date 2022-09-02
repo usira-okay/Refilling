@@ -1,11 +1,25 @@
-function Test-Administrator { $user = [Security.Principal.WindowsIdentity]::GetCurrent(); (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) } 
+function Test-Administrator {
+    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
+    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) 
+} 
+    
 $dirName = "Numix Dark"
+$workDir = [System.IO.Path]::GetDirectoryName($PSCommandPath)
+  
+Set-Location $workDir
 
-if ((Test-Administrator) -and (test-path ".\$dirName")) {   
+if (-not (test-path ".\$dirName")) {
+    Write-Host "$dirName not found !"
+    pause
+    exit
+}
 
+if (Test-Administrator) { 
     $cursors = "$env:systemroot\Cursors\$dirName"
 
-    Copy-Item -Path ".\$dirName" -Destination $cursors -Recurse
+    if (-not (test-path $cursors)) {
+        Copy-Item -Path ".\$dirName" -Destination $cursors -Recurse
+    }
 
     $RegConnect = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey([Microsoft.Win32.RegistryHive]"CurrentUser", "$env:COMPUTERNAME")
 
@@ -54,7 +68,9 @@ public static extern bool SystemParametersInfo(uint uiAction,uint uiParam,uint p
 
     $CursorRefresh = Add-Type -MemberDefinition $CSharpSig -Name WinAPICall -Namespace SystemParamInfo -PassThru
     $CursorRefresh::SystemParametersInfo(0x0057, 0, $null, 0)
-
-} else {
-    Write-Host "Not admin or dir not found !"
+        
 }
+else {
+    Start-Process Powershell -Verb RunAs -ArgumentList " $PSCommandPath ''" 
+}
+

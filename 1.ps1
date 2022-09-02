@@ -1,4 +1,11 @@
-function Test-Administrator { $user = [Security.Principal.WindowsIdentity]::GetCurrent(); (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) } 
+function Test-Administrator {
+    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
+    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) 
+} 
+
+$workDir = [System.IO.Path]::GetDirectoryName($PSCommandPath)
+  
+Set-Location $workDir
 
 if (Test-Administrator) {   
 
@@ -14,6 +21,7 @@ if (Test-Administrator) {
 
     Restart-Computer
 
-} else {
-    Write-Host "Not admin!"
+}
+else {
+    Start-Process Powershell -Verb RunAs -ArgumentList " $PSCommandPath ''" 
 }

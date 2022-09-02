@@ -1,4 +1,11 @@
-function Test-Administrator { $user = [Security.Principal.WindowsIdentity]::GetCurrent(); (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) } 
+function Test-Administrator {
+    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
+    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) 
+} 
+
+$workDir = [System.IO.Path]::GetDirectoryName($PSCommandPath)
+  
+Set-Location $workDir
 
 if (Test-Administrator) { 
 
@@ -9,7 +16,7 @@ if (Test-Administrator) {
     Set-WinDefaultInputMethodOverride -InputTip "0409:00000409"
 
     # Install Applications by Chocolatey
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
     choco install tortoisegit `
         linqpad `
@@ -79,5 +86,5 @@ if (Test-Administrator) {
 
 }
 else {
-    Write-Host "Not admin!"
+    Start-Process Powershell -Verb RunAs -ArgumentList " $PSCommandPath ''" 
 }
