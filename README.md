@@ -6,6 +6,8 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 
 ## 安裝程式清單
 
+- tortoisegit
+- linqpad
 - sqlpackage
 - googlechrome
 - line
@@ -19,10 +21,6 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - nodejs-lts
 - git
 - sourcetree
-- visualstudio2019community
-- visualstudio2019enterprise
-- visualstudio2022community
-- sql-server-management-studio
 - potplayer
 - microsoft-teams
 - docker-desktop
@@ -34,10 +32,21 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - steam-client
 - ngrok
 - skype
-- office365business
+- filezilla
 - yt-dlp
 - ffmpeg
-- picpick.portable
+- flameshot
+- devtoys
+- dropbox
+- hwinfo
+- coretemp
+- speedtest
+- sql server management studio
+- visualstudio 2019 community
+- visualstudio 2019 enterprise
+- visualstudio 2022 community
+- visualstudio 2022 enterprise
+- office365business
 
 ## 選擇安裝
 
