@@ -15,6 +15,10 @@ if (Test-Administrator) {
     Set-WinUserLanguageList -LanguageList $UserLanguageList -Force
     Set-WinDefaultInputMethodOverride -InputTip "0409:00000409"
 
+    $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
+   
+    Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
+   
     # Install Applications by Chocolatey
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
