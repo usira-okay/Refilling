@@ -37,6 +37,7 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - dropbox
 - coretemp
 - speedtest
+- nuget.commandline
 - sql server management studio
 - visualstudio 2019 community
 - visualstudio 2019 enterprise

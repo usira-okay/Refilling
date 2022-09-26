@@ -59,6 +59,7 @@ if (Test-Administrator) {
         devtoys `
         dropbox `
         coretemp `
+        nuget.commandline `
         speedtest-by-ookla `
         sql-server-management-studio `
         visualstudio2019community --package-parameters "--allWorkloads --passive --locale en-US" `
@@ -79,6 +80,9 @@ if (Test-Administrator) {
     code --install-extension "shan.code-settings-sync"
     npm i -g nswag
 
+    # Add Nuget Offical Source
+    nuget source add -name nuget -source https://api.nuget.org/v3/index.json
+    
     # 右鍵選單設定成 win10 版的
     reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
 
