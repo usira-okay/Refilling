@@ -10,7 +10,7 @@ if (Test-Administrator) {
     $VMName = "Win-10-$date"
     $SWName = 'Default Switch'
     $VMPath = 'D:\Hyper'
-    $ISOPath = "E:\Cloud\Windows\Windows.iso"
+    $ISOPath = "E:\Windows.iso"
 
     $GiB = 1024 * 1024 * 1024
     $disk = 100
