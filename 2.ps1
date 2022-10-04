@@ -58,9 +58,7 @@ if (Test-Administrator) {
         speedtest-by-ookla `
         sql-server-management-studio `
         visualstudio2019community --package-parameters "--allWorkloads --passive --locale en-US" `
-        visualstudio2019enterprise --package-parameters "--allWorkloads --passive --locale en-US" `
         visualstudio2022community --package-parameters "--allWorkloads --passive --locale en-US" `
-        visualstudio2022enterprise --package-parameters "--allWorkloads --passive --locale en-US" `
         office365business -y
 
     # Refresh Chocolatey environment 
