@@ -4,11 +4,12 @@ function Test-Administrator {
 } 
     
 $dirName = "Numix Dark"
+$path = ".\Cursors\$dirName"
 $workDir = [System.IO.Path]::GetDirectoryName($PSCommandPath)
   
 Set-Location $workDir
 
-if (-not (test-path ".\$dirName")) {
+if (-not (test-path $path)) {
     Write-Host "$dirName not found !"
     pause
     exit
@@ -18,7 +19,7 @@ if (Test-Administrator) {
     $cursors = "$env:systemroot\Cursors\$dirName"
 
     if (-not (test-path $cursors)) {
-        Copy-Item -Path ".\$dirName" -Destination $cursors -Recurse
+        Copy-Item -Path $path -Destination $cursors -Recurse
     }
 
     $RegConnect = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey([Microsoft.Win32.RegistryHive]"CurrentUser", "$env:COMPUTERNAME")
