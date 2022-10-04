@@ -1,13 +1,11 @@
-function Test-Administrator {
-    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
-    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) 
-} 
-    
-$dirName = "Numix Dark"
-$path = ".\Cursors\$dirName"
 $workDir = [System.IO.Path]::GetDirectoryName($PSCommandPath)
   
 Set-Location $workDir
+
+. .\Test-Administrator.ps1
+    
+$dirName = "Numix Dark"
+$path = ".\Cursors\$dirName"
 
 if (-not (test-path $path)) {
     Write-Host "$dirName not found !"

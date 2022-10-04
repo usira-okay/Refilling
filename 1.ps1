@@ -1,13 +1,8 @@
-function Test-Administrator {
-    Write-Host 'Test-Administrator'
-    # Test-Administrator
-    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
-    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) 
-} 
-
 $workDir = [System.IO.Path]::GetDirectoryName($PSCommandPath)
-  
+
 Set-Location $workDir
+
+. .\Test-Administrator.ps1
 
 if (Test-Administrator) {   
 

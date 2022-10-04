@@ -1,17 +1,13 @@
-function Test-Administrator {
-    Write-Host 'Test-Administrator'
-    # Test-Administrator
-    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
-    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) 
-} 
-
 $workDir = [System.IO.Path]::GetDirectoryName($PSCommandPath)
   
 Set-Location $workDir
 
+. .\Test-Administrator.ps1
+
 if (Test-Administrator) {   
 
-    $VMName = 'Win-10-01'
+    $date = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
+    $VMName = "Win-10-$date"
     $SWName = 'Default Switch'
     $VMPath = 'D:\Hyper'
     $ISOPath = "E:\Cloud\Windows\Windows.iso"
