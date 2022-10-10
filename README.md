@@ -28,7 +28,6 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - zoom
 - steam-client
 - ngrok
-- skype
 - filezilla
 - yt-dlp
 - ffmpeg
@@ -40,10 +39,7 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - nuget.commandline
 - sql server management studio
 - visualstudio 2019 community
-- visualstudio 2019 enterprise
 - visualstudio 2022 community
-- visualstudio 2022 enterprise
-- office365business
 
 ## 選擇安裝
 
