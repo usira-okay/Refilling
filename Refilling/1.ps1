@@ -6,7 +6,15 @@ Set-Location $workDir
 
 if (Test-Administrator) {   
 
-    #以系統管理者權限開啟 Powershell 並執行以下指令
+    dism.exe /online /enable-feature:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+    dism.exe /online /enable-feature:VirtualMachinePlatform /all /norestart
+
+    dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All /norestart
+
+    dism.exe /online /Enable-Feature:Containers-DisposableClientVM /All /norestart
+
+    # 以下是 Windows Update
 
     Set-ExecutionPolicy -ExecutionPolicy ByPass -Scope CurrentUser -Force
 
