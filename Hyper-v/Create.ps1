@@ -30,6 +30,7 @@ if (Test-Administrator) {
     $VM | Set-VMMemory -DynamicMemoryEnabled $true
     $VM | Get-VMDvdDrive | Set-VMDvdDrive -Path $ISOPath
     $VM | Start-VM
+    VMConnect 'localhost' $VMName
 
 }
 else {
