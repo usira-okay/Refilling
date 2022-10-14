@@ -24,7 +24,7 @@ if (Test-Administrator) {
     # Install Applications by Chocolatey
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-    choco install linqpad7 -y -f --ignore-checksums
+    choco install linqpad7 -y --ignore-checksums
 
     choco install tortoisegit `
         sqlpackage `
