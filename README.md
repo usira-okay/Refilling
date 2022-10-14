@@ -7,7 +7,7 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 ## 安裝程式清單
 
 - tortoisegit
-- linqpad
+- linqpad7
 - sqlpackage
 - googlechrome
 - line
