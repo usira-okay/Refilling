@@ -15,7 +15,7 @@ if (Test-Administrator) {
     dism.exe /online /Enable-Feature:Containers-DisposableClientVM /All /norestart
 
     # 以下是 Windows Update
-    
+
     Set-ExecutionPolicy -ExecutionPolicy ByPass -Scope CurrentUser -Force
 
     Install-PackageProvider -Name Nuget -MinimumVersion 2.8.5.201 -Force
@@ -27,7 +27,6 @@ if (Test-Administrator) {
     Get-WindowsUpdate
 
     Install-WindowsUpdate -AcceptAll -MicrosoftUpdate -AutoReboot
-
 
 }
 else {
