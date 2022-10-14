@@ -40,7 +40,6 @@ if (Test-Administrator) {
         git `
         sourcetree `
         potplayer `
-        microsoft-teams `
         openshot `
         obs-studio `
         zoom `
@@ -67,9 +66,7 @@ if (Test-Administrator) {
     refreshenv
 
     # Install develoment tools
-    npm i -g @angular/cli
     code --install-extension "shan.code-settings-sync"
-    npm i -g nswag
 
     # Add Nuget Offical Source
     nuget source add -name nuget -source https://api.nuget.org/v3/index.json

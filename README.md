@@ -22,7 +22,6 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 - git
 - sourcetree
 - potplayer
-- microsoft-teams
 - openshot
 - obs-studio
 - zoom
