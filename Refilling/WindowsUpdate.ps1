@@ -7,9 +7,16 @@ Set-Location $workDir
 
 if (Test-Administrator) {   
 
-    Get-WindowsUpdate
+    $update = Get-WindowsUpdate
 
-    Install-WindowsUpdate -AcceptAll -MicrosoftUpdate -AutoReboot
+    while($update.count -ne 0){
+    
+        $update
+
+        Install-WindowsUpdate -AcceptAll -MicrosoftUpdate -AutoReboot
+        
+        $update = Get-WindowsUpdate
+    }
 
 }
 else {
