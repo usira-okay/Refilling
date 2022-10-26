@@ -14,8 +14,6 @@ if (Test-Administrator) {
 
     dism.exe /online /Enable-Feature:Containers-DisposableClientVM /All /norestart
 
-    Set-ExecutionPolicy -ExecutionPolicy ByPass -Scope CurrentUser -Force
-
     Install-PackageProvider -Name Nuget -MinimumVersion 2.8.5.201 -Force
 
     Install-Module PSWindowsUpdate -Force
