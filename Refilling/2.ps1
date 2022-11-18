@@ -30,6 +30,7 @@ if (Test-Administrator) {
         sizer `
         sqlpackage `
         googlechrome `
+        brave `
         line `
         teamviewer `
         7zip `
