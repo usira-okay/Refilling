@@ -29,7 +29,6 @@ if (Test-Administrator) {
     choco install tortoisegit `
         sizer `
         sqlpackage `
-        googlechrome `
         brave `
         line `
         teamviewer `
@@ -52,7 +51,6 @@ if (Test-Administrator) {
         ffmpeg `
         flameshot `
         devtoys `
-        dropbox `
         coretemp `
         nuget.commandline `
         speedtest-by-ookla `

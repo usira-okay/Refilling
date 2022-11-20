@@ -6,39 +6,37 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 
 ## 安裝程式清單
 
-- tortoisegit
-- linqpad7
-- sqlpackage
-- googlechrome
-- line
-- teamviewer
-- telegram
-- 7zip
-- adobereader
-- discord
-- postman
-- vscode
-- nodejs-lts
-- git
-- sourcetree
-- potplayer
-- openshot
-- obs-studio
-- zoom
-- steam-client
-- ngrok
-- filezilla
-- yt-dlp
-- ffmpeg
-- flameshot
-- devtoys
-- dropbox
-- coretemp
-- speedtest
-- nuget.commandline
-- sql server management studio
-- visualstudio 2019 community
-- visualstudio 2022 community
+1. tortoisegit
+1. sizer
+1. sqlpackage
+1. brave
+1. line
+1. teamviewer
+1. 7zip
+1. adobereader
+1. discord
+1. postman
+1. vscode
+1. nodejs-lts
+1. git
+1. sourcetree
+1. potplayer
+1. openshot
+1. obs-studio
+1. zoom
+1. steam-client
+1. ngrok
+1. filezilla
+1. yt-dlp
+1. ffmpeg
+1. flameshot
+1. devtoys
+1. coretemp
+1. nuget.commandline
+1. speedtest-by-ookla
+1. sql-server-management-studio
+1. visualstudio2019community
+1. visualstudio2022community
 
 ## 選擇安裝
 
