@@ -27,6 +27,7 @@ if (Test-Administrator) {
     choco install linqpad7 -y --ignore-checksums
 
     choco install tortoisegit `
+        winrar `
         googledrive `
         sizer `
         sqlpackage `
