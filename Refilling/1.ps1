@@ -2,7 +2,7 @@ $workDir = [System.IO.Path]::GetDirectoryName($PSCommandPath)
 
 Set-Location $workDir
 
-. ..\Test-Administrator.ps1
+. ..\Functions.ps1
 
 if (Test-Administrator) {   
 
@@ -20,6 +20,7 @@ if (Test-Administrator) {
 
     Import-Module PSWindowsUpdate  -Force
 
+    UpdateWindows
 }
 else {
     Start-Process Powershell -Verb RunAs -ArgumentList " $PSCommandPath ''" 

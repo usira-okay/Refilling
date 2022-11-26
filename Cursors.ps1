@@ -2,7 +2,7 @@ $workDir = [System.IO.Path]::GetDirectoryName($PSCommandPath)
   
 Set-Location $workDir
 
-. .\Test-Administrator.ps1
+. .\Functions.ps1
     
 $dirName = "Numix Dark"
 $path = ".\Cursors\$dirName"
