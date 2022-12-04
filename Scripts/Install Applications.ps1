@@ -21,17 +21,13 @@ choco install tortoisegit `
     teamviewer `
     7zip `
     adobereader `
-    discord `
     postman `
     vscode `
     nodejs-lts `
     git `
     sourcetree `
     potplayer `
-    openshot `
-    obs-studio `
     zoom `
-    steam-client `
     ngrok `
     filezilla `
     yt-dlp `
