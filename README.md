@@ -2,8 +2,6 @@
 
 先確定 Windows Update 都更新完，不然裝 SSMS 會失敗
 
-PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
-
 ## 安裝程式清單
 
 1. tortoisegit
@@ -14,17 +12,13 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 1. teamviewer
 1. 7zip
 1. adobereader
-1. discord
 1. postman
 1. vscode
 1. nodejs-lts
 1. git
 1. sourcetree
 1. potplayer
-1. openshot
-1. obs-studio
 1. zoom
-1. steam-client
 1. ngrok
 1. filezilla
 1. yt-dlp
@@ -39,6 +33,11 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File {ps1}
 1. visualstudio2022community
 
 ## 選擇安裝
+
+1. discord
+1. openshot
+1. obs-studio
+1. steam-client
 
 ### docker 預留 port
 
