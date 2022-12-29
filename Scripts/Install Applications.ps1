@@ -38,6 +38,7 @@ choco install tortoisegit `
     nuget.commandline `
     speedtest-by-ookla `
     sql-server-management-studio `
+    powertoys `
     visualstudio2019community --package-parameters '--allWorkloads --passive --locale en-US' `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 
