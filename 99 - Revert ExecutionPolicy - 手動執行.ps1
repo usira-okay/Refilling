@@ -1,2 +1,0 @@
-
-Set-ExecutionPolicy -ExecutionPolicy Restricted -Scope CurrentUser -Force
