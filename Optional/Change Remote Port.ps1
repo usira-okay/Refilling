@@ -1,6 +1,6 @@
 Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
-. .\Test-Admin.ps1 -p $PSCommandPath
+. ..\Test-Admin.ps1 -p $PSCommandPath
 
 Write-Host 'Change Remote Port'
 

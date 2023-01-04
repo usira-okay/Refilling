@@ -2,21 +2,9 @@ Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 . .\Test-Admin.ps1 -p $PSCommandPath
 
-Write-Host 'Install Applications'
-   
-Write-Host 'Install AzureCLI'
-# Install AzureCLI
-$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
-   
-Install-PackageProvider -Name Nuget -MinimumVersion 2.8.5.201 -Force
-Write-Host 'Install-Module Az'
-Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
-    
 Write-Host 'Install Applications by Chocolatey'
 # Install Applications by Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-
-choco install linqpad7 -y --ignore-checksums
 
 choco install tortoisegit `
     sizer `
@@ -30,6 +18,7 @@ choco install tortoisegit `
     vscode `
     nodejs-lts `
     git `
+    git-lfs `
     sourcetree `
     potplayer `
     zoom `
@@ -44,6 +33,13 @@ choco install tortoisegit `
     speedtest-by-ookla `
     sql-server-management-studio `
     powertoys `
+    drawio `
+    googledrive `
+    obsidian `
+    microsoft-openjdk `
+    maven `
+    docker-desktop `
+    slack `
     visualstudio2019community --package-parameters '--allWorkloads --passive --locale en-US' `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 

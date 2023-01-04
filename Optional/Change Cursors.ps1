@@ -1,12 +1,12 @@
 
 Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
-. .\Test-Admin.ps1 -p $PSCommandPath
+. ..\Test-Admin.ps1 -p $PSCommandPath
 
 Write-Host 'Change Cursors'
 
 $dirName = 'Numix Light'
-$path = ".\Cursors\$dirName"
+$path = "..\Cursors\$dirName"
 
 if (-not (test-path $path)) {
     Write-Host "$dirName not found !"

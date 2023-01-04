@@ -6,7 +6,7 @@ Write-Host 'Update Windows'
 
 $update = Get-WindowsUpdate
 
-while ($update.count -ne 0) {
+while ($update.count -eq 0) {
     
     $update
 
