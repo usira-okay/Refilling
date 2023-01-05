@@ -43,18 +43,4 @@ choco install tortoisegit `
     visualstudio2019community --package-parameters '--allWorkloads --passive --locale en-US' `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 
-# Refresh Chocolatey environment 
-Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-
-refreshenv
-
-# Install develoment tools
-code --install-extension 'shan.code-settings-sync'
-
-# Install SWA CLI
-npm install -g @azure/static-web-apps-cli
-
-# Add Nuget Offical Source
-nuget source add -name nuget -source https://api.nuget.org/v3/index.json
-    
 Pause
