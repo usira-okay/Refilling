@@ -8,7 +8,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 choco install discord `
     openshot `
-    obs-studio `
-    steam-client -y
+    obs-studio -y
+
+winget import -i '.\Winget Package\Optional.json' --accept-package-agreements --accept-source-agreements
 
 Pause
