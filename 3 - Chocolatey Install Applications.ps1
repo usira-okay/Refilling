@@ -40,6 +40,7 @@ choco install tortoisegit `
     maven `
     docker-desktop `
     slack `
+    gsudo `
     visualstudio2019community --package-parameters '--allWorkloads --passive --locale en-US' `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 

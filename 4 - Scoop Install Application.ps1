@@ -9,6 +9,9 @@ scoop bucket add main
 # install applications
 scoop install autohotkey
 scoop install hugo-extended
+scoop install starship
+scoop install lsd
+scoop install screentogif
 
 
 Pause
