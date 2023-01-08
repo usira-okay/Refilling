@@ -1,2 +1,2 @@
 
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+Set-ExecutionPolicy -ExecutionPolicy ByPass -Scope CurrentUser -Force
