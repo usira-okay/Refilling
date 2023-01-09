@@ -42,6 +42,7 @@ choco install tortoisegit `
     slack `
     gsudo `
     dbeaver `
+    crystaldiskinfo `
     visualstudio2019community --package-parameters '--allWorkloads --passive --locale en-US' `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 
