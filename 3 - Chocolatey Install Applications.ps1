@@ -41,6 +41,7 @@ choco install tortoisegit `
     docker-desktop `
     slack `
     gsudo `
+    dbeaver `
     visualstudio2019community --package-parameters '--allWorkloads --passive --locale en-US' `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 
