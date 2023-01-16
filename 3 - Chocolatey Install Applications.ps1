@@ -9,7 +9,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco install tortoisegit `
     sizer `
     sqlpackage `
-    googlechrome `
+    brave `
     line `
     teamviewer `
     7zip `
