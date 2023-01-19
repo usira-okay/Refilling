@@ -47,4 +47,6 @@ $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/
 Write-Host 'Install-Module Az'
 Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
     
+shutdown -r -s 120 -f
+
 Pause
