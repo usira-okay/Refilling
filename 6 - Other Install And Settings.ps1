@@ -1,3 +1,9 @@
+Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
+
+. .\Test-Admin.ps1 -p $PSCommandPath
+
+Write-Host 'Other install and settings'
+
 if (!($env:Path.Contains('C:\Program Files\Git\bin'))) {
     $env:Path = $env:Path + ';C:\Program Files\Git\bin'
 }
