@@ -23,6 +23,9 @@ powercfg -change -monitor-timeout-dc 30
 # 插電
 powercfg -change -monitor-timeout-ac 60
 
+# 開啟 Win + v 
+reg add HKEY_CURRENT_USER\Software\Microsoft\Clipboard /t REG_DWORD /v EnableClipboardHistory /d 1 /f
+
 dism.exe /online /enable-feature:Microsoft-Windows-Subsystem-Linux /all /norestart
 
 dism.exe /online /enable-feature:VirtualMachinePlatform /all /norestart

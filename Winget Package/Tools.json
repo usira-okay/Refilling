@@ -12,6 +12,9 @@
 				},
 				{
 					"PackageIdentifier": "LINQPad.LINQPad.7"
+				},
+				{
+					"PackageIdentifier": "qishibo.AnotherRedisDesktopManager"
 				}
 			],
 			"SourceDetails": {
