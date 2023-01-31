@@ -20,7 +20,7 @@ choco install tortoisegit `
     git `
     git-lfs `
     sourcetree `
-    potplayer `
+    vlc `
     zoom `
     ngrok `
     filezilla `
