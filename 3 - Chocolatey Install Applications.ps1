@@ -39,7 +39,6 @@ choco install tortoisegit `
     microsoft-openjdk `
     maven `
     docker-desktop `
-    slack `
     gsudo `
     dbeaver `
     crystaldiskinfo `
