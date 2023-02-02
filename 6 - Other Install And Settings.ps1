@@ -5,7 +5,14 @@ Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 Write-Host 'Other install and settings'
 
 if (!($env:Path.Contains('C:\Program Files\Git\bin'))) {
-    $env:Path = $env:Path + ';C:\Program Files\Git\bin'
+    $env:Path
+    
+    if (!$env:Path.EndsWith(';')) {
+        $env:Path = $env:Path + ';'
+    }
+    $env:Path = $env:Path + 'C:\Program Files\Git\bin'
+
+    $env:Path
 }
 
 # Install SWA CLI
