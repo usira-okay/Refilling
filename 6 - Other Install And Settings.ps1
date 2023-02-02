@@ -35,4 +35,6 @@ New-Item -Type File -Path $PROFILE -Force
 
 "Invoke-Expression (&starship init powershell)" | Out-File -FilePath $PROFILE
 
+dotnet tool install --global dotnet-ef
+
 Pause
