@@ -9,39 +9,11 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco install tortoisegit `
     sizer `
     sqlpackage `
-    brave `
     line `
-    teamviewer `
-    7zip `
     adobereader `
-    postman `
-    vscode `
-    nodejs-lts `
-    sourcetree `
-    vlc `
-    zoom `
-    ngrok `
-    filezilla `
-    yt-dlp `
-    ffmpeg `
-    flameshot `
-    devtoys `
-    coretemp `
     nuget.commandline `
-    speedtest-by-ookla `
-    sql-server-management-studio `
-    powertoys `
     drawio `
     googledrive `
-    obsidian `
-    microsoft-openjdk `
-    maven `
-    docker-desktop `
-    gsudo `
-    dbeaver `
-    crystaldiskinfo `
-    winrar `
-    visualstudio2019community --package-parameters '--allWorkloads --passive --locale en-US' `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 
 Pause

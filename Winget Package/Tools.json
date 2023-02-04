@@ -5,9 +5,6 @@
 		{
 			"Packages": [
 				{
-					"PackageIdentifier": "Microsoft.PowerToys"
-				},
-				{
 					"PackageIdentifier": "JetBrains.Toolbox"
 				},
 				{
