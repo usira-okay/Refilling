@@ -17,8 +17,6 @@ choco install tortoisegit `
     postman `
     vscode `
     nodejs-lts `
-    git `
-    git-lfs `
     sourcetree `
     vlc `
     zoom `
