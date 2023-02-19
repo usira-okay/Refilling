@@ -11,6 +11,9 @@
 					"PackageIdentifier": "LINQPad.LINQPad.7"
 				},
 				{
+					"PackageIdentifier": "TeamViewer.TeamViewer"
+				},
+				{
 					"PackageIdentifier": "qishibo.AnotherRedisDesktopManager"
 				}
 			],

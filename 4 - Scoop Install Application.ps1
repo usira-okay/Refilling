@@ -41,7 +41,6 @@ scoop install crystaldiskinfo
 scoop install winrar
 scoop install speedtest
 scoop install devtoys-np
-scoop install teamviewer
 scoop install sql-server-management-studio-np
 
 Pause
