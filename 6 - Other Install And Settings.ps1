@@ -15,6 +15,13 @@ if (!($env:Path.Contains('C:\Program Files\Git\bin'))) {
     $env:Path
 }
 
+Write-Host 'Install AzureCLI'
+# Install AzureCLI
+$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
+   
+Write-Host 'Install-Module Az'
+Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
+
 # Install SWA CLI
 npm install -g @azure/static-web-apps-cli
 
