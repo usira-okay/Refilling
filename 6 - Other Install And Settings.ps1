@@ -10,7 +10,7 @@ if (!($env:Path.Contains('C:\Program Files\Git\bin'))) {
     if (!$env:Path.EndsWith(';')) {
         $env:Path = $env:Path + ';'
     }
-    $env:Path = $env:Path + 'C:\Program Files\Git\bin'
+    $env:Path = $env:Path + "C:\Users\$env:USERNAME\scoop\apps\git\current\bin"
 
     $env:Path
 }
@@ -20,12 +20,6 @@ npm install -g @azure/static-web-apps-cli
 
 # Add Nuget Offical Source
 nuget source add -name nuget -source https://api.nuget.org/v3/index.json
-    
-wsl --update
-
-wsl --install Ubuntu
-
-wsl --set-default Ubuntu
 
 Install-Module posh-git -Scope CurrentUser -Force
     
