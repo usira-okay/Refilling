@@ -7,7 +7,6 @@ scoop install git-lfs
 
 # add bucket
 scoop bucket add extras
-scoop bucket add nonportable
 scoop bucket add java
 
 # install applications
@@ -40,7 +39,5 @@ scoop install dbeaver
 scoop install crystaldiskinfo
 scoop install winrar
 scoop install speedtest
-scoop install devtoys-np
-scoop install sql-server-management-studio-np
 
 Pause

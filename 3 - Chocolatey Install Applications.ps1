@@ -14,6 +14,8 @@ choco install tortoisegit `
     nuget.commandline `
     drawio `
     googledrive `
+    devtoys `
+    sql-server-management-studio `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 
 Pause
