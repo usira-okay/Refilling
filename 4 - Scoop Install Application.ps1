@@ -18,7 +18,6 @@ scoop install screentogif
 scoop install brave
 scoop install 7zip
 scoop install postman
-scoop install vscode
 scoop install nodejs
 scoop install sourcetree
 scoop install vlc

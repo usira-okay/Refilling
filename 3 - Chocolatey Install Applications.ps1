@@ -16,6 +16,8 @@ choco install tortoisegit `
     googledrive `
     devtoys `
     sql-server-management-studio `
+    libreoffice-still `
+    vscode `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 
 Pause
