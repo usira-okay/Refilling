@@ -16,11 +16,9 @@ scoop install starship
 scoop install lsd
 scoop install screentogif
 scoop install brave
-scoop install 7zip
 scoop install postman
 scoop install nodejs
 scoop install sourcetree
-scoop install vlc
 scoop install zoom
 scoop install ngrok
 scoop install filezilla
@@ -36,7 +34,6 @@ scoop install docker
 scoop install gsudo
 scoop install dbeaver
 scoop install crystaldiskinfo
-scoop install winrar
 scoop install speedtest
 
 Pause

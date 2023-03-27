@@ -18,6 +18,9 @@ choco install tortoisegit `
     sql-server-management-studio `
     libreoffice-still `
     vscode `
+    vlc `
+    winrar `
+    7zip `
     visualstudio2022community --package-parameters '--allWorkloads --passive --locale en-US' -y
 
 Pause
