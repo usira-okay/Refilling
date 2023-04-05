@@ -36,10 +36,6 @@ dism.exe /online /Enable-Feature:Containers /All /norestart
 
 Install-PackageProvider -Name Nuget -MinimumVersion 2.8.5.201 -Force
 
-Install-Module PSWindowsUpdate -Force
-
-Import-Module PSWindowsUpdate  -Force
-  
 shutdown -r -t 120 -f
 
 Pause

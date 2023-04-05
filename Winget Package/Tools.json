@@ -15,6 +15,9 @@
 				},
 				{
 					"PackageIdentifier": "qishibo.AnotherRedisDesktopManager"
+				},
+				{
+					"PackageIdentifier": "NordVPN.NordVPN"
 				}
 			],
 			"SourceDetails": {
