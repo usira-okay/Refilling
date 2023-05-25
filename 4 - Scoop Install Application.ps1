@@ -10,7 +10,6 @@ scoop bucket add extras
 
 # install applications
 scoop install autohotkey
-scoop install lsd
 scoop install screentogif
 scoop install brave
 scoop install postman
@@ -24,7 +23,6 @@ scoop install flameshot
 scoop install coretemp
 scoop install obsidian
 scoop install docker
-scoop install gsudo
 scoop install crystaldiskinfo
 scoop install speedtest
 
