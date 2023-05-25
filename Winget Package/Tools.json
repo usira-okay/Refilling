@@ -21,6 +21,78 @@
 				},
 				{
 					"PackageIdentifier": "Oracle.VirtualBox"
+				},
+				{
+					"PackageIdentifier": "Microsoft.SQLServerManagementStudio"
+				},
+				{
+					"PackageIdentifier": "Microsoft.VisualStudioCode"
+				},
+				{
+					"PackageIdentifier": "RARLab.WinRAR"
+				},
+				{
+					"PackageIdentifier": "JGraph.Draw"
+				},
+				{
+					"PackageIdentifier": "LINE.LINE"
+				},
+				{
+					"PackageIdentifier": "TortoiseGit.TortoiseGit"
+				},
+				{
+					"PackageIdentifier": "Adobe.Acrobat.Reader.64-bit"
+				},
+				{
+					"PackageIdentifier": "BrianApps.Sizer"
+				},
+				{
+					"PackageIdentifier": "AutoHotkey.AutoHotkey"
+				},
+				{
+					"PackageIdentifier": "NickeManarin.ScreenToGif"
+				},
+				{
+					"PackageIdentifier": "Brave.Brave"
+				},
+				{
+					"PackageIdentifier": "Postman.Postman"
+				},
+				{
+					"PackageIdentifier": "OpenJS.NodeJS"
+				},
+				{
+					"PackageIdentifier": "Atlassian.Sourcetree"
+				},
+				{
+					"PackageIdentifier": "Ngrok.Ngrok"
+				},
+				{
+					"PackageIdentifier": "yt-dlp.yt-dlp"
+				},
+				{
+					"PackageIdentifier": "Gyan.FFmpeg"
+				},
+				{
+					"PackageIdentifier": "Flameshot.Flameshot"
+				},
+				{
+					"PackageIdentifier": "ALCPU.CoreTemp"
+				},
+				{
+					"PackageIdentifier": "Docker.DockerDesktop"
+				},
+				{
+					"PackageIdentifier": "CrystalDewWorld.CrystalDiskInfo"
+				},
+				{
+					"PackageIdentifier": "Ookla.Speedtest.Desktop"
+				},
+				{
+					"PackageIdentifier": "Git.Git"
+				},
+				{
+					"PackageIdentifier": "Microsoft.DotNet.SDK.6"
 				}
 			],
 			"SourceDetails": {
@@ -39,6 +111,14 @@
 				{
 					"//commant": "Whiteboard",
 					"PackageIdentifier": "9MSPC6MP8FM4"
+				},
+				{
+					"//commant": "DevToys",
+					"PackageIdentifier": "9PGCV4V3BK4W"
+				},
+				{
+					"//commant": "VLC",
+					"PackageIdentifier": "XPDM1ZW6815MQM"
 				}
 			],
 			"SourceDetails": {

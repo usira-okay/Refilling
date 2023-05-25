@@ -6,18 +6,8 @@ Write-Host 'Install Applications by Chocolatey'
 # Install Applications by Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-choco install tortoisegit `
-    sizer `
-    sqlpackage `
-    line `
-    adobereader `
+choco install sqlpackage `
     nuget.commandline `
-    drawio `
-    devtoys `
-    sql-server-management-studio `
-    vscode `
-    vlc `
-    winrar `
-    7zip -y
+    filezilla -y
 
 Pause
