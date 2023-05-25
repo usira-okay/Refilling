@@ -13,10 +13,8 @@ choco install tortoisegit `
     adobereader `
     nuget.commandline `
     drawio `
-    googledrive `
     devtoys `
     sql-server-management-studio `
-    libreoffice-still `
     vscode `
     vlc `
     winrar `

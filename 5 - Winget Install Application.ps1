@@ -16,7 +16,6 @@ if ($VCLibs.length -eq 0) {
 Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/download/v1.3.2691/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile .\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 
-winget import -i '.\Winget Package\Meeting.json' --accept-package-agreements --accept-source-agreements
 winget import -i '.\Winget Package\Tools.json' --accept-package-agreements --accept-source-agreements
 
 pause

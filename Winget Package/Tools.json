@@ -5,9 +5,6 @@
 		{
 			"Packages": [
 				{
-					"PackageIdentifier": "JetBrains.Toolbox"
-				},
-				{
 					"PackageIdentifier": "LINQPad.LINQPad.7"
 				},
 				{
@@ -17,7 +14,13 @@
 					"PackageIdentifier": "qishibo.AnotherRedisDesktopManager"
 				},
 				{
-					"PackageIdentifier": "NordVPN.NordVPN"
+					"PackageIdentifier": "NordSecurity.NordVPN"
+				},
+				{
+					"PackageIdentifier": "Microsoft.PowerToys"
+				},
+				{
+					"PackageIdentifier": "Oracle.VirtualBox"
 				}
 			],
 			"SourceDetails": {
