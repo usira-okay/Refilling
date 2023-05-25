@@ -8,7 +8,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 choco install sqlpackage `
     nuget.commandline `
-    jjmpeg `
+    ffmpeg `
     ngrok `
     filezilla -y
 
