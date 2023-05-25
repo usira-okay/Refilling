@@ -65,13 +65,7 @@
 					"PackageIdentifier": "Atlassian.Sourcetree"
 				},
 				{
-					"PackageIdentifier": "Ngrok.Ngrok"
-				},
-				{
 					"PackageIdentifier": "yt-dlp.yt-dlp"
-				},
-				{
-					"PackageIdentifier": "Gyan.FFmpeg"
 				},
 				{
 					"PackageIdentifier": "Flameshot.Flameshot"
