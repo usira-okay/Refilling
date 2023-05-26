@@ -4,11 +4,10 @@ Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 Write-Host 'Other install and settings'
 
-Write-Host 'Install AzureCLI'
 # Install AzureCLI
 $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
    
-Write-Host 'Install-Module Az'
+# Install-Module Az
 Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
 
 # Install SWA CLI
@@ -25,5 +24,11 @@ $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("C:\Users\$env:USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PowerToys.lnk")
 $Shortcut.TargetPath = "C:\Users\$env:USERNAME\scoop\apps\powertoys\current\PowerToys.exe"
 $Shortcut.Save()
+
+# Install visual studio
+Invoke-WebRequest -Uri https://aka.ms/vs/17/release/vs_community.exe -OutFile .\vs_community.exe
+
+$process = Start-Process -FilePath vs_community.exe -ArgumentList "--allWorkloads", "--passive", "--installWhileDownloading", "--locale en-US", "--wait" -Wait -PassThru
+Write-Output $process.ExitCode 
 
 Pause

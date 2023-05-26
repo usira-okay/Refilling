@@ -87,6 +87,9 @@
 				},
 				{
 					"PackageIdentifier": "Microsoft.DotNet.SDK.6"
+				},
+				{
+					"PackageIdentifier": "Valve.Steam"
 				}
 			],
 			"SourceDetails": {

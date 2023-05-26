@@ -10,6 +10,9 @@ choco install sqlpackage `
     nuget.commandline `
     ffmpeg `
     ngrok `
-    filezilla -y
+    filezilla `
+    discord `
+    openshot `
+    obs-studio -y
 
 Pause
