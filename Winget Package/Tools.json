@@ -5,6 +5,32 @@
 		{
 			"Packages": [
 				{
+					"//commant": "WSL",
+					"PackageIdentifier": "9P9TQF7MRM4R"
+				},
+				{
+					"//commant": "Whiteboard",
+					"PackageIdentifier": "9MSPC6MP8FM4"
+				},
+				{
+					"//commant": "DevToys",
+					"PackageIdentifier": "9PGCV4V3BK4W"
+				},
+				{
+					"//commant": "VLC",
+					"PackageIdentifier": "XPDM1ZW6815MQM"
+				}
+			],
+			"SourceDetails": {
+				"Argument": "https://storeedgefd.dsx.mp.microsoft.com/v9.0",
+				"Identifier": "StoreEdgeFD",
+				"Name": "msstore",
+				"Type": "Microsoft.Rest"
+			}
+		},
+		{
+			"Packages": [
+				{
 					"PackageIdentifier": "LINQPad.LINQPad.7"
 				},
 				{
@@ -94,32 +120,6 @@
 				"Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
 				"Name": "winget",
 				"Type": "Microsoft.PreIndexed.Package"
-			}
-		},
-		{
-			"Packages": [
-				{
-					"//commant": "WSL",
-					"PackageIdentifier": "9P9TQF7MRM4R"
-				},
-				{
-					"//commant": "Whiteboard",
-					"PackageIdentifier": "9MSPC6MP8FM4"
-				},
-				{
-					"//commant": "DevToys",
-					"PackageIdentifier": "9PGCV4V3BK4W"
-				},
-				{
-					"//commant": "VLC",
-					"PackageIdentifier": "XPDM1ZW6815MQM"
-				}
-			],
-			"SourceDetails": {
-				"Argument": "https://storeedgefd.dsx.mp.microsoft.com/v9.0",
-				"Identifier": "StoreEdgeFD",
-				"Name": "msstore",
-				"Type": "Microsoft.Rest"
 			}
 		}
 	],
