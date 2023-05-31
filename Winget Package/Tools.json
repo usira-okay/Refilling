@@ -31,6 +31,9 @@
 		{
 			"Packages": [
 				{
+					"PackageIdentifier": "Google.Chrome"
+				},
+				{
 					"PackageIdentifier": "LINQPad.LINQPad.7"
 				},
 				{
