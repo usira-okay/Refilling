@@ -34,8 +34,6 @@ dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All /norestart
 
 dism.exe /online /Enable-Feature:Containers /All /norestart
 
-Install-PackageProvider -Name Nuget -MinimumVersion 2.8.5.201 -Force
-
-shutdown -r -t 120 -f
-
 Pause
+
+shutdown -r -t 0 -f

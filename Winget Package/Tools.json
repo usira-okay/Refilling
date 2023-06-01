@@ -31,6 +31,9 @@
 		{
 			"Packages": [
 				{
+					"PackageIdentifier": "OpenJS.NodeJS"
+				},
+				{
 					"PackageIdentifier": "Google.Chrome"
 				},
 				{
@@ -82,9 +85,6 @@
 					"PackageIdentifier": "Postman.Postman"
 				},
 				{
-					"PackageIdentifier": "OpenJS.NodeJS"
-				},
-				{
 					"PackageIdentifier": "Atlassian.Sourcetree"
 				},
 				{
@@ -109,10 +109,19 @@
 					"PackageIdentifier": "Git.Git"
 				},
 				{
-					"PackageIdentifier": "Microsoft.DotNet.SDK.6"
+					"PackageIdentifier": "Valve.Steam"
 				},
 				{
-					"PackageIdentifier": "Valve.Steam"
+					"PackageIdentifier": "Discord.Discord"
+				},
+				{
+					"PackageIdentifier": "OpenShot.OpenShot"
+				},
+				{
+					"PackageIdentifier": "OBSProject.OBSStudio"
+				},
+				{
+					"PackageIdentifier": "Microsoft.NuGet"
 				}
 			],
 			"SourceDetails": {
