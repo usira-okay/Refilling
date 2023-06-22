@@ -122,6 +122,9 @@
 				},
 				{
 					"PackageIdentifier": "Microsoft.NuGet"
+				},
+				{
+					"PackageIdentifier": "dbeaver.dbeaver"
 				}
 			],
 			"SourceDetails": {
