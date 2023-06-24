@@ -28,4 +28,18 @@ $Shortcut = $WshShell.CreateShortcut("C:\Users\$env:USERNAME\AppData\Roaming\Mic
 $Shortcut.TargetPath = "C:\Users\$env:USERNAME\scoop\apps\powertoys\current\PowerToys.exe"
 $Shortcut.Save()
 
+$env:path
+$envPath = $env:path
+$splitPaths = $envPath -split ';' | Where-Object { $_ -ne '' }
+
+$targetPath = "C:\Program Files\Oracle\VirtualBox"
+
+if ($splitPaths -notcontains $targetPath) {
+    $splitPaths += $targetPath
+}
+
+$env:path = ($splitPaths -join ';') + ';'
+
+$env:path
+
 Pause
