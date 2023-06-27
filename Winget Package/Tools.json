@@ -19,6 +19,10 @@
 				{
 					"//commant": "VLC",
 					"PackageIdentifier": "XPDM1ZW6815MQM"
+				},
+				{
+					"//commant": "Microsoft Remote Desktop",
+					"PackageIdentifier": "9WZDNCRFJ3PS"
 				}
 			],
 			"SourceDetails": {
