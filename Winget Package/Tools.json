@@ -129,6 +129,9 @@
 				},
 				{
 					"PackageIdentifier": "dbeaver.dbeaver"
+				},
+				{
+					"PackageIdentifier": "NoIP.DUC"
 				}
 			],
 			"SourceDetails": {
