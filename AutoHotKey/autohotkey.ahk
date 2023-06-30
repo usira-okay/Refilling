@@ -11,7 +11,18 @@ return
 
 path := GetPath() 
 
-Run, wt.exe -w normal new-tab powershell.exe -Command code '%path%'
+#NoEnv
+SetWorkingDir %A_ScriptDir%
+SetTitleMatchMode, 2
+
+; 獲取使用者名稱
+EnvGet, username, USERNAME
+
+; 設定VSCode的安裝路徑
+vscodePath := "C:\Users\" . username . "\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+
+; 執行指令啟動VSCode並開啟指定資料夾
+Run, %vscodePath% "%path%"
 
 return
 
