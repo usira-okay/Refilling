@@ -11,7 +11,7 @@ return
 
 path := GetPath() 
 
-Run, powershell.exe -Command code '%path%'
+Run, wt.exe -w normal new-tab powershell.exe -Command code '%path%'
 
 return
 
