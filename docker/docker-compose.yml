@@ -11,18 +11,18 @@ services:
     image: arisuokay/noip-duc:latest
     container_name: noip-duc
     env_file:
-      - ~/docker/env/duc.env
+      - ./env/duc.env
     volumes:
-      - ~/docker/data/duc:/app/data
+      - ./data/duc:/app/data
     restart: unless-stopped
   
   wake-it-up:
     image: arisuokay/wake-it-up:latest
     container_name: wake-it-up
     env_file:
-      - ~/docker/env/wakeup.env
+      - ./env/wakeup.env
     volumes:
-      - ~/docker/data/WakeItUp:/app/data
+      - ./data/wake-it-up:/app/data
     restart: unless-stopped
 
   hbbs:
@@ -34,7 +34,7 @@ services:
     image: rustdesk/rustdesk-server:latest
     command: hbbs -r <your-domain>:21117
     volumes:
-      - ~/docker/data/rust/hbbs:/root
+      - ./data/rust/hbbs:/root
     networks:
       - rustdesk-net
     depends_on:
@@ -52,7 +52,7 @@ services:
     image: rustdesk/rustdesk-server:latest
     command: hbbr
     volumes:
-      - ~/docker/data/rust/hbbr:/root
+      - ./data/rust/hbbr:/root
     networks:
       - rustdesk-net
     restart: unless-stopped
