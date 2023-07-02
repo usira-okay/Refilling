@@ -1,0 +1,62 @@
+version: '1'
+
+name: life-helper
+
+networks:
+  rustdesk-net:
+    external: false
+
+services:
+  noip-duc:
+    image: arisuokay/noip-duc:latest
+    container_name: noip-duc
+    env_file:
+      - ~/docker/env/duc.env
+    volumes:
+      - ~/docker/data/duc:/app/data
+    restart: unless-stopped
+  
+  wake-it-up:
+    image: arisuokay/wake-it-up:latest
+    container_name: wake-it-up
+    env_file:
+      - ~/docker/env/wakeup.env
+    volumes:
+      - ~/docker/data/WakeItUp:/app/data
+    restart: unless-stopped
+
+  hbbs:
+    container_name: hbbs
+    ports:
+      - 21115:21115
+      - 21116:21116
+      - 21116:21116/udp
+    image: rustdesk/rustdesk-server:latest
+    command: hbbs -r <your-domain>:21117
+    volumes:
+      - ~/docker/data/rust/hbbs:/root
+    networks:
+      - rustdesk-net
+    depends_on:
+      - hbbr
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+
+  hbbr:
+    container_name: hbbr
+    ports:
+      - 21117:21117
+    image: rustdesk/rustdesk-server:latest
+    command: hbbr
+    volumes:
+      - ~/docker/data/rust/hbbr:/root
+    networks:
+      - rustdesk-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 64M
