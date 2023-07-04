@@ -5,25 +5,36 @@ name: life-helper
 networks:
   rustdesk-net:
     external: false
+  seq_log_network:
+    external: false
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
 
 services:
-  noip-duc:
-    image: arisuokay/noip-duc:latest
-    container_name: noip-duc
-    env_file:
-      - ./env/duc.env
-    volumes:
-      - ./data/duc:/app/data
+  seq:
+    image: datalust/seq:2023.2
+    container_name: seq
     restart: unless-stopped
-  
-  wake-it-up:
-    image: arisuokay/wake-it-up:latest
-    container_name: wake-it-up
-    env_file:
-      - ./env/wakeup.env
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5341:80
     volumes:
-      - ./data/wake-it-up:/app/data
+      - ./data/seq:/data
+    networks:
+      seq_log_network:
+        ipv4_address: 172.30.0.2
+
+  lifehelper:
+    image: arisuokay/lifehelper-worker-service:latest
+    container_name: lifehelper-worker
     restart: unless-stopped
+    env_file:
+      - ./env/lifehelper.env
+    networks:
+      seq_log_network:
+        ipv4_address: 172.30.0.3
 
   hbbs:
     container_name: hbbs
