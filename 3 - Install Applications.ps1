@@ -16,6 +16,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco install sqlpackage `
     ffmpeg `
     ngrok `
+    sourcetree `
     filezilla -y
-
+    
 Pause
