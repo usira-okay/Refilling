@@ -13,9 +13,6 @@ Install-PackageProvider -Name Nuget -Force
 Write-Host 'Az'
 Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
 
-Write-Host 'SWA CLI'
-npm install -g @azure/static-web-apps-cli
-
 Write-Host 'Add Nuget Offical Source'
 nuget source add -name nuget -source https://api.nuget.org/v3/index.json
 
