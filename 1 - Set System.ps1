@@ -11,6 +11,11 @@ $UserLanguageList.Add('en-US')
 Set-WinUserLanguageList -LanguageList $UserLanguageList -Force
 Set-WinDefaultInputMethodOverride -InputTip '0409:00000409'
 
+# 設定地區、語言
+Set-WinHomeLocation -GeoId 237
+Set-Culture -CultureInfo "zh-TW"
+
+
 # 調整電腦進入睡眠時間
 # 電池
 powercfg -change -standby-timeout-dc 120
