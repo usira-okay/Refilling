@@ -7,3 +7,5 @@ Write-Host 'Set User Password'
 $newpassword = ConvertTo-SecureString "YourNewPassword" -AsPlainText -Force
 $user = Get-LocalUser -Name $env:USERNAME
 $user | Set-LocalUser -Password $newpassword
+
+Pause
