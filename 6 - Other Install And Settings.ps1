@@ -39,7 +39,7 @@ $env:path = ($splitPaths -join ';') + ';'
 
 $env:path
 
-git config -g user.name "Ari"
-git config -g user.email "arisuokayokay@gmail.com"
+git config --global user.name "Ari"
+git config --global user.email "arisuokayokay@gmail.com"
 
 Pause
