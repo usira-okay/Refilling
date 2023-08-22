@@ -15,14 +15,6 @@
 				{
 					"//commant": "DevToys",
 					"PackageIdentifier": "9PGCV4V3BK4W"
-				},
-				{
-					"//commant": "VLC",
-					"PackageIdentifier": "XPDM1ZW6815MQM"
-				},
-				{
-					"//commant": "Microsoft Remote Desktop",
-					"PackageIdentifier": "9WZDNCRFJ3PS"
 				}
 			],
 			"SourceDetails": {
@@ -123,6 +115,12 @@
 				},
 				{
 					"PackageIdentifier": "dbeaver.dbeaver"
+				},
+				{
+					"PackageIdentifier": "mRemoteNG.mRemoteNG"
+				},
+				{
+					"PackageIdentifier": "VideoLAN.VLC"
 				}
 			],
 			"SourceDetails": {
