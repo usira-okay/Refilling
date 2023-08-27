@@ -120,6 +120,9 @@
 					"PackageIdentifier": "mRemoteNG.mRemoteNG"
 				},
 				{
+					"PackageIdentifier": "Rustlang.Rustup"
+				},
+				{
 					"PackageIdentifier": "VideoLAN.VLC"
 				}
 			],
