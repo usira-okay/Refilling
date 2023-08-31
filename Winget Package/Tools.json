@@ -111,9 +111,6 @@
 					"PackageIdentifier": "OBSProject.OBSStudio"
 				},
 				{
-					"PackageIdentifier": "Microsoft.NuGet"
-				},
-				{
 					"PackageIdentifier": "dbeaver.dbeaver"
 				},
 				{

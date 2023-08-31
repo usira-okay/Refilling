@@ -14,7 +14,7 @@ Write-Host 'Az'
 Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
 
 Write-Host 'Add Nuget Offical Source'
-nuget source add -name nuget -source https://api.nuget.org/v3/index.json
+dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json
 
 dotnet tool install --global dotnet-ef
 
