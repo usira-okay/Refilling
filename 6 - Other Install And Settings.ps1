@@ -25,6 +25,16 @@ $Shortcut = $WshShell.CreateShortcut("C:\Users\$env:USERNAME\AppData\Roaming\Mic
 $Shortcut.TargetPath = "C:\Users\$env:USERNAME\scoop\apps\powertoys\current\PowerToys.exe"
 $Shortcut.Save()
 
+$webClient = New-Object System.Net.WebClient
+$url = 'https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.13.4-stable.zip'
+$destination = 'flutter.zip'
+$webClient.DownloadFile($url, $destination)
+
+Expand-Archive -Path 'flutter.zip' -DestinationPath 'flutter'
+
+
+Copy-Item -Path 'flutter\flutter' -Destination 'C:\tools\flutter' -Recurse
+
 $env:path
 $envPath = $env:path
 $splitPaths = $envPath -split ';' | Where-Object { $_ -ne '' }
@@ -33,6 +43,12 @@ $targetPath = "C:\Program Files\Oracle\VirtualBox"
 
 if ($splitPaths -notcontains $targetPath) {
     $splitPaths += $targetPath
+}
+
+$flutterPath = 'C:\tools\flutter\bin'
+
+if ($splitPaths -notcontains $flutterPath) {
+    $splitPaths += $flutterPath
 }
 
 $env:path = ($splitPaths -join ';') + ';'

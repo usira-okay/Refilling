@@ -121,6 +121,9 @@
 				},
 				{
 					"PackageIdentifier": "VideoLAN.VLC"
+				},
+				{
+					"PackageIdentifier": "Google.AndroidStudio"
 				}
 			],
 			"SourceDetails": {
