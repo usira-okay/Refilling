@@ -1,4 +1,12 @@
 ﻿
+#!d::
+
+path := GetPath() 
+
+Run, %path%
+
+return
+
 #!c::
 
 path := GetPath() 
