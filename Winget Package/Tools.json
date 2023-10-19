@@ -52,16 +52,10 @@
 					"PackageIdentifier": "Microsoft.PowerToys"
 				},
 				{
-					"PackageIdentifier": "Oracle.VirtualBox"
-				},
-				{
 					"PackageIdentifier": "Microsoft.SQLServerManagementStudio"
 				},
 				{
 					"PackageIdentifier": "Microsoft.VisualStudioCode"
-				},
-				{
-					"PackageIdentifier": "RARLab.WinRAR"
 				},
 				{
 					"PackageIdentifier": "JGraph.Draw"
@@ -119,9 +113,6 @@
 				},
 				{
 					"PackageIdentifier": "mRemoteNG.mRemoteNG"
-				},
-				{
-					"PackageIdentifier": "Rustlang.Rustup"
 				},
 				{
 					"PackageIdentifier": "VideoLAN.VLC"
