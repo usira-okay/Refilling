@@ -1,4 +1,16 @@
 ﻿
+^#!r::
+
+Run, shutdown -r -t 0 -f
+
+return
+
+^#!s::
+
+Run, slidetoshutdown
+
+return
+
 #!d::
 
 path := GetPath() 
