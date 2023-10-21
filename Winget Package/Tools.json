@@ -15,6 +15,10 @@
 				{
 					"//commant": "DevToys",
 					"PackageIdentifier": "9PGCV4V3BK4W"
+				},
+				{
+					"//commant": "Ubuntu",
+					"PackageIdentifier": "9PDXGNCFSCZV"
 				}
 			],
 			"SourceDetails": {
@@ -48,16 +52,10 @@
 					"PackageIdentifier": "Microsoft.PowerToys"
 				},
 				{
-					"PackageIdentifier": "Oracle.VirtualBox"
-				},
-				{
 					"PackageIdentifier": "Microsoft.SQLServerManagementStudio"
 				},
 				{
 					"PackageIdentifier": "Microsoft.VisualStudioCode"
-				},
-				{
-					"PackageIdentifier": "RARLab.WinRAR"
 				},
 				{
 					"PackageIdentifier": "JGraph.Draw"
@@ -115,9 +113,6 @@
 				},
 				{
 					"PackageIdentifier": "mRemoteNG.mRemoteNG"
-				},
-				{
-					"PackageIdentifier": "Rustlang.Rustup"
 				},
 				{
 					"PackageIdentifier": "VideoLAN.VLC"
