@@ -1,7 +1,13 @@
 ﻿
+^#!a::
+
+Run, shutdown -a
+
+return
+
 ^#!r::
 
-Run, shutdown -r -t 0 -f
+Run, shutdown -r -t 10 -f
 
 return
 
