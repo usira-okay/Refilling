@@ -5,7 +5,7 @@ Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 Write-Host 'Change Cursors'
 
-$dirName = 'Numix Light'
+$dirName = 'Numix Dark'
 $path = "..\Cursors\$dirName"
 
 if (-not (test-path $path)) {
