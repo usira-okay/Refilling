@@ -119,6 +119,9 @@
 				},
 				{
 					"PackageIdentifier": "RicoSuter.NSwagStudio"
+				},
+				{
+					"PackageIdentifier": "7zip.7zip"
 				}
 			],
 			"SourceDetails": {
