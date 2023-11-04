@@ -42,7 +42,4 @@ $env:path
 git config --global user.name "Ari"
 git config --global user.email "arisuokayokay@gmail.com"
 
-# 停用預設的 print screen 快捷鍵
-Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "PrintScreenKeyForSnippingEnabled" -Value 0
-
 Pause
