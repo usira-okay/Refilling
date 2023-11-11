@@ -1,31 +1,12 @@
-version: '1'
+version: "1"
 
 name: life-helper
 
 networks:
   rustdesk-net:
     external: false
-  seq_log_network:
-    external: false
-    ipam:
-      config:
-        - subnet: 172.30.0.0/16
 
 services:
-  seq:
-    image: datalust/seq:2023.2
-    container_name: seq
-    restart: unless-stopped
-    environment:
-      - ACCEPT_EULA=Y
-    ports:
-      - 5342:80
-    volumes:
-      - ./data/seq:/data
-    networks:
-      seq_log_network:
-        ipv4_address: 172.30.0.2
-
   lifehelper:
     image: arisuokay/lifehelper-worker-service:latest
     container_name: lifehelper-worker
