@@ -122,6 +122,18 @@
 				},
 				{
 					"PackageIdentifier": "7zip.7zip"
+				},
+				{
+					"PackageIdentifier": "Google.GoogleDrive"
+				},
+				{
+					"PackageIdentifier": "JetBrains.Toolbox"
+				},
+				{
+					"PackageIdentifier": "JetBrains.DataGrip"
+				},
+				{
+					"PackageIdentifier": "JetBrains.Rider"
 				}
 			],
 			"SourceDetails": {
