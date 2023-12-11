@@ -37,7 +37,7 @@
 					"PackageIdentifier": "Google.Chrome"
 				},
 				{
-					"PackageIdentifier": "LINQPad.LINQPad.7"
+					"PackageIdentifier": "LINQPad.LINQPad.8"
 				},
 				{
 					"PackageIdentifier": "RustDesk.RustDesk"
@@ -128,12 +128,6 @@
 				},
 				{
 					"PackageIdentifier": "JetBrains.Toolbox"
-				},
-				{
-					"PackageIdentifier": "JetBrains.DataGrip"
-				},
-				{
-					"PackageIdentifier": "JetBrains.Rider"
 				}
 			],
 			"SourceDetails": {
