@@ -13,7 +13,7 @@ return
 
 ^#!s::
 
-Run, slidetoshutdown
+Run, shutdown -s -t 10 -f
 
 return
 
