@@ -22,7 +22,9 @@ choco install sqlpackage `
     ffmpeg `
     ngrok `
     sourcetree `
-    filezilla -y 
+    filezilla `
+    gawk `
+    grep -y 
 
 choco install autohotkey --version=1.1.37.1 -y 
     
