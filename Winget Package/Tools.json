@@ -128,6 +128,9 @@
 				},
 				{
 					"PackageIdentifier": "JetBrains.Toolbox"
+				},
+				{
+					"PackageIdentifier": "SlackTechnologies.Slack"
 				}
 			],
 			"SourceDetails": {
