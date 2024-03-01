@@ -4,7 +4,7 @@ Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 Write-Host 'Change Remote Port'
 
-$portvalue = 3390
+$portvalue = Read-Host "Enter port"
 
 # 變更遠端桌面的 Port 以及變更遠端桌面的 Port
 Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name 'PortNumber' -Value $portvalue 

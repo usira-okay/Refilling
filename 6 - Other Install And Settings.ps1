@@ -25,18 +25,10 @@ $Shortcut = $WshShell.CreateShortcut("C:\Users\$env:USERNAME\AppData\Roaming\Mic
 $Shortcut.TargetPath = "C:\Users\$env:USERNAME\scoop\apps\powertoys\current\PowerToys.exe"
 $Shortcut.Save()
 
-$splitPaths = [System.Environment]::GetEnvironmentVariable("PATH", "Machine") -split ';' | Where-Object { $_ -ne '' }
-
-$targetPath = "C:\Program Files\Oracle\VirtualBox"
-
-if ($splitPaths -notcontains $targetPath) {
-    $splitPaths += $targetPath
-}
-
-$envPath = ($splitPaths -join ';') + ';'
-
-[System.Environment]::SetEnvironmentVariable("PATH", $env:Path, [System.EnvironmentVariableTarget]::Machine)
-
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("C:\Users\$env:USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\flameshot.lnk")
+$Shortcut.TargetPath = "C:\Program Files\Flameshot\bin\flameshot.exe"
+$Shortcut.Save()
 
 git config --global user.name "Ari"
 git config --global user.email "arisuokayokay@gmail.com"
