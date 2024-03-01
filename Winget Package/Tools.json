@@ -125,6 +125,9 @@
 				},
 				{
 					"PackageIdentifier": "SlackTechnologies.Slack"
+				},
+				{
+					"PackageIdentifier": "Telegram.TelegramDesktop"
 				}
 			],
 			"SourceDetails": {
