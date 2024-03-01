@@ -44,11 +44,11 @@ REG ADD 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer' /
 REG ADD 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer' /V ShellState /T REG_BINARY /D 240000001ea8000000000000000000000000000001000000130000000000000062000000 /F
 
 # 顯示隱藏檔案
-REG ADD 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /v Hidden /t REG_DWORD /f /d 1 > NUL
-REG ADD 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /v ShowSuperHidden /t REG_DWORD /f /d 1
+REG ADD 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /V Hidden /T REG_DWORD /D 1 /F
+REG ADD 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /V ShowSuperHidden /T REG_DWORD /D 1 /F
 
 # 顯示已知的檔案類型
-REG ADD 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /v HideFileExt /t REG_DWORD /f /d 0 > NUL
+REG ADD 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /V HideFileExt /T REG_DWORD /D 0 /F
 
 Pause
 
