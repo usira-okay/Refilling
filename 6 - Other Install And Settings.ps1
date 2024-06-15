@@ -30,7 +30,10 @@ $Shortcut = $WshShell.CreateShortcut("C:\Users\$env:USERNAME\AppData\Roaming\Mic
 $Shortcut.TargetPath = "C:\Program Files\Flameshot\bin\flameshot.exe"
 $Shortcut.Save()
 
+git config --global core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
 git config --global user.name "Ari"
 git config --global user.email "arisuokayokay@gmail.com"
+
+ssh-add .\id_ed25519
 
 Pause
