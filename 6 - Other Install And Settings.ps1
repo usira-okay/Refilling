@@ -33,6 +33,8 @@ $Shortcut.Save()
 git config --global core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
 git config --global user.name "Ari"
 git config --global user.email "arisuokayokay@gmail.com"
+git config --global core.autocrlf true
+git config --global core.safecrlf true
 
 ssh-add .\id_ed25519
 
