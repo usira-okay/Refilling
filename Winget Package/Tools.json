@@ -124,9 +124,6 @@
 					"PackageIdentifier": "JetBrains.Toolbox"
 				},
 				{
-					"PackageIdentifier": "SlackTechnologies.Slack"
-				},
-				{
 					"PackageIdentifier": "Telegram.TelegramDesktop"
 				},
 				{
