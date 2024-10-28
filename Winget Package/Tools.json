@@ -134,6 +134,14 @@
 				},
 				{
 					"PackageIdentifier": "Fork.Fork"
+				},
+				{
+					"//Command": "for vscode plantuml extension",
+					"PackageIdentifier": "Microsoft.OpenJDK.21"
+				},
+				{
+					"//Command": "for vscode plantuml extension",
+					"PackageIdentifier": "Graphviz.Graphviz"
 				}
 			],
 			"SourceDetails": {
