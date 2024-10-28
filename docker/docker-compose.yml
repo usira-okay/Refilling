@@ -2,53 +2,21 @@ version: "1"
 
 name: life-helper
 
-networks:
-  rustdesk-net:
-    external: false
-
 services:
-  lifehelper:
+  lifehelper-worker:
     image: arisuokay/lifehelper-worker-service:latest
     container_name: lifehelper-worker
     restart: unless-stopped
     env_file:
       - ./env/lifehelper.env
-    networks:
-      seq_log_network:
-        ipv4_address: 172.30.0.3
-
-  hbbs:
-    container_name: hbbs
-    ports:
-      - 21115:21115
-      - 21116:21116
-      - 21116:21116/udp
-    image: rustdesk/rustdesk-server:latest
-    command: hbbs -r <your-domain>:21117
-    volumes:
-      - ./data/rust/hbbs:/root
-    networks:
-      - rustdesk-net
-    depends_on:
-      - hbbr
+  
+  seqlog:
+    image: datalust/seq:latest
+    container_name: seqlog
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: 64M
-
-  hbbr:
-    container_name: hbbr
     ports:
-      - 21117:21117
-    image: rustdesk/rustdesk-server:latest
-    command: hbbr
+      - "5341:80"
     volumes:
-      - ./data/rust/hbbr:/root
-    networks:
-      - rustdesk-net
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: 64M
+      - ./seqlog:/data
+    env_file:
+      - ./env/seq.env
