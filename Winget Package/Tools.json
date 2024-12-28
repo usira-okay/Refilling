@@ -58,9 +58,6 @@
 					"PackageIdentifier": "JGraph.Draw"
 				},
 				{
-					"PackageIdentifier": "LINE.LINE"
-				},
-				{
 					"PackageIdentifier": "TortoiseGit.TortoiseGit"
 				},
 				{
@@ -142,6 +139,9 @@
 				{
 					"//Command": "for vscode plantuml extension",
 					"PackageIdentifier": "Graphviz.Graphviz"
+				},
+				{
+					"PackageIdentifier": "Obsidian.Obsidian"
 				}
 			],
 			"SourceDetails": {
