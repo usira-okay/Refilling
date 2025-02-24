@@ -121,13 +121,7 @@
 					"PackageIdentifier": "JetBrains.Toolbox"
 				},
 				{
-					"PackageIdentifier": "Telegram.TelegramDesktop"
-				},
-				{
 					"PackageIdentifier": "JetBrains.DataGrip"
-				},
-				{
-					"PackageIdentifier": "GNU.Nano"
 				},
 				{
 					"PackageIdentifier": "Fork.Fork"
