@@ -29,7 +29,9 @@ return
 
 path := GetPath() 
 
-Run, wt.exe -w normal new-tab PowerShell -NoExit -Command cd '%path%'
+profile := GetPowerShellProfilePath()
+
+Run, wt.exe -w normal new-tab "C:\Program Files\PowerShell\7\pwsh.exe" -NoExit -Command ". %profile% `cd '%path%'"
 
 return
 
@@ -56,7 +58,9 @@ return
 
 path := GetPath() 
 
-Run, *RunAs wt.exe -w administrator new-tab PowerShell -NoExit -Command cd '%path%'
+profile := GetPowerShellProfilePath()
+
+Run, *RunAs wt.exe -w administrator new-tab "C:\Program Files\PowerShell\7\pwsh.exe" -NoExit -Command ". %profile% `cd '%path%'"
 
 return
 
@@ -81,4 +85,14 @@ GetPath()
 	dirpath := GetActiveExplorerPath()
 	
 	return dirpath
+}
+
+GetPowerShellProfilePath()
+{
+	; 獲取使用者名稱
+	EnvGet, userprofile, USERPROFILE
+
+	profile := userprofile . "\Microsoft.PowerShell_profile.ps1"
+
+	return profile
 }

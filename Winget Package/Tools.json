@@ -49,19 +49,10 @@
 					"PackageIdentifier": "Microsoft.PowerToys"
 				},
 				{
-					"PackageIdentifier": "Microsoft.SQLServerManagementStudio"
-				},
-				{
 					"PackageIdentifier": "Microsoft.VisualStudioCode"
 				},
 				{
-					"PackageIdentifier": "JGraph.Draw"
-				},
-				{
-					"PackageIdentifier": "TortoiseGit.TortoiseGit"
-				},
-				{
-					"PackageIdentifier": "BrianApps.Sizer"
+					"PackageIdentifier": "Microsoft.VisualStudioCode.Insiders"
 				},
 				{
 					"PackageIdentifier": "NickeManarin.ScreenToGif"
@@ -109,9 +100,6 @@
 					"PackageIdentifier": "VideoLAN.VLC"
 				},
 				{
-					"PackageIdentifier": "RicoSuter.NSwagStudio"
-				},
-				{
 					"PackageIdentifier": "7zip.7zip"
 				},
 				{
@@ -136,6 +124,9 @@
 				},
 				{
 					"PackageIdentifier": "Obsidian.Obsidian"
+				},
+				{
+					"PackageIdentifier": "Microsoft.PowerShell"
 				}
 			],
 			"SourceDetails": {
