@@ -31,7 +31,7 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, wt.exe -w normal new-tab "C:\Program Files\PowerShell\7\pwsh.exe" -NoExit -Command ". %profile% `cd '%path%'"
+Run, wt.exe -w normal new-tab "C:\Program Files\PowerShell\7\pwsh.exe" -NoExit -Command ". %profile% && cd '%path%'"
 
 return
 
@@ -60,7 +60,7 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, *RunAs wt.exe -w administrator new-tab "C:\Program Files\PowerShell\7\pwsh.exe" -NoExit -Command ". %profile% `cd '%path%'"
+Run, *RunAs wt.exe -w administrator new-tab "C:\Program Files\PowerShell\7\pwsh.exe" -NoExit -Command ". %profile% && cd '%path%'"
 
 return
 

@@ -98,8 +98,6 @@ foreach ($CustProfile in $CustProfiles) {
         }
         $settings.defaultProfile = $CustProfile.guid
     }
-
-
 }
 
 # 將更新後的設定寫回 settings.json
