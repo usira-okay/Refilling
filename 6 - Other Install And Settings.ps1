@@ -29,6 +29,7 @@ git config --global user.name "Ari"
 git config --global user.email "arisuokayokay@gmail.com"
 git config --global core.autocrlf true
 git config --global core.safecrlf true
+git config --global push.autoSetupRemote true
 
 # History Autocomplete
 Install-Module PSReadLine -Force
