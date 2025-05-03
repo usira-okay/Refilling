@@ -127,6 +127,9 @@
 				},
 				{
 					"PackageIdentifier": "Microsoft.PowerShell"
+				},
+				{
+					"PackageIdentifier": "Microsoft.NuGet"
 				}
 			],
 			"SourceDetails": {
