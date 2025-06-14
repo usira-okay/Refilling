@@ -67,9 +67,6 @@
 					"PackageIdentifier": "ALCPU.CoreTemp"
 				},
 				{
-					"PackageIdentifier": "Docker.DockerDesktop"
-				},
-				{
 					"PackageIdentifier": "CrystalDewWorld.CrystalDiskInfo"
 				},
 				{
@@ -127,6 +124,15 @@
 				},
 				{
 					"PackageIdentifier": "Microsoft.NuGet"
+				},
+				{
+					"PackageIdentifier": "RedHat.Podman"
+				},
+				{
+					"PackageIdentifier": "RedHat.Podman-Desktop"
+				},
+				{
+					"PackageIdentifier": "astral-sh.uv"
 				}
 			],
 			"SourceDetails": {
