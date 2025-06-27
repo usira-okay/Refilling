@@ -106,10 +106,4 @@ $settings | ConvertTo-Json -Depth 10 | Set-Content -Path $settingsPath -Encoding
 
 Write-Output "Windows Terminal PowerShell 設定已更新！"
 
-podman machine init
-podman machine start
-
-uv venv
-uv pip install podman-compose
-
 Pause

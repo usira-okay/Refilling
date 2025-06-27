@@ -67,9 +67,6 @@
 					"PackageIdentifier": "ALCPU.CoreTemp"
 				},
 				{
-					"PackageIdentifier": "CrystalDewWorld.CrystalDiskInfo"
-				},
-				{
 					"PackageIdentifier": "Ookla.Speedtest.Desktop"
 				},
 				{
@@ -126,13 +123,7 @@
 					"PackageIdentifier": "Microsoft.NuGet"
 				},
 				{
-					"PackageIdentifier": "RedHat.Podman"
-				},
-				{
-					"PackageIdentifier": "RedHat.Podman-Desktop"
-				},
-				{
-					"PackageIdentifier": "astral-sh.uv"
+					"PackageIdentifier": "Docker.DockerDesktop"
 				}
 			],
 			"SourceDetails": {
