@@ -32,8 +32,10 @@ dnsutils \
 aggregate \
 jq \
 ca-certificates \
-curl \
-nodejs
+curl
+
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo bash -
+sudo apt-get install -y nodejs
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
