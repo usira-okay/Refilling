@@ -8,10 +8,38 @@
 
 ```bash
 wsl --update
-
 wsl --install Ubuntu
-
 wsl --set-default Ubuntu
+```
+
+```bash
+
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install -y --no-install-recommends \
+git \
+procps \
+fzf \
+zsh \
+unzip \
+man-db \
+gnupg2 \
+gh \
+iptables \
+ipset \
+iproute2 \
+dnsutils \
+aggregate \
+jq \
+ca-certificates \
+curl \
+nodejs
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+npm install -g @google/gemini-cli
+
+echo 'npm update -g @google/gemini-cli' >> ~/.zshrc
 ```
 
 ## 安裝程式清單
