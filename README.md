@@ -37,6 +37,9 @@ curl
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo bash -
 sudo apt-get install -y nodejs
 
+echo 'export NPM_CONFIG_PREFIX=/usr/local/share/npm-global' >> ~/.zshrc
+echo 'export PATH=$PATH:/usr/local/share/npm-global/bin' >> ~/.zshrc
+
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 npm install -g @google/gemini-cli
