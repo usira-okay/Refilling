@@ -5,20 +5,12 @@
 		{
 			"Packages": [
 				{
-					"//commant": "WSL",
-					"PackageIdentifier": "9P9TQF7MRM4R"
-				},
-				{
 					"//commant": "Whiteboard",
 					"PackageIdentifier": "9MSPC6MP8FM4"
 				},
 				{
 					"//commant": "DevToys",
 					"PackageIdentifier": "9PGCV4V3BK4W"
-				},
-				{
-					"//commant": "Ubuntu",
-					"PackageIdentifier": "9PDXGNCFSCZV"
 				}
 			],
 			"SourceDetails": {
@@ -31,7 +23,7 @@
 		{
 			"Packages": [
 				{
-					"PackageIdentifier": "OpenJS.NodeJS"
+					"PackageIdentifier": "CoreyButler.NVMforWindows"
 				},
 				{
 					"PackageIdentifier": "Google.Chrome"
