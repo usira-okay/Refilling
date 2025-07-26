@@ -24,12 +24,16 @@ $Shortcut = $WshShell.CreateShortcut("C:\Users\$env:USERNAME\AppData\Roaming\Mic
 $Shortcut.TargetPath = "C:\Program Files\Flameshot\bin\flameshot.exe"
 $Shortcut.Save()
 
+$gitUser = Read-Host "Enter git user."
+$gitMail = Read-Host "Enter git email."
+
 git config --global core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
-git config --global user.name "Ari"
-git config --global user.email "arisuokayokay@gmail.com"
-git config --global core.autocrlf true
+git config --global user.name $gitUser
+git config --global user.email $gitMail
+git config --global core.autocrlf input
 git config --global core.safecrlf true
 git config --global push.autoSetupRemote true
+git config --global init.defaultBranch main
 
 # History Autocomplete
 Install-Module PSReadLine -Force
