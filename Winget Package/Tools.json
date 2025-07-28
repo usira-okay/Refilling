@@ -116,6 +116,9 @@
 				},
 				{
 					"PackageIdentifier": "Docker.DockerDesktop"
+				},
+				{
+					"PackageIdentifier": "Microsoft.AzureCLI"
 				}
 			],
 			"SourceDetails": {
