@@ -45,12 +45,6 @@ cat <<'EOF' | tee -a ~/.profile
 export JQ_COLORS="33:93:93:96:92:97:1;97:4;97"
 EOF
 
-# bash setup
-cat <<'EOF' | tee -a ~/.bashrc
-# Enable programmable completion features
-shopt -u direxpand
-shopt -s no_empty_cmd_completion
-EOF
 
 # setup workspace
 mkdir -p ~/projects
@@ -90,46 +84,7 @@ npx -y @willh/git-setup --name '$USER' --email arisuokayokay@gmail.com
 git config --global core.autocrlf input
 git config --global init.defaultBranch main
 
-
-npm install -g @google/gemini-cli && gemini -v
-
-
-npm install -g @anthropic-ai/claude-code
-
-# 設定任務完成的鈴聲
-claude config set --global preferredNotifChannel terminal_bell
-
-# 設定暗黑佈景主題
-claude config set -g theme dark
-
-# CI 模式必須關閉 verbose
-claude config set -g verbose false
-
-
 curl -LsSf https://astral.sh/uv/install.sh | sh
 uv -V
 
-# mcp tool context7
-claude mcp add context7 -s user -- npx -y @upstash/context7-mcp
 
-# # 建立 ~/.claude 目錄（如果不存在）
-# mkdir -p ~/.claude
-
-# # 建立 Claude 設定檔
-# cat <<'EOF' > ~/.claude/settings.json
-# {
-#     "permissions": {
-#         "allow": [
-#             "Bash(mkdir:*)",
-#             "Bash(dotnet:*)",
-#             "mcp__context7__resolve-library-id",
-#             "mcp__context7__get-library-docs"
-#         ],
-#         "deny": [],
-#         "defaultMode": "bypassPermissions"
-#     }
-# }
-# EOF
-
-
-  # "bypassPermissionsModeAccepted": true

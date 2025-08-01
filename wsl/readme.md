@@ -11,5 +11,8 @@ wsl --install Ubuntu
 
 wsl --set-default Ubuntu
 
+
+wsl --install -d Ubuntu-24.04
+
 ```
 
