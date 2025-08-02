@@ -119,6 +119,9 @@
 				},
 				{
 					"PackageIdentifier": "Microsoft.AzureCLI"
+				},
+				{
+					"PackageIdentifier": "NordSecurity.NordPass"
 				}
 			],
 			"SourceDetails": {
