@@ -110,4 +110,6 @@ $settings | ConvertTo-Json -Depth 10 | Set-Content -Path $settingsPath -Encoding
 
 Write-Output "Windows Terminal PowerShell 設定已更新！"
 
+npm install -g @vue/cli
+
 Pause
