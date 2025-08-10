@@ -31,7 +31,7 @@ git config --global core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
 git config --global user.name $gitUser
 git config --global user.email $gitMail
 git config --global core.autocrlf true
-git config --global core.safecrlf true
+git config --global core.safecrlf false
 git config --global push.autoSetupRemote true
 git config --global init.defaultBranch main
 
