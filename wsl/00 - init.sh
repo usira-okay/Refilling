@@ -88,5 +88,6 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv -V
 
 sudo apt-get update && \
-  sudo apt-get install -y dotnet-sdk-9.0
+  sudo apt-get install -y dotnet-sdk-9.0 dotnet-sdk-8.0
+
 
