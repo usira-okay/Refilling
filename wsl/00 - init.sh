@@ -87,4 +87,6 @@ git config --global init.defaultBranch main
 curl -LsSf https://astral.sh/uv/install.sh | sh
 uv -V
 
+sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-9.0
 
