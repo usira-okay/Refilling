@@ -9,3 +9,11 @@ sudo apt-get update
 
 # 安裝 .NET 6 SDK
 sudo apt-get install -y dotnet-sdk-6.0
+
+
+
+sudo add-apt-repository ppa:dotnet/backports
+
+# 安裝 .NET 9 SDK
+sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-9.0
