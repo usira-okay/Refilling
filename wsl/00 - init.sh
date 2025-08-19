@@ -91,3 +91,5 @@ sudo apt update && sudo apt upgrade -y
 
 npm install -g @google/gemini-cli
 npm install -g @anthropic-ai/claude-code
+
+claude
