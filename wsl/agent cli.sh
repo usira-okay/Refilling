@@ -7,7 +7,7 @@ npm install -g @anthropic-ai/claude-code
 claude config set -g theme dark
 
 # CI 模式必須關閉 verbose
-claude config set -g verbose false
+# claude config set -g verbose false
 
 # mcp tool context7
 claude mcp add context7 -s user -- npx -y @upstash/context7-mcp
