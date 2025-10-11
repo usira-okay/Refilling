@@ -93,4 +93,6 @@ npm install -g @google/gemini-cli
 npm install -g @anthropic-ai/claude-code
 npm install -g @openai/codex
 npm install -g @github/copilot
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+
 
