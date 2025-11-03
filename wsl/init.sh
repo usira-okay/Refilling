@@ -80,7 +80,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 source ~/.bashrc
 
 # git setup
-npx -y @willh/git-setup --name '$USER' --email arisuokayokay@gmail.com
+npx -y @willh/git-setup --name 'ari' --email arisuokayokay@gmail.com
 git config --global core.autocrlf input
 git config --global init.defaultBranch main
 
@@ -97,4 +97,10 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
 uv tool install claude-monitor
 
 
+cat >> ~/.bashrc << 'EOF'
+alias cpy='copilot --allow-all-tools --allow-all-paths --model claude-sonnet-4.5'
+alias ccc='claude'
+EOF
+
+source ~/.bashrc
 
