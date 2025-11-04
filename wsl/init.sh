@@ -99,7 +99,7 @@ uv tool install claude-monitor
 
 cat >> ~/.bashrc << 'EOF'
 alias cpy='copilot --allow-all-tools --allow-all-paths --model claude-sonnet-4.5'
-alias ccc='claude'
+alias cc='claude'
 EOF
 
 source ~/.bashrc
