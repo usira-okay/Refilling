@@ -34,6 +34,7 @@ git config --global core.autocrlf true
 git config --global core.safecrlf false
 git config --global push.autoSetupRemote true
 git config --global init.defaultBranch main
+git config --global core.longpaths true
 
 # History Autocomplete
 Install-Module PSReadLine -Force
