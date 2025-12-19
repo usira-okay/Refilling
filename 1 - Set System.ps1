@@ -52,6 +52,9 @@ REG ADD 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /V Sh
 # 顯示已知的檔案類型
 REG ADD 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /V HideFileExt /T REG_DWORD /D 0 /F
 
+# 檔案路徑長度
+REG ADD 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem' /V LongPathsEnabled /T REG_DWORD /D 1 /F
+
 Pause
 
 shutdown -r -t 0 -f
