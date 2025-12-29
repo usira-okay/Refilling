@@ -54,6 +54,9 @@
 					"PackageIdentifier": "Postman.Postman"
 				},
 				{
+					"PackageIdentifier": "Bruno.Bruno"
+				},
+				{
 					"PackageIdentifier": "yt-dlp.yt-dlp"
 				},
 				{
@@ -91,12 +94,6 @@
 				},
 				{
 					"PackageIdentifier": "Google.GoogleDrive"
-				},
-				{
-					"PackageIdentifier": "JetBrains.Toolbox"
-				},
-				{
-					"PackageIdentifier": "JetBrains.DataGrip"
 				},
 				{
 					"PackageIdentifier": "Fork.Fork"
