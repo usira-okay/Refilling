@@ -6,7 +6,7 @@ claude config set -g theme dark
 # claude config set -g verbose false
 
 # mcp tool context7
-claude mcp add context7 -s user -- npx -y @upstash/context7-mcp
+# claude mcp add context7 -s user -- npx -y @upstash/context7-mcp
 
 # 建立 ~/.claude 目錄（如果不存在）
 mkdir -p ~/.claude
@@ -68,3 +68,17 @@ else
     jq '.bypassPermissionsModeAccepted = true' ~/.claude.json > ~/.claude.json.tmp && mv ~/.claude.json.tmp ~/.claude.json
     echo "已更新現有的 ~/.claude.json 設定檔，確保 bypassPermissionsModeAccepted: true"
 fi
+
+# 檢查 ~/.claude/CLAUDE.md 設定檔是否存在，存在則備份
+if [ -f ~/.claude/CLAUDE.md ]; then
+    cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.backup.$(date +%Y%m%d_%H%M%S)
+    echo "已備份現有的 ~/.claude/CLAUDE.md 設定檔"
+fi
+
+# 建立 ~/.claude/CLAUDE.md 預設內容
+cat <<'EOF' > ~/.claude/CLAUDE.md
+**請遵循 .specify\memory\constitution.md** 的規範
+**Please follow the guidelines in .specify\memory\constitution.md**
+EOF
+
+echo "已建立 ~/.claude/CLAUDE.md 預設內容"

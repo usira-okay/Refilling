@@ -98,7 +98,7 @@ uv tool install specify-cli --force --from git+https://github.com/github/spec-ki
 
 cat >> ~/.bashrc << 'EOF'
 alias cpy='copilot --allow-all-tools --allow-all-paths --model claude-sonnet-4.5'
-alias cc='claude'
+alias cc='claude --allow-dangerously-skip-permissions --dangerously-skip-permissions --permission-mode bypassPermissions'
 EOF
 
 source ~/.bashrc
