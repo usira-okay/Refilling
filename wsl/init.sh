@@ -90,14 +90,15 @@ uv -V
 sudo apt update && sudo apt upgrade -y
 
 npm install -g @google/gemini-cli
-npm install -g @anthropic-ai/claude-code
+curl -fsSL https://claude.ai/install.sh | bash
 npm install -g @openai/codex
-npm install -g @github/copilot
+curl -fsSL https://gh.io/copilot-install | bash
 uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git
+curl -fsSL https://opencode.ai/install | bash
 
 
 cat >> ~/.bashrc << 'EOF'
-alias cpy='copilot --allow-all-tools --allow-all-paths --model claude-sonnet-4.5'
+alias cpy='copilot --allow-all-tools --allow-all-paths'
 alias cc='claude --allow-dangerously-skip-permissions --dangerously-skip-permissions --permission-mode bypassPermissions'
 EOF
 
