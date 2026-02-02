@@ -1,19 +1,11 @@
-# 重新加入 Microsoft 套件來源
-wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-sudo apt-get update
+sudo sed -i 's|http://archive.ubuntu.com|http://tw.archive.ubuntu.com|g' /etc/apt/sources.list
+sudo sed -i 's|http://security.ubuntu.com|http://tw.archive.ubuntu.com|g' /etc/apt/sources.list
 
-# 啟用 Universe 套件庫
-sudo add-apt-repository universe
-sudo apt-get update
+# 2. 啟用 apt 平行下載（加速）
+echo 'Acquire::Queue-Mode "host";' | sudo tee /etc/apt/apt.conf.d/99parallel
+echo 'Acquire::http::Pipeline-Depth "5";' | sudo tee -a /etc/apt/apt.conf.d/99parallel
 
-# 安裝 .NET 6 SDK
-sudo apt-get install -y dotnet-sdk-6.0
-
-
-
-sudo add-apt-repository ppa:dotnet/backports
-
-# 安裝 .NET 8 9 SDK
+# 3. 加入 .NET PPA 並安裝
+sudo add-apt-repository ppa:dotnet/backports -y
 sudo apt-get update && \
-  sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-8.0 dotnet-sdk-9.0
+  sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-8.0 dotnet-sdk-9.0 dotnet-sdk-10.0

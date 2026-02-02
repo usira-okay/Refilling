@@ -13,8 +13,8 @@ fi
 
 # 建立 ~/.claude/CLAUDE.md 預設內容
 cat <<'EOF' > ~/.claude/CLAUDE.md
-**請遵循 .specify/memory/constitution.md** 的規範
-**Please follow the guidelines in .specify/memory/constitution.md**
+**請遵循 constitution.md** 的規範
+**Please follow the guidelines in constitution.md**
 EOF
 
 echo "已建立 ~/.claude/CLAUDE.md 預設內容"
@@ -27,8 +27,8 @@ fi
 
 # 建立 ~/.config/opencode/AGENTS.md 預設內容
 cat <<'EOF' > ~/.config/opencode/AGENTS.md
-**請遵循 .specify/memory/constitution.md** 的規範
-**Please follow the guidelines in .specify/memory/constitution.md**
+**請遵循 constitution.md** 的規範
+**Please follow the guidelines in constitution.md**
 EOF
 
 echo "已建立 ~/.config/opencode/AGENTS.md 預設內容"
@@ -41,8 +41,8 @@ fi
 
 # 建立 ~/.copilot/copilot-instructions.md 預設內容
 cat <<'EOF' > ~/.copilot/copilot-instructions.md
-**請遵循 .specify/memory/constitution.md** 的規範
-**Please follow the guidelines in .specify/memory/constitution.md**
+**請遵循 constitution.md** 的規範
+**Please follow the guidelines in constitution.md**
 EOF
 
 echo "已建立 ~/.copilot/copilot-instructions.md 預設內容"

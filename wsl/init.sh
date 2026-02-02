@@ -80,9 +80,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 source ~/.bashrc
 
 # git setup
-npx -y @willh/git-setup --name 'ari' --email arisuokayokay@gmail.com
-git config --global core.autocrlf input
-git config --global init.defaultBranch main
+npx -y @willh/git-setup --name 'arisu' --email arisuokayokay@gmail.com
 
 curl -LsSf https://astral.sh/uv/install.sh | sh
 uv -V
@@ -98,8 +96,10 @@ curl -fsSL https://opencode.ai/install | bash
 
 
 cat >> ~/.bashrc << 'EOF'
-alias cpy='copilot --allow-all-tools --allow-all-paths'
+alias cpy='copilot --yolo'
 alias cc='claude --allow-dangerously-skip-permissions --dangerously-skip-permissions --permission-mode bypassPermissions'
+alias g='gemini --yolo'
+
 EOF
 
 source ~/.bashrc
