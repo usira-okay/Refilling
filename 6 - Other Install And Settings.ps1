@@ -40,6 +40,12 @@ Set-Content -Path $profilePath -Value @'
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\gmay.omp.json" | Invoke-Expression
 Set-PSReadLineOption -PredictionViewStyle ListView
 Import-Module Terminal-Icons
+
+function Enter-Docker {
+    param([string]$container, [string]$shell = "zsh")
+    docker exec -it $container $shell
+}
+Set-Alias -Name de -Value Enter-Docker
 '@
 
 # 設定 windows terminal
