@@ -129,6 +129,9 @@
 				},
 				{
 					"PackageIdentifier": "Anthropic.ClaudeCode"
+				},
+				{
+					"PackageIdentifier": "GitHub.Copilot"
 				}
 			],
 			"SourceDetails": {
