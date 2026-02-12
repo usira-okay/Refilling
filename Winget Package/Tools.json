@@ -123,6 +123,12 @@
 				},
 				{
 					"PackageIdentifier": "NordSecurity.NordPass"
+				},
+				{
+					"PackageIdentifier": "Anthropic.Claude"
+				},
+				{
+					"PackageIdentifier": "Anthropic.ClaudeCode"
 				}
 			],
 			"SourceDetails": {
