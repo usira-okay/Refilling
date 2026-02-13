@@ -5,10 +5,6 @@
 		{
 			"Packages": [
 				{
-					"//commant": "Whiteboard",
-					"PackageIdentifier": "9MSPC6MP8FM4"
-				},
-				{
 					"//commant": "DevToys",
 					"PackageIdentifier": "9PGCV4V3BK4W"
 				},
@@ -119,9 +115,6 @@
 					"PackageIdentifier": "Docker.DockerDesktop"
 				},
 				{
-					"PackageIdentifier": "Microsoft.AzureCLI"
-				},
-				{
 					"PackageIdentifier": "NordSecurity.NordPass"
 				},
 				{
@@ -132,6 +125,9 @@
 				},
 				{
 					"PackageIdentifier": "GitHub.Copilot"
+				},
+				{
+					"PackageIdentifier": "GitHub.Cli"
 				}
 			],
 			"SourceDetails": {
