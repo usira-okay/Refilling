@@ -7,6 +7,6 @@ Write-Host 'Visual Studio'
 
 $command = "--allWorkloads --passive --installWhileDownloading --locale en-US --wait --norestart"
 
-winget install --id Microsoft.VisualStudio.2022.Community --override $command --accept-package-agreements --accept-source-agreements
+winget install --id Microsoft.VisualStudio.2026.Community --override $command --accept-package-agreements --accept-source-agreements
 
 Pause
