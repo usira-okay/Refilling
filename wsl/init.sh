@@ -88,7 +88,6 @@ uv -V
 sudo apt update && sudo apt upgrade -y
 
 npm install -g @google/gemini-cli
-curl -fsSL https://claude.ai/install.sh | bash
 npm install -g @openai/codex
 curl -fsSL https://gh.io/copilot-install | bash
 uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git
@@ -97,7 +96,6 @@ curl -fsSL https://opencode.ai/install | bash
 
 cat >> ~/.bashrc << 'EOF'
 alias cpy='copilot --yolo'
-alias cc='claude --allow-dangerously-skip-permissions --dangerously-skip-permissions --permission-mode bypassPermissions'
 alias g='gemini --yolo'
 
 EOF

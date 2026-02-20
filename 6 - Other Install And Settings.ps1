@@ -47,12 +47,6 @@ function Enter-Docker {
 }
 Set-Alias -Name de -Value Enter-Docker
 
-function Enter-Claude {
-    param([string]$params)
-    claude --allow-dangerously-skip-permissions --dangerously-skip-permissions --permission-mode bypassPermissions $params
-}
-Set-Alias -Name cc -Value Enter-Claude
-
 function Enter-Copilot {
     param([string]$params)
     copilot --yolo $params

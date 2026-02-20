@@ -118,12 +118,6 @@
 					"PackageIdentifier": "NordSecurity.NordPass"
 				},
 				{
-					"PackageIdentifier": "Anthropic.Claude"
-				},
-				{
-					"PackageIdentifier": "Anthropic.ClaudeCode"
-				},
-				{
 					"PackageIdentifier": "GitHub.Copilot"
 				},
 				{
