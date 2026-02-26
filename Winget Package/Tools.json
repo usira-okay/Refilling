@@ -119,6 +119,9 @@
 				},
 				{
 					"PackageIdentifier": "GitHub.Cli"
+				},
+				{
+					"PackageIdentifier": "DBeaver.DBeaver.Community"
 				}
 			],
 			"SourceDetails": {
