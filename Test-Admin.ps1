@@ -13,6 +13,6 @@ $isAdmin = (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Secu
 
 if (-not $isAdmin) {
 
-    Start-Process Powershell -Verb RunAs -ArgumentList ". '$ps1Path'" 
+    Start-Process pwsh -Verb RunAs -ArgumentList ". '$ps1Path'" 
     break
 }
