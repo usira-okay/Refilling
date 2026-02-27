@@ -11,7 +11,7 @@ $msNewPhoneticTips = @(
 )
 
 # ── Step 1: 掃描 Registry 尋找華碩注音輸入法 ──
-Write-Host "`n🔍 正在搜尋已安裝的華碩注音輸入法..." -ForegroundColor Cyan
+Write-Host "`n正在搜尋已安裝的華碩注音輸入法..." -ForegroundColor Cyan
 
 $tipBasePath = 'HKLM:\SOFTWARE\Microsoft\CTF\TIP'
 $asusTipId = $null
@@ -74,19 +74,19 @@ if (Test-Path $tipBasePath) {
 
 if (-not $asusTipId) {
     Write-Host ''
-    Write-Host '❌ 找不到華碩注音輸入法！' -ForegroundColor Red
+    Write-Host '找不到華碩注音輸入法！' -ForegroundColor Red
     Write-Host '   請先至以下網址下載並安裝：' -ForegroundColor Yellow
     Write-Host '   https://www.asus.com/tw/supportonly/asus%20smart%20input/helpdesk_download/' -ForegroundColor Gray
     Write-Host ''
     exit 1
 }
 
-Write-Host "✅ 找到華碩注音輸入法" -ForegroundColor Green
+Write-Host "找到華碩注音輸入法" -ForegroundColor Green
 Write-Host "   描述 : $asusDescription" -ForegroundColor Gray
 Write-Host "   TIP  : $asusTipId" -ForegroundColor Gray
 
 # ── Step 2: 列出目前輸入法設定 ──
-Write-Host "`n📋 目前語言設定：" -ForegroundColor Cyan
+Write-Host "`n目前語言設定：" -ForegroundColor Cyan
 
 $langList = Get-WinUserLanguageList
 $zhTwLang = $null
@@ -106,7 +106,7 @@ foreach ($lang in $langList) {
 
 if (-not $zhTwLang) {
     Write-Host ''
-    Write-Host '⚠️  未找到繁體中文 (zh-TW) 語言設定。' -ForegroundColor Yellow
+    Write-Host '未找到繁體中文 (zh-TW) 語言設定。' -ForegroundColor Yellow
     Write-Host '   請先至 [設定] → [時間與語言] → [語言] 新增「中文 (繁體, 台灣)」。' -ForegroundColor Yellow
     Write-Host ''
     exit 1
@@ -119,7 +119,7 @@ $changed = $false
 foreach ($msTip in $msNewPhoneticTips) {
     if ($zhTwLang.InputMethodTips.Contains($msTip)) {
         $zhTwLang.InputMethodTips.Remove($msTip) | Out-Null
-        Write-Host "`n🗑️  移除微軟新注音: $msTip" -ForegroundColor Yellow
+        Write-Host "`n移除微軟新注音: $msTip" -ForegroundColor Yellow
         $changed = $true
     }
 }
@@ -127,30 +127,30 @@ foreach ($msTip in $msNewPhoneticTips) {
 # 加入華碩注音
 if (-not $zhTwLang.InputMethodTips.Contains($asusTipId)) {
     $zhTwLang.InputMethodTips.Insert(0, $asusTipId)  # 插入第一個位置
-    Write-Host "➕ 加入華碩注音: $asusTipId" -ForegroundColor Green
+    Write-Host "加入華碩注音: $asusTipId" -ForegroundColor Green
     $changed = $true
 } else {
-    Write-Host "`nℹ️  華碩注音已在輸入法清單中。" -ForegroundColor Cyan
+    Write-Host "`n華碩注音已在輸入法清單中。" -ForegroundColor Cyan
 }
 
 if (-not $changed) {
-    Write-Host "`n✅ 不需要任何變更，目前設定已正確。" -ForegroundColor Green
+    Write-Host "`n不需要任何變更，目前設定已正確。" -ForegroundColor Green
     exit 0
 }
 
 # ── Step 4: 套用變更 ──
-Write-Host "`n⏳ 正在套用設定..." -ForegroundColor Cyan
+Write-Host "`n正在套用設定..." -ForegroundColor Cyan
 Set-WinUserLanguageList $langList -Force
-Write-Host "✅ 設定完成！華碩注音已取代微軟新注音。" -ForegroundColor Green
+Write-Host "設定完成！華碩注音已取代微軟新注音。" -ForegroundColor Green
 Write-Host "   若切換無效，請登出再登入或重新啟動電腦。" -ForegroundColor Gray
 
 # ── Step 5: 顯示最終狀態 ──
-Write-Host "`n📋 最終輸入法清單：" -ForegroundColor Cyan
+Write-Host "`n最終輸入法清單：" -ForegroundColor Cyan
 $finalList = Get-WinUserLanguageList
 foreach ($lang in $finalList) {
     if ($lang.LanguageTag -match '^zh-(TW|Hant)') {
         foreach ($tip in $lang.InputMethodTips) {
-            $label = if ($tip -eq $asusTipId) { '華碩注音 ✓' } else { $tip }
+            $label = if ($tip -eq $asusTipId) { '華碩注音' } else { $tip }
             Write-Host "   - $label" -ForegroundColor White
         }
     }
