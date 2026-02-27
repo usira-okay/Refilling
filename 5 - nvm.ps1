@@ -1,4 +1,4 @@
-Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
+﻿Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 nvm install latest
 
