@@ -76,11 +76,9 @@ foreach ($CustProfile in $CustProfiles) {
     $command = ""
     if ($CustProfile.name -eq "Windows PowerShell") {
         $command = "%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -Command `". $profilePath`""
-    }
-    elseif ($CustProfile.name -eq "PowerShell") {
+    } elseif ($CustProfile.name -eq "PowerShell") {
         $command = "C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `". $profilePath`""
-    }
-    else {
+    } else {
         continue
     }
 
@@ -93,8 +91,7 @@ foreach ($CustProfile in $CustProfiles) {
     # 新增或修改 font.face
     if (-not $CustProfile.PSObject.Properties["font"]) {
         $CustProfile | Add-Member -MemberType NoteProperty -Name "font" -Value @{ face = "Maple Mono NF CN" }
-    }
-    else {
+    } else {
         $CustProfile.font.face = "Maple Mono NF CN"
     }  
 

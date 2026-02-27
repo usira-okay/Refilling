@@ -41,8 +41,7 @@ foreach ($key in $localPrivateKeys) {
     try {
         ssh-add "$($key.FullName)"
         Write-Host "Successfully added: $($key.Name)" -ForegroundColor Green
-    }
-    catch {
+    } catch {
         Write-Host "Failed to add: $($key.Name) - $($_.Exception.Message)" -ForegroundColor Red
     }
 }
