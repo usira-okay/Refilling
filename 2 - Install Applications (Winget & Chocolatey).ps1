@@ -4,6 +4,9 @@ Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 Write-Host 'Install Applications by Winget'
 
+# PowerShell 5.1 預設不啟用 TLS 1.2，許多 HTTPS 端點需要 TLS 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+
 $webClient = New-Object System.Net.WebClient
 $webClient.DownloadFile('https://aka.ms/getwinget', "$env:TEMP\winget.msixbundle")
 $webClient.DownloadFile('https://aka.ms/windowsappsdk/1.8/latest/windowsappruntimeinstall-x64.exe', "$env:TEMP\WinAppRuntime.exe")

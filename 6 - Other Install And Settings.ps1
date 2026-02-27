@@ -4,6 +4,9 @@ Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 Write-Host 'Other install and settings'
 
+# PowerShell 5.1 預設不啟用 TLS 1.2，許多 HTTPS 端點需要 TLS 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+
 Write-Host 'PackageProvider Nuget'
 Install-PackageProvider -Name Nuget -Force
 
@@ -27,7 +30,7 @@ $Shortcut.Save()
 npx -y @willh/git-setup --name 'arisu' --email arisuokayokay@gmail.com
 
 # History Autocomplete
-Install-Module PSReadLine -Force
+Install-Module PSReadLine -Force -SkipPublisherCheck
 Set-PSReadLineOption -PredictionSource History
 
 # Terminal-Icons
@@ -106,7 +109,9 @@ foreach ($CustProfile in $CustProfiles) {
 }
 
 # 將更新後的設定寫回 settings.json
-$settings | ConvertTo-Json -Depth 10 | Set-Content -Path $settingsPath -Encoding UTF8
+# 使用 .NET 寫入 UTF-8 無 BOM，避免 PowerShell 5.1 的 Set-Content -Encoding UTF8 會加入 BOM
+$jsonContent = $settings | ConvertTo-Json -Depth 10
+[System.IO.File]::WriteAllText($settingsPath, $jsonContent, [System.Text.UTF8Encoding]::new($false))
 
 Write-Output "Windows Terminal PowerShell 設定已更新！"
 

@@ -13,6 +13,8 @@ $isAdmin = (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Secu
 
 if (-not $isAdmin) {
 
-    Start-Process Powershell -Verb RunAs -ArgumentList "-NoExit", ". '$ps1Path'"
+    # 使用當前 PowerShell 執行檔路徑，同時相容 PowerShell 5.1 (powershell.exe) 和 7+ (pwsh.exe)
+    $psExe = (Get-Process -Id $PID).Path
+    Start-Process $psExe -Verb RunAs -ArgumentList "-NoExit", ". '$ps1Path'"
     break
 }
