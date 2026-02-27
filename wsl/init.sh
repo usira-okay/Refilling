@@ -11,7 +11,7 @@ mkdir -p ~/.local/bin
 
 # Installing essential packages...
 sudo apt install -y wslu xdg-utils pulseaudio \
-  build-essential net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
+  build-essential net-tools ripgrep lftp moreutils btop bat zip zstd gnupg2 \
   ffmpeg 7zip poppler-utils fd-find zoxide imagemagick exiftool
 
 # Install Rust: https://www.rust-lang.org/tools/install

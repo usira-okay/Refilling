@@ -12,15 +12,15 @@ dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json
 
 dotnet tool install --global dotnet-ef
 
-Copy-Item .\AutoHotKey\autohotkey.ahk "C:\Users\$env:USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\autohotkey.ahk"
+Copy-Item .\AutoHotKey\autohotkey.ahk "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\autohotkey.ahk"
 
 $WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("C:\Users\$env:USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PowerToys.lnk")
-$Shortcut.TargetPath = "C:\Users\$env:USERNAME\scoop\apps\powertoys\current\PowerToys.exe"
+$Shortcut = $WshShell.CreateShortcut("$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PowerToys.lnk")
+$Shortcut.TargetPath = "$env:USERPROFILE\scoop\apps\powertoys\current\PowerToys.exe"
 $Shortcut.Save()
 
 $WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("C:\Users\$env:USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\flameshot.lnk")
+$Shortcut = $WshShell.CreateShortcut("$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\flameshot.lnk")
 $Shortcut.TargetPath = "C:\Program Files\Flameshot\bin\flameshot.exe"
 $Shortcut.Save()
 
@@ -112,7 +112,5 @@ foreach ($CustProfile in $CustProfiles) {
 $settings | ConvertTo-Json -Depth 10 | Set-Content -Path $settingsPath -Encoding UTF8
 
 Write-Output "Windows Terminal PowerShell 設定已更新！"
-
-npm install -g @vue/cli
 
 Pause

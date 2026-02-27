@@ -23,6 +23,12 @@ if ($plaintextPassword1 -eq $plaintextPassword2) {
     $user = Get-LocalUser -Name $env:USERNAME
     $user | Set-LocalUser -Password $password1
 }
+else {
+    Write-Host "Passwords do not match!" -ForegroundColor Red
+}
 
+# 釋放 BSTR 指標，避免密碼殘留記憶體
+[System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr1)
+[System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr2)
 
 Pause
