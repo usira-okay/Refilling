@@ -15,6 +15,13 @@ Add-AppxPackage -Path "$env:TEMP\winget.msixbundle"
 
 winget import -i '.\Winget Package\Tools.json' --accept-package-agreements --accept-source-agreements
 
+
+Write-Host 'Visual Studio'
+
+$command = "--allWorkloads --passive --installWhileDownloading --locale en-US --wait --norestart"
+
+winget install --id Microsoft.VisualStudio.Community --override $command --accept-package-agreements --accept-source-agreements
+
 Write-Host 'Install Applications by Chocolatey'
 # Install Applications by Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
