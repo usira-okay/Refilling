@@ -30,6 +30,7 @@ if (Test-Path $sshKeySource) {
 # Start SSH Agent service
 Get-Service ssh-agent | Set-Service -StartupType Automatic
 Start-Service ssh-agent
+git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
 
 # Get all private keys in .ssh directory and batch add them to ssh-agent
 $localPrivateKeys = Get-ChildItem -Path "$env:USERPROFILE\.ssh" -File | Where-Object { 
