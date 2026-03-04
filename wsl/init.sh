@@ -81,6 +81,7 @@ source ~/.bashrc
 
 # git setup
 npx -y @willh/git-setup --name 'arisu' --email arisuokayokay@gmail.com
+git config --global core.filemode false
 
 curl -LsSf https://astral.sh/uv/install.sh | sh
 uv -V

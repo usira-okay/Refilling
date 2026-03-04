@@ -28,6 +28,7 @@ $Shortcut.TargetPath = "C:\Program Files\Flameshot\bin\flameshot.exe"
 $Shortcut.Save()
 
 npx -y @willh/git-setup --name 'arisu' --email arisuokayokay@gmail.com
+git config --global core.filemode false
 
 # History Autocomplete
 Install-Module PSReadLine -Force -SkipPublisherCheck
