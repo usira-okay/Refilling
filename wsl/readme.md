@@ -5,7 +5,7 @@ wsl --install
 
 wsl --update
 
-wsl --unregister Ubuntu
+wsl --unregister Ubuntu-24.04
 
 wsl --install Ubuntu
 

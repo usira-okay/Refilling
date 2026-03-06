@@ -45,17 +45,17 @@ oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\gmay.omp.json" | Invoke-Exp
 Set-PSReadLineOption -PredictionViewStyle ListView
 Import-Module Terminal-Icons
 
-function Enter-Docker {
+function de {
     param([string]$container, [string]$shell = "zsh")
     docker exec -it $container $shell
 }
-Set-Alias -Name de -Value Enter-Docker
 
-function Enter-Copilot {
-    param([string]$params)
-    copilot --yolo $params
+function cpy {
+    copilot --yolo $args
 }
-Set-Alias -Name cpy -Value Enter-Copilot
+
+function docker { wsl docker $args }
+function docker-compose { wsl docker compose $args }
 '@
 
 # 設定 windows terminal
