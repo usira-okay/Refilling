@@ -109,9 +109,6 @@
 					"PackageIdentifier": "Microsoft.NuGet"
 				},
 				{
-					"PackageIdentifier": "Docker.DockerDesktop"
-				},
-				{
 					"PackageIdentifier": "NordSecurity.NordPass"
 				},
 				{
