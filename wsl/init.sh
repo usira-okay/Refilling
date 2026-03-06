@@ -95,7 +95,8 @@ npm install -g @google/gemini-cli
 npm install -g @openai/codex
 curl -fsSL https://gh.io/copilot-install | bash
 uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git
-curl -fsSL https://opencode.ai/install | bash
+npm install -g @fission-ai/openspec@latest
+
 
 
 cat >> ~/.bashrc << 'EOF'
