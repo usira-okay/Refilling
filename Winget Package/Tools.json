@@ -119,6 +119,9 @@
 				},
 				{
 					"PackageIdentifier": "DBeaver.DBeaver.Community"
+				},
+				{
+					"PackageIdentifier": "Docker.DockerDesktop"
 				}
 			],
 			"SourceDetails": {

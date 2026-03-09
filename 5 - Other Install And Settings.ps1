@@ -50,12 +50,6 @@ function de {
     docker exec -it $container $shell
 }
 
-function cpy {
-    copilot --yolo $args
-}
-
-function docker { wsl docker $args }
-function docker-compose { wsl docker compose $args }
 '@
 
 # 設定 windows terminal
