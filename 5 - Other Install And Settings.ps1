@@ -51,6 +51,10 @@ function de {
     docker exec -it $container $shell
 }
 
+# $PROFILE 中加入
+function git-work { git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe -F ~/.ssh/config-work" }
+function git-default { git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe -F ~/.ssh/config" }
+
 '@
 
 # 設定 windows terminal
