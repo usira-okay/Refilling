@@ -21,6 +21,8 @@ Write-Host 'Visual Studio'
 $command = "--allWorkloads --passive --installWhileDownloading --locale en-US --wait --norestart"
 
 winget install --id Microsoft.VisualStudio.Community --override $command --accept-package-agreements --accept-source-agreements
+winget install Microsoft.VisualStudio.2022.BuildTools --override "--wait --passive --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
+
 
 Write-Host 'Install Applications by Chocolatey'
 # Install Applications by Chocolatey
