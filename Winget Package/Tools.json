@@ -124,7 +124,7 @@
 					"PackageIdentifier": "Docker.DockerDesktop"
 				},
 				{
-					"PackageIdentifier": "ustlang.Rustup"
+					"PackageIdentifier": "Rustlang.Rustup"
 				}
 			],
 			"SourceDetails": {
