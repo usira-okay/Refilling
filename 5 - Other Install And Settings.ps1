@@ -30,6 +30,7 @@ $Shortcut.Save()
 npx -y @willh/git-setup --name 'arisu' --email arisuokayokay@gmail.com
 git config --global --add safe.directory '*'
 git config --global worktree.useRelativePaths true
+git config --global core.longpaths true
 
 # History Autocomplete
 Install-Module PSReadLine -Force -SkipPublisherCheck
@@ -126,5 +127,7 @@ $jsonContent = $settings | ConvertTo-Json -Depth 10
 Write-Output "Windows Terminal PowerShell 設定已更新！"
 
 cargo install git_worktree_copse
+
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
 Pause
