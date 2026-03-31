@@ -5,6 +5,12 @@ Run, shutdown -a
 
 return
 
+#!p::
+
+SendInput, ，再麻煩協助 review & merge 感謝
+
+return
+
 ^#!r::
 
 Run, shutdown -r -t 10 -f
