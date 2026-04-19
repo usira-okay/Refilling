@@ -1,4 +1,4 @@
-﻿
+
 ^#!a::
 
 Run, shutdown -a

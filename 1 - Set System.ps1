@@ -1,8 +1,9 @@
-﻿Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
+Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 . .\Test-Admin.ps1 -p $PSCommandPath
 
 Write-Host 'Set System'
+$ErrorActionPreference = 'Stop'
 
 Write-Host 'Add US and TW Keyboard'
 # Add US and TW Keyboard
@@ -31,15 +32,24 @@ powercfg -change -monitor-timeout-ac 60
 # 開啟 Win + v 
 reg add HKEY_CURRENT_USER\Software\Microsoft\Clipboard /t REG_DWORD /v EnableClipboardHistory /d 1 /f
 
-dism.exe /online /enable-feature:Microsoft-Windows-Subsystem-Linux /all /norestart
+# 啟用 Windows 功能（已啟用則跳過）
+$features = @(
+    'Microsoft-Windows-Subsystem-Linux',
+    'VirtualMachinePlatform',
+    'Microsoft-Hyper-V',
+    'Containers',
+    'Containers-DisposableClientVM'
+)
 
-dism.exe /online /enable-feature:VirtualMachinePlatform /all /norestart
-
-dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All /norestart
-
-dism.exe /online /Enable-Feature:Containers /All /norestart
-
-dism.exe /online /Enable-Feature:Containers-DisposableClientVM /All /norestart
+foreach ($feature in $features) {
+    $state = (Get-WindowsOptionalFeature -Online -FeatureName $feature -ErrorAction SilentlyContinue).State
+    if ($state -eq 'Enabled') {
+        Write-Host "$feature 已啟用，跳過" -ForegroundColor Yellow
+    } else {
+        Write-Host "啟用 $feature ..."
+        dism.exe /online /enable-feature:$feature /all /norestart
+    }
+}
 
 # 單擊開檔
 REG ADD 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer' /V IconUnderline /T REG_DWORD /D 2 /F

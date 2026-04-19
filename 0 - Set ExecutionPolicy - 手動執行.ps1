@@ -1,4 +1,5 @@
-﻿
+$ErrorActionPreference = 'Stop'
+
 Set-ExecutionPolicy -ExecutionPolicy ByPass -Scope CurrentUser -Force
 
 # 停用預設的 print screen 快捷鍵

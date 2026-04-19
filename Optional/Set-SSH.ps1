@@ -1,11 +1,13 @@
-﻿Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
+Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 . ..\Test-Admin.ps1 -p $PSCommandPath
+. ..\config.ps1
+$ErrorActionPreference = 'Stop'
 
 mkdir "$env:USERPROFILE\.ssh" -Force
 cd "$env:USERPROFILE\.ssh"
 
-$sshKeySource = "E:\Google\keys\ssh"
+$sshKeySource = $Config.SshKeySource
 
 # Check if source directory exists
 if (Test-Path $sshKeySource) {

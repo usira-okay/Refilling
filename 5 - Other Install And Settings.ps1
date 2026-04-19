@@ -1,8 +1,10 @@
-﻿Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
+Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
+. .\config.ps1
 
 . .\Test-Admin.ps1 -p $PSCommandPath
 
 Write-Host 'Other install and settings'
+$ErrorActionPreference = 'Stop'
 
 # PowerShell 5.1 預設不啟用 TLS 1.2，許多 HTTPS 端點需要 TLS 1.2
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -27,7 +29,7 @@ $Shortcut = $WshShell.CreateShortcut("$env:USERPROFILE\AppData\Roaming\Microsoft
 $Shortcut.TargetPath = "C:\Program Files\Flameshot\bin\flameshot.exe"
 $Shortcut.Save()
 
-npx -y @willh/git-setup --name 'arisu' --email arisuokayokay@gmail.com
+npx -y @willh/git-setup --name $Config.GitName --email $Config.GitEmail
 git config --global --add safe.directory '*'
 git config --global worktree.useRelativePaths true
 git config --global core.longpaths true
@@ -41,6 +43,14 @@ Install-Module -Name Terminal-Icons -Repository PSGallery -Force
 
 # 寫 PowerShell_profile
 $profilePath = "$env:USERPROFILE\Microsoft.PowerShell_profile.ps1"
+
+# 備份現有 Profile
+if (Test-Path $profilePath) {
+    $backupPath = "$profilePath.backup.$(Get-Date -Format 'yyyyMMdd_HHmmss')"
+    Copy-Item -Path $profilePath -Destination $backupPath
+    Write-Host "已備份 Profile 至 $backupPath" -ForegroundColor Yellow
+}
+
 New-Item -Path $profilePath -Type File -Force
 Set-Content -Path $profilePath -Value @'
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\gmay.omp.json" | Invoke-Expression
@@ -76,6 +86,13 @@ $termonalName = Get-ChildItem -Path $path -Directory | Where-Object { $_.Name -l
 
 $settingsPath = Join-Path -Path $path -ChildPath $termonalName
 $settingsPath = Join-Path -Path $settingsPath -ChildPath 'LocalState\settings.json'
+
+# 備份 Windows Terminal settings.json
+if (Test-Path $settingsPath) {
+    $backupSettingsPath = "$settingsPath.backup.$(Get-Date -Format 'yyyyMMdd_HHmmss')"
+    Copy-Item -Path $settingsPath -Destination $backupSettingsPath
+    Write-Host "已備份 Terminal settings 至 $backupSettingsPath" -ForegroundColor Yellow
+}
 
 # 讀取現有的 settings.json
 $settings = Get-Content -Raw -Path $settingsPath | ConvertFrom-Json -ErrorAction SilentlyContinue
@@ -126,7 +143,12 @@ $jsonContent = $settings | ConvertTo-Json -Depth 10
 
 Write-Output "Windows Terminal PowerShell 設定已更新！"
 
-cargo install git_worktree_copse
+# 檢查 Cargo 是否已安裝
+if (Get-Command cargo -ErrorAction SilentlyContinue) {
+    cargo install git_worktree_copse
+} else {
+    Write-Warning 'Cargo 未安裝，跳過 git_worktree_copse 安裝'
+}
 
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 

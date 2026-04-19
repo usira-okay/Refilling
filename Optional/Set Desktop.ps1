@@ -1,12 +1,13 @@
-﻿
+
 Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
 . ..\Test-Admin.ps1 -p $PSCommandPath
+. ..\config.ps1
 
 Write-Host 'Set Desktop'
 
 # 1. 設定你想要的新桌面路徑
-$newPath = "D:\MyNewDesktop"
+$newPath = $Config.DesktopPath
 
 # 2. 檢查資料夾是否存在
 if (!(Test-Path -Path $newPath)) {
