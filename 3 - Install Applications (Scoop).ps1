@@ -17,21 +17,9 @@ if (Get-Command scoop -ErrorAction SilentlyContinue) {
 # 設定 Scoop 快取資料夾指向沙箱掛載的本機資料夾
 scoop config cache_path $Config.ScoopCachePath
 
-# 新增 extras bucket
-scoop bucket add extras
-
 # 安裝 Maple Mono NF CN 字型
 scoop bucket add nerd-fonts
 scoop install nerd-fonts/Maple-Mono-NF-CN
 scoop install oh-my-posh
-
-# 從 main bucket 安裝
-scoop install ffmpeg gawk grep git 7zip gh yt-dlp graphviz rustup openjdk21 nvm nuget
-
-# 從 extras bucket 安裝
-scoop install filezilla autohotkey1 line `
-    googlechrome vscode postman obs-studio vlc discord obsidian `
-    dbeaver fork another-redis-desktop-manager screentogif sharex `
-    powertoys mremoteng pwsh googledrive openshot coretemp steam
 
 Pause
