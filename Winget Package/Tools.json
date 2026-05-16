@@ -23,13 +23,90 @@
 		{
 			"Packages": [
 				{
+					"PackageIdentifier": "CoreyButler.NVMforWindows"
+				},
+				{
+					"PackageIdentifier": "Google.Chrome"
+				},
+				{
 					"PackageIdentifier": "LINQPad.LINQPad.8"
+				},
+				{
+					"PackageIdentifier": "qishibo.AnotherRedisDesktopManager"
 				},
 				{
 					"PackageIdentifier": "NordSecurity.NordVPN"
 				},
 				{
+					"PackageIdentifier": "Microsoft.PowerToys"
+				},
+				{
+					"PackageIdentifier": "Microsoft.VisualStudioCode"
+				},
+				{
+					"PackageIdentifier": "NickeManarin.ScreenToGif"
+				},
+				{
+					"PackageIdentifier": "Postman.Postman"
+				},
+				{
+					"PackageIdentifier": "yt-dlp.yt-dlp"
+				},
+				{
+					"PackageIdentifier": "ShareX.ShareX"
+				},
+				{
+					"PackageIdentifier": "ALCPU.CoreTemp"
+				},
+				{
 					"PackageIdentifier": "Ookla.Speedtest.Desktop"
+				},
+				{
+					"PackageIdentifier": "Git.Git"
+				},
+				{
+					"PackageIdentifier": "Valve.Steam"
+				},
+				{
+					"PackageIdentifier": "Discord.Discord"
+				},
+				{
+					"PackageIdentifier": "OpenShot.OpenShot"
+				},
+				{
+					"PackageIdentifier": "OBSProject.OBSStudio"
+				},
+				{
+					"PackageIdentifier": "mRemoteNG.mRemoteNG"
+				},
+				{
+					"PackageIdentifier": "VideoLAN.VLC"
+				},
+				{
+					"PackageIdentifier": "7zip.7zip"
+				},
+				{
+					"PackageIdentifier": "Google.GoogleDrive"
+				},
+				{
+					"PackageIdentifier": "Fork.Fork"
+				},
+				{
+					"//comment": "for vscode plantuml extension",
+					"PackageIdentifier": "Microsoft.OpenJDK.21"
+				},
+				{
+					"//comment": "for vscode plantuml extension",
+					"PackageIdentifier": "Graphviz.Graphviz"
+				},
+				{
+					"PackageIdentifier": "Obsidian.Obsidian"
+				},
+				{
+					"PackageIdentifier": "Microsoft.PowerShell"
+				},
+				{
+					"PackageIdentifier": "Microsoft.NuGet"
 				},
 				{
 					"PackageIdentifier": "NordSecurity.NordPass"
@@ -38,7 +115,16 @@
 					"PackageIdentifier": "GitHub.Copilot"
 				},
 				{
+					"PackageIdentifier": "GitHub.Cli"
+				},
+				{
+					"PackageIdentifier": "DBeaver.DBeaver.Community"
+				},
+				{
 					"PackageIdentifier": "Docker.DockerDesktop"
+				},
+				{
+					"PackageIdentifier": "Rustlang.Rustup"
 				}
 			],
 			"SourceDetails": {
