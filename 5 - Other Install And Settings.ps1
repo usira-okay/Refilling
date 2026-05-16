@@ -34,6 +34,17 @@ git config --global --add safe.directory '*'
 git config --global worktree.useRelativePaths true
 git config --global core.longpaths true
 
+# 全域 gitignore
+$globalGitignorePath = "$env:USERPROFILE\.gitignore_global"
+if (-not (Test-Path $globalGitignorePath)) {
+    New-Item -Path $globalGitignorePath -ItemType File -Force | Out-Null
+}
+$gitignoreContent = Get-Content -Path $globalGitignorePath -Raw -ErrorAction SilentlyContinue
+if ($gitignoreContent -notmatch '\.lscache') {
+    Add-Content -Path $globalGitignorePath -Value "`n*.lscache"
+}
+git config --global core.excludesfile "$globalGitignorePath"
+
 # History Autocomplete
 Install-Module PSReadLine -Force -SkipPublisherCheck
 Set-PSReadLineOption -PredictionSource History
