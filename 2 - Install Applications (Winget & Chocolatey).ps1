@@ -35,21 +35,4 @@ $command = "--allWorkloads --passive --installWhileDownloading --locale en-US --
 winget install --id Microsoft.VisualStudio.Community --override $command --accept-package-agreements --accept-source-agreements
 
 
-Write-Host 'Install Applications by Chocolatey'
-# Install Applications by Chocolatey
-# 檢查 Chocolatey 是否已安裝
-if (Get-Command choco -ErrorAction SilentlyContinue) {
-    Write-Host 'Chocolatey 已安裝，跳過安裝步驟' -ForegroundColor Yellow
-} else {
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-}
-
-choco install ffmpeg `
-    filezilla `
-    gawk `
-    grep -y 
-
-choco install autohotkey --version=1.1.37.1 -y 
-choco install line -y --ignore-checksums
-    
 Pause
