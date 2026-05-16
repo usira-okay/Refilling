@@ -26,9 +26,12 @@ scoop install nerd-fonts/Maple-Mono-NF-CN
 scoop install oh-my-posh
 
 # 從 main bucket 安裝
-scoop install ffmpeg gawk grep
+scoop install ffmpeg gawk grep git 7zip gh yt-dlp graphviz rustup openjdk21 nvm nuget
 
 # 從 extras bucket 安裝
-scoop install filezilla autohotkey1 line
+scoop install filezilla autohotkey1 line `
+    googlechrome vscode postman obs-studio vlc discord obsidian `
+    dbeaver fork another-redis-desktop-manager screentogif sharex `
+    powertoys mremoteng pwsh googledrive openshot coretemp steam
 
 Pause
