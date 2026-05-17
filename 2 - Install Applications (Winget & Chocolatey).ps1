@@ -1,6 +1,6 @@
 Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 
-. .\Test-Admin.ps1 -p $PSCommandPath
+if (-not (. .\Test-Admin.ps1 -p $PSCommandPath)) { return }
 
 Write-Host 'Install Applications by Winget'
 $ErrorActionPreference = 'Stop'
