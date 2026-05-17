@@ -1,7 +1,7 @@
 Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
 . .\config.ps1
 
-. .\Test-Admin.ps1 -p $PSCommandPath
+if (-not (. .\Test-Admin.ps1 -p $PSCommandPath)) { return }
 
 Write-Host 'Other install and settings'
 $ErrorActionPreference = 'Stop'
