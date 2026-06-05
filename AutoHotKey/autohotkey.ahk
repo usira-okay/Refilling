@@ -5,12 +5,6 @@ Run, shutdown -a
 
 return
 
-#!p::
-
-SendInput, ，再麻煩協助 review & merge 感謝
-
-return
-
 ^#!r::
 
 Run, shutdown -r -t 10 -f
@@ -23,11 +17,9 @@ Run, shutdown -s -t 10 -f
 
 return
 
-#!d::
+#!p::
 
-path := GetPath() 
-
-Run, %path%
+SendInput, {U+FF0C}{U+518D}{U+9EBB}{U+7169}{U+5354}{U+52A9} review {&} merge {U+611F}{U+8B1D}
 
 return
 
@@ -37,26 +29,7 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, wt.exe -w normal new-tab "C:\Program Files\PowerShell\7\pwsh.exe" -NoExit -Command ". %profile% && cd '%path%'"
-
-return
-
-#!v::
-
-path := GetPath() 
-
-#NoEnv
-SetWorkingDir %A_ScriptDir%
-SetTitleMatchMode, 2
-
-; 獲取使用者名稱
-EnvGet, username, USERNAME
-
-; 設定VSCode的安裝路徑
-vscodePath := "C:\Users\" . username . "\AppData\Local\Programs\Microsoft VS Code\Code.exe"
-
-; 執行指令啟動VSCode並開啟指定資料夾
-Run, %vscodePath% "%path%"
+Run, "C:\Users\ari\AppData\Local\Microsoft\WindowsApps\pwsh.exe" -NoExit -Command ". %profile% && cd '%path%'"
 
 return
 
@@ -66,8 +39,15 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, *RunAs wt.exe -w administrator new-tab "C:\Program Files\PowerShell\7\pwsh.exe" -NoExit -Command ". %profile% && cd '%path%'"
+Run, *RunAs "C:\Users\ari\AppData\Local\Microsoft\WindowsApps\pwsh.exe" -NoExit -Command ". %profile% && cd '%path%'"
 
+return
+
+#!v::
+
+path := GetPath() 
+
+Run, "C:\Users\ari\AppData\Local\Microsoft\WindowsApps\pwsh.exe" -NoProfile -WindowStyle Hidden -Command "code '%path%'", , Hide
 return
 
 GetActiveExplorerPath()
