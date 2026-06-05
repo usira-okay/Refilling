@@ -74,8 +74,9 @@ function de {
 }
 
 
-function git-work { git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe -F ~/.ssh/config-work" }
-function git-default { git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe -F ~/.ssh/config" }
+function d {
+    Set-Location ([Environment]::GetFolderPath('Desktop'))
+}
 
 function Invoke-Copse {
     $output = & "git_worktree_copse" @args
