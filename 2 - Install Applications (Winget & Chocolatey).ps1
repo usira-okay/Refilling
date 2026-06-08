@@ -45,9 +45,7 @@ if (Get-Command choco -ErrorAction SilentlyContinue) {
 }
 
 choco install ffmpeg `
-    filezilla `
-    gawk `
-    grep -y 
+    filezilla -y 
 
 choco install autohotkey --version=1.1.37.1 -y 
 choco install line -y --ignore-checksums
