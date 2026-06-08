@@ -23,6 +23,16 @@ SendInput, {U+FF0C}{U+518D}{U+9EBB}{U+7169}{U+5354}{U+52A9} review {&} merge {U+
 
 return
 
+#!x::
+
+path := GetPath() 
+
+profile := GetPowerShellProfilePath()
+
+Run, "C:\Users\ari\AppData\Local\Microsoft\WindowsApps\pwsh.exe" -NoExit -Command ". %profile% && de agent-dev"
+
+return
+
 #!c::
 
 path := GetPath() 
