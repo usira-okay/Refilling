@@ -120,7 +120,7 @@ foreach ($CustProfile in $CustProfiles) {
     if ($CustProfile.name -eq "Windows PowerShell") {
         $command = "%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -Command `". $profilePath`""
     } elseif ($CustProfile.name -eq "PowerShell") {
-        $command = "C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `". $profilePath`""
+        $command = "pwsh -NoExit -Command `". $profilePath`""
     } else {
         continue
     }
@@ -147,6 +147,36 @@ foreach ($CustProfile in $CustProfiles) {
         $settings.defaultProfile = $CustProfile.guid
     }
 }
+
+# 新增 agent-dev profile
+$agentDevProfile = @{
+    "colorScheme" = "Campbell"
+    "commandline" = "pwsh -NoExit -Command `". $profilePath && de agent-dev`""
+    "font" = @{
+        "face" = "Maple Mono NF CN"
+    }
+    "guid" = "{bf89599a-06b4-4ee5-bf49-72e4fb5c0eab}"
+    "hidden" = $false
+    "icon" = "none"
+    "name" = "agent-dev"
+    "startingDirectory" = "%USERPROFILE%"
+}
+
+# 檢查 agent-dev profile 是否已存在
+$agentDevExists = $settings.profiles.list | Where-Object { $_.name -eq "agent-dev" }
+if (-not $agentDevExists) {
+    $settings.profiles.list += $agentDevProfile
+}
+
+# 重新排序 profiles：pwsh 在第一個，agent-dev 在第二個
+$pwshProfile = $settings.profiles.list | Where-Object { $_.name -eq "PowerShell" }
+$agentDevProfile = $settings.profiles.list | Where-Object { $_.name -eq "agent-dev" }
+$otherProfiles = $settings.profiles.list | Where-Object { $_.name -ne "PowerShell" -and $_.name -ne "agent-dev" }
+
+$settings.profiles.list = @()
+if ($pwshProfile) { $settings.profiles.list += $pwshProfile }
+if ($agentDevProfile) { $settings.profiles.list += $agentDevProfile }
+$settings.profiles.list += $otherProfiles
 
 # 將更新後的設定寫回 settings.json
 # 使用 .NET 寫入 UTF-8 無 BOM，避免 PowerShell 5.1 的 Set-Content -Encoding UTF8 會加入 BOM
