@@ -29,7 +29,7 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, "C:\Users\ari\AppData\Local\Microsoft\WindowsApps\pwsh.exe" -NoExit -Command ". %profile% && de agent-dev"
+Run, "pwsh" -NoExit -Command ". %profile% && de agent-dev"
 
 return
 
@@ -39,7 +39,7 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, "C:\Users\ari\AppData\Local\Microsoft\WindowsApps\pwsh.exe" -NoExit -Command ". %profile% && cd '%path%'"
+Run, "pwsh" -NoExit -Command ". %profile% && cd '%path%'"
 
 return
 
@@ -49,7 +49,7 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, *RunAs "C:\Users\ari\AppData\Local\Microsoft\WindowsApps\pwsh.exe" -NoExit -Command ". %profile% && cd '%path%'"
+Run, *RunAs "pwsh" -NoExit -Command ". %profile% && cd '%path%'"
 
 return
 
@@ -57,7 +57,7 @@ return
 
 path := GetPath() 
 
-Run, "C:\Users\ari\AppData\Local\Microsoft\WindowsApps\pwsh.exe" -NoProfile -WindowStyle Hidden -Command "code '%path%'", , Hide
+Run, "pwsh" -NoProfile -WindowStyle Hidden -Command "code '%path%'", , Hide
 return
 
 GetActiveExplorerPath()
