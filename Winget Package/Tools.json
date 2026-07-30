@@ -140,6 +140,9 @@
 				},
 				{
 					"PackageIdentifier": "OpenVPNTechnologies.OpenVPN"
+				},
+				{
+					"PackageIdentifier": "NASM.NASM"
 				}
 			],
 			"SourceDetails": {
