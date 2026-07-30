@@ -1,19 +1,23 @@
-Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
+if (-not (. .\Common.ps1 -CallerPath $PSCommandPath)) { return }
+
+if (-not (Test-Path .\config.ps1)) {
+    Write-Error '找不到 config.ps1，請先複製 config.example.ps1 為 config.ps1 並填入個人資訊'
+    exit 1
+}
 . .\config.ps1
 
-if (-not (. .\Test-Admin.ps1 -p $PSCommandPath)) { return }
-
 Write-Host 'Other install and settings'
-$ErrorActionPreference = 'Stop'
-
-# PowerShell 5.1 預設不啟用 TLS 1.2，許多 HTTPS 端點需要 TLS 1.2
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 Write-Host 'PackageProvider Nuget'
 Install-PackageProvider -Name Nuget -Force
 
 Write-Host 'Add Nuget Offical Source'
-dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json
+$existingNugetSources = dotnet nuget list source
+if ($existingNugetSources -notmatch 'nuget\.org') {
+    dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json
+} else {
+    Write-Host 'nuget.org 來源已存在，跳過' -ForegroundColor Yellow
+}
 
 dotnet tool install --global dotnet-ef
 

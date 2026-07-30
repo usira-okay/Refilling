@@ -1,5 +1,4 @@
-Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
-$ErrorActionPreference = 'Stop'
+if (-not (. .\Common.ps1 -CallerPath $PSCommandPath -SkipAdminCheck)) { return }
 
 # 檢查 NVM 是否已安裝
 if (-not (Get-Command nvm -ErrorAction SilentlyContinue)) {

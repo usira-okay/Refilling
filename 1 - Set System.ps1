@@ -1,9 +1,6 @@
-Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
-
-if (-not (. .\Test-Admin.ps1 -p $PSCommandPath)) { return }
+if (-not (. .\Common.ps1 -CallerPath $PSCommandPath)) { return }
 
 Write-Host 'Set System'
-$ErrorActionPreference = 'Stop'
 
 Write-Host 'Add US and TW Keyboard'
 # Add US and TW Keyboard

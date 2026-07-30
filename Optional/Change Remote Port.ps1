@@ -1,7 +1,4 @@
-Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
-
-if (-not (. ..\Test-Admin.ps1 -p $PSCommandPath)) { return }
-$ErrorActionPreference = 'Stop'
+if (-not (. ..\Common.ps1 -CallerPath $PSCommandPath)) { return }
 
 Write-Host 'Change Remote Port'
 

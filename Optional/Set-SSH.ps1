@@ -1,8 +1,10 @@
-Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
+if (-not (. ..\Common.ps1 -CallerPath $PSCommandPath)) { return }
 
-if (-not (. ..\Test-Admin.ps1 -p $PSCommandPath)) { return }
+if (-not (Test-Path ..\config.ps1)) {
+    Write-Error '找不到 config.ps1，請先複製 config.example.ps1 為 config.ps1 並填入個人資訊'
+    exit 1
+}
 . ..\config.ps1
-$ErrorActionPreference = 'Stop'
 
 mkdir "$env:USERPROFILE\.ssh" -Force
 cd "$env:USERPROFILE\.ssh"
@@ -12,8 +14,8 @@ $sshKeySource = $Config.SshKeySource
 # Check if source directory exists
 if (Test-Path $sshKeySource) {
     # Get all private key files (usually no extension or specific naming pattern)
-    $privateKeys = Get-ChildItem -Path $sshKeySource -File | Where-Object { 
-        $_.Extension -eq "" -or $_.Name -notmatch "\.(pub|ppk)$" 
+    $privateKeys = Get-ChildItem -Path $sshKeySource -File | Where-Object {
+        $_.Name -notmatch "\.(pub|ppk|known_hosts|config)$"
     }
     
     # Batch copy private keys to .ssh directory
@@ -35,8 +37,8 @@ Start-Service ssh-agent
 git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
 
 # Get all private keys in .ssh directory and batch add them to ssh-agent
-$localPrivateKeys = Get-ChildItem -Path "$env:USERPROFILE\.ssh" -File | Where-Object { 
-    $_.Extension -eq "" -or ($_.Name -notmatch "\.(pub|ppk|known_hosts|config)$" -and $_.Name -notlike "*.pub") 
+$localPrivateKeys = Get-ChildItem -Path "$env:USERPROFILE\.ssh" -File | Where-Object {
+    $_.Name -notmatch "\.(pub|ppk|known_hosts|config)$"
 }
 
 foreach ($key in $localPrivateKeys) {

@@ -1,12 +1,6 @@
-Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
-
-if (-not (. .\Test-Admin.ps1 -p $PSCommandPath)) { return }
+if (-not (. .\Common.ps1 -CallerPath $PSCommandPath)) { return }
 
 Write-Host 'Install Applications by Winget'
-$ErrorActionPreference = 'Stop'
-
-# PowerShell 5.1 預設不啟用 TLS 1.2，許多 HTTPS 端點需要 TLS 1.2
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 # 檢查 Winget 是否已安裝
 if (Get-Command winget -ErrorAction SilentlyContinue) {

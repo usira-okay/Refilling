@@ -1,9 +1,6 @@
-Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
-
-if (-not (. ..\Test-Admin.ps1 -p $PSCommandPath)) { return }
+if (-not (. ..\Common.ps1 -CallerPath $PSCommandPath)) { return }
 
 Set-StrictMode -Version Latest
-$ErrorActionPreference = 'Stop'
 
 # ── 已知的微軟新注音 TIP ID ──
 $msNewPhoneticTips = @(

@@ -1,11 +1,12 @@
-Set-Location ([System.IO.Path]::GetDirectoryName($PSCommandPath))
+if (-not (. .\Common.ps1 -CallerPath $PSCommandPath -SkipAdminCheck)) { return }
+
+if (-not (Test-Path .\config.ps1)) {
+    Write-Error '找不到 config.ps1，請先複製 config.example.ps1 為 config.ps1 並填入個人資訊'
+    exit 1
+}
 . .\config.ps1
 
 Write-Host 'Install Applications by Scoop'
-$ErrorActionPreference = 'Stop'
-
-# PowerShell 5.1 預設不啟用 TLS 1.2，許多 HTTPS 端點需要 TLS 1.2
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 # 檢查 Scoop 是否已安裝
 if (Get-Command scoop -ErrorAction SilentlyContinue) {

@@ -25,9 +25,11 @@ Windows 開發環境自動化佈建工具。透過編號化的 PowerShell 腳本
 | `4 - nvm.ps1`                                        | 透過 NVM 安裝最新版 Node.js                                                                                |
 | `5 - Other Install And Settings.ps1`                 | NuGet、dotnet-ef、AutoHotKey 啟動、Git 設定、PowerShell Profile、Windows Terminal 設定、git_worktree_copse |
 
+`Common.ps1`、`Test-Admin.ps1` 為共用邏輯（切換目錄、管理員權限檢查、TLS 設定），由上述腳本內部呼叫，不需手動執行。
+
 ## 設定檔
 
-使用前請先修改 `config.ps1` 中的個人資訊：
+使用前請先複製 `config.example.ps1` 為 `config.ps1`，並修改其中的個人資訊（`config.ps1` 已加入 `.gitignore`，不會被提交）：
 
 - `GitName` — Git 使用者名稱
 - `GitEmail` — Git 電子郵件
@@ -47,21 +49,8 @@ Windows 開發環境自動化佈建工具。透過編號化的 PowerShell 腳本
 | `Windows Button.ps1`     | 隱藏關機與睡眠按鈕                   |
 | `set-asus-ime.ps1`       | 安裝華碩注音輸入法（取代微軟新注音） |
 
-## WSL 環境設定（wsl/）
-
-WSL 腳本用於初始化 Linux 開發環境：
-
-| 腳本        | 說明                   |
-| ----------- | ---------------------- |
-| `init.sh`   | 主入口，依序呼叫各模組 |
-| `dotnet.sh` | 安裝 .NET SDK 6/8/9/10 |
-| `ssh.sh`    | SSH 金鑰生成           |
-
-使用前請修改 `wsl/config.sh` 中的個人資訊。
-
 ## 其他
 
 - **AutoHotKey/** — Windows 快捷鍵配置（Ctrl+Alt+Win 系列）
 - **Cursors/** — Numix Dark/Light 游標主題檔案
 - **Winget Package/** — Winget 應用匯入清單（Tools.json）
-- **docker/** — Docker Compose 部署配置
