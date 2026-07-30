@@ -194,4 +194,6 @@ if (Get-Command cargo -ErrorAction SilentlyContinue) {
 
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
+npm install -g yarn
+
 Pause
