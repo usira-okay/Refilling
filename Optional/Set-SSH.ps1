@@ -34,7 +34,11 @@ if (Test-Path $sshKeySource) {
 # Start SSH Agent service
 Get-Service ssh-agent | Set-Service -StartupType Automatic
 Start-Service ssh-agent
-git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
+$openSshPath = Join-Path $env:WINDIR 'System32\OpenSSH'
+$openSshSsh = (Join-Path $openSshPath 'ssh.exe') -replace '\\', '/'
+$openSshSshAdd = Join-Path $openSshPath 'ssh-add.exe'
+git config --global core.sshCommand $openSshSsh
+Write-Host "Using Windows built-in OpenSSH ssh-agent service" -ForegroundColor Yellow
 
 # Get all private keys in .ssh directory and batch add them to ssh-agent
 $localPrivateKeys = Get-ChildItem -Path "$env:USERPROFILE\.ssh" -File | Where-Object {
@@ -44,7 +48,7 @@ $localPrivateKeys = Get-ChildItem -Path "$env:USERPROFILE\.ssh" -File | Where-Ob
 foreach ($key in $localPrivateKeys) {
     Write-Host "Adding private key to ssh-agent: $($key.Name)" -ForegroundColor Green
     try {
-        ssh-add "$($key.FullName)"
+        & $openSshSshAdd "$($key.FullName)"
         Write-Host "Successfully added: $($key.Name)" -ForegroundColor Green
     } catch {
         Write-Host "Failed to add: $($key.Name) - $($_.Exception.Message)" -ForegroundColor Red

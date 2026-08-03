@@ -45,7 +45,7 @@ Windows 開發環境自動化佈建工具。透過編號化的 PowerShell 腳本
 | `Change Remote Port.ps1` | 修改遠端桌面連線埠                   |
 | `Set Desktop.ps1`        | 修改桌面資料夾位置                   |
 | `Set User Password.ps1`  | 修改本機使用者密碼                   |
-| `Set-SSH.ps1`            | 配置 SSH 金鑰與 ssh-agent            |
+| `Set-SSH.ps1`            | 配置 SSH 金鑰與 Windows 內建 OpenSSH ssh-agent            |
 | `Windows Button.ps1`     | 隱藏關機與睡眠按鈕                   |
 | `set-asus-ime.ps1`       | 安裝華碩注音輸入法（取代微軟新注音） |
 
