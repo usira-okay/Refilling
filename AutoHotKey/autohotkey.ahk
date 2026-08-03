@@ -29,7 +29,7 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, "pwsh" -NoExit -Command ". %profile% && de agent-dev"
+Run, "pwsh" -NoExit -Command ". '%profile%' && de agent-dev"
 
 return
 
@@ -39,7 +39,7 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, "pwsh" -NoExit -Command ". %profile% && cd '%path%'"
+Run, "pwsh" -NoExit -Command ". '%profile%' && cd '%path%'"
 
 return
 
@@ -49,7 +49,7 @@ path := GetPath()
 
 profile := GetPowerShellProfilePath()
 
-Run, *RunAs "pwsh" -NoExit -Command ". %profile% && cd '%path%'"
+Run, *RunAs "pwsh" -NoExit -Command ". '%profile%' && cd '%path%'"
 
 return
 
