@@ -48,9 +48,11 @@ Windows 開發環境自動化佈建工具。透過編號化的 PowerShell 腳本
 | `Set-SSH.ps1`            | 配置 SSH 金鑰與 ssh-agent            |
 | `Windows Button.ps1`     | 隱藏關機與睡眠按鈕                   |
 | `set-asus-ime.ps1`       | 安裝華碩注音輸入法（取代微軟新注音） |
+| `Setup AI Environment.ps1` | 安裝 AI CLI（Claude Code、Codex、GitHub Copilot、Antigravity）、以 npx skills 安裝 skills、同步 `AGENTS.md` 到各 CLI 的全域指令檔（會直接覆寫既有檔案） |
 
 ## 其他
 
 - **AutoHotKey/** — Windows 快捷鍵配置（Ctrl+Alt+Win 系列）
 - **Cursors/** — Numix Dark/Light 游標主題檔案
 - **Winget Package/** — Winget 應用匯入清單（Tools.json）
+- **AGENTS.md** — AI CLI 全域指令（專案憲法），由 `Optional/Setup AI Environment.ps1` 同步到各 CLI
