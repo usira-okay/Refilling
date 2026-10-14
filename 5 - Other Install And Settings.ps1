@@ -92,6 +92,27 @@ function Invoke-Copse {
 }
 Set-Alias -Name wt -Value Invoke-Copse
 
+function c
+{
+    copilot --yolo
+}
+
+function a
+{
+    agy --dangerously-skip-permissions
+}
+
+function cc
+{
+    claude --allow-dangerously-skip-permissions --dangerously-skip-permissions
+}
+
+function co
+{
+    codex --dangerously-bypass-approvals-and-sandbox --dangerously-bypass-hook-trust
+}
+
+
 '@
 
 # 設定 windows terminal
