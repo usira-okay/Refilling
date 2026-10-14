@@ -112,9 +112,6 @@
 					"PackageIdentifier": "NordSecurity.NordPass"
 				},
 				{
-					"PackageIdentifier": "GitHub.Copilot"
-				},
-				{
 					"PackageIdentifier": "GitHub.Cli"
 				},
 				{
