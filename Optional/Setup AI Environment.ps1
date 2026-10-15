@@ -4,7 +4,7 @@ Write-Host 'Setup AI Environment'
 
 # AI CLI 安裝清單：Command 為安裝後的執行檔名稱，已存在就跳過
 $cliInstallers = @(
-    @{ Name = 'Claude Code'; Command = 'claude'; Install = { Invoke-RestMethod -Uri https://claude.ai/install.ps1 | Invoke-Expression } }
+    @{ Name = 'Claude Code'; Command = 'claude'; Install = { winget install --id Anthropic.ClaudeCode --accept-package-agreements --accept-source-agreements } }
     @{ Name = 'Codex'; Command = 'codex'; Install = { Invoke-RestMethod -Uri https://chatgpt.com/codex/install.ps1 | Invoke-Expression } }
     @{ Name = 'GitHub Copilot'; Command = 'copilot'; Install = { winget install --id GitHub.Copilot --accept-package-agreements --accept-source-agreements } }
     @{ Name = 'Antigravity'; Command = 'agy'; Install = { Invoke-RestMethod -Uri https://antigravity.google/cli/install.ps1 | Invoke-Expression } }
