@@ -102,6 +102,14 @@ PowerShell 7 與 agent-dev 排在清單前兩位，使用 Maple Mono NF CN，並
 | `set-asus-ime.ps1` | 設定已安裝的華碩注音輸入法；安裝由第 2 階段的 Store 套件處理 |
 | `Setup AI Environment.ps1` | 安裝 Claude Code、Codex、GitHub Copilot、Antigravity，透過 npx 安裝 skills，並將 `AGENTS.md` 覆寫至各 CLI 全域指令檔 |
 
+遠端桌面連接埠必須是 `1–65535` 的整數，驗證通過後才會更新登錄檔及防火牆。TCP、UDP 規則皆允許 **Private 與 Public** 網路；完成後需重新啟動電腦，腳本會顯示提醒。[Microsoft 改埠說明](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/remotepc/change-listening-port)
+
+SSH 會先確認來源資料夾及可辨識的 OpenSSH／PEM 私鑰，再複製並加入 ssh-agent。`config`、`known_hosts`、公鑰與 PuTTY `.ppk` 不會當成私鑰匯入；`ssh-add` 失敗會停止並保留錯誤訊息。
+
+密碼確認區分大小寫，BSTR 緩衝區會在成功或失敗時清除。桌面設定必須指向現有資料夾，會修改目前使用者的桌面路徑並重啟 Explorer；請先自行搬移所需的桌面檔案，此腳本可使用一般權限。
+
+AI 安裝流程會先檢查必要工具與指令檔。CLI 或 skills 安裝失敗時會停止後續同步；遠端 PowerShell 安裝器以獨立程序執行，並檢查執行結果。完成後重新開啟終端機以取得更新後的 PATH。
+
 ## AutoHotkey v2 快捷鍵
 
 `AutoHotKey/autohotkey.ahk` 使用 `#Requires AutoHotkey v2.0`，無法由 v1 執行。完成第 5 階段後，重新登入即可由 Startup 載入，也可自行雙擊腳本啟動。

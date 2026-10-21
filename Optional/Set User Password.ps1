@@ -1,31 +1,35 @@
-if (-not (. ..\Common.ps1 -CallerPath $PSCommandPath)) { return }
+#requires -Version 7.0
+<# .SYNOPSIS 確認兩次密碼完全一致後更新目前帳號，並清除比較用的非受控記憶體。 #>
+$repositoryRoot = Split-Path $PSScriptRoot -Parent
+if (-not (. (Join-Path $repositoryRoot 'Common.ps1') -CallerPath $PSCommandPath)) { return }
 
-Write-Host 'Set User Password'
+$password1 = Read-Host '請輸入新密碼' -AsSecureString
+$password2 = Read-Host '請再次輸入新密碼' -AsSecureString
+$ptr1 = [IntPtr]::Zero
+$ptr2 = [IntPtr]::Zero
+$plaintextPassword1 = $null
+$plaintextPassword2 = $null
 
-# 要求使用者第一次輸入密碼
-$password1 = Read-Host "Enter password" -AsSecureString
+try {
+    $ptr1 = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password1)
+    $plaintextPassword1 = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr1)
+    $ptr2 = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password2)
+    $plaintextPassword2 = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr2)
 
-# 要求使用者第二次輸入密碼
-$password2 = Read-Host "Enter password again" -AsSecureString
-
-# 將 SecureString 轉換為普通字串以便比較
-$ptr1 = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password1)
-$plaintextPassword1 = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($ptr1)
-
-$ptr2 = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password2)
-$plaintextPassword2 = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($ptr2)
-
-# 比較兩次輸入的密碼
-if ($plaintextPassword1 -eq $plaintextPassword2) {
-    Write-Host "Password match."
-    $user = Get-LocalUser -Name $env:USERNAME
-    $user | Set-LocalUser -Password $password1
-} else {
-    Write-Host "Passwords do not match!" -ForegroundColor Red
+    if (-not [string]::Equals($plaintextPassword1, $plaintextPassword2, [StringComparison]::Ordinal)) {
+        throw '兩次密碼輸入不一致。'
+    }
+    Get-LocalUser -Name $env:USERNAME | Set-LocalUser -Password $password1
+} finally {
+    if ($ptr1 -ne [IntPtr]::Zero) {
+        [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr1)
+    }
+    if ($ptr2 -ne [IntPtr]::Zero) {
+        [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr2)
+    }
+    $plaintextPassword1 = $null
+    $plaintextPassword2 = $null
 }
 
-# 釋放 BSTR 指標，避免密碼殘留記憶體
-[System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr1)
-[System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr2)
-
+Write-Host '密碼更新完成。' -ForegroundColor Green
 Pause

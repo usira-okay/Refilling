@@ -1,40 +1,29 @@
+#requires -Version 7.0
+<# .SYNOPSIS 將目前使用者的桌面指向既有資料夾，並重新啟動 Explorer 套用設定。 #>
+$repositoryRoot = Split-Path $PSScriptRoot -Parent
+if (-not (. (Join-Path $repositoryRoot 'Common.ps1') -CallerPath $PSCommandPath -SkipAdminCheck)) { return }
 
-if (-not (. ..\Common.ps1 -CallerPath $PSCommandPath)) { return }
-
-if (-not (Test-Path ..\config.ps1)) {
-    Write-Error '找不到 config.ps1，請先複製 config.example.ps1 為 config.ps1 並填入個人資訊'
-    exit 1
+$configPath = Join-Path $repositoryRoot 'config.ps1'
+if (-not (Test-Path -LiteralPath $configPath -PathType Leaf)) {
+    throw '找不到 config.ps1，請先複製 config.example.ps1 為 config.ps1 並填入個人資訊。'
 }
-. ..\config.ps1
+. $configPath
 
-Write-Host 'Set Desktop'
-
-# 1. 設定你想要的新桌面路徑
 $newPath = $Config.DesktopPath
-
-# 2. 檢查資料夾是否存在
-if (!(Test-Path -Path $newPath)) {
-    # 如果找不到資料夾，直接報錯並終止執行
-    Write-Error "錯誤：找不到目標資料夾 '$newPath'。操作已取消，未對系統進行任何變更。"
-    exit
+if ([string]::IsNullOrWhiteSpace($newPath) -or
+    -not (Test-Path -LiteralPath $newPath -PathType Container)) {
+    throw "DesktopPath 必須是存在的資料夾：$newPath"
 }
-
-# 3. 執行到這裡代表資料夾存在，開始修改登錄檔
-$registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"
-
-try {
-    # 修改桌面路徑 (使用 REG_EXPAND_SZ 以相容環境變數)
-    Set-ItemProperty -Path $registryPath -Name "Desktop" -Value $newPath -ErrorAction Stop
-    
-    Write-Host "成功：桌面路徑已更新為 '$newPath'。" -ForegroundColor Green
-
-    # 4. 立即重啟檔案總管使設定生效
-    Write-Host "正在重新啟動檔案總管以套用變更..."
-    Stop-Process -Name explorer -Force
-    Start-Process explorer
+$desktopDirectory = Get-Item -LiteralPath $newPath
+if ($desktopDirectory -isnot [System.IO.DirectoryInfo]) {
+    throw "DesktopPath 必須是檔案系統資料夾：$newPath"
 }
-catch {
-    Write-Error "變更登錄檔時發生預料之外的錯誤：$($_.Exception.Message)"
-}
-        
+$newPath = $desktopDirectory.FullName
+
+$registryPath = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'
+Set-ItemProperty -Path $registryPath -Name Desktop -Value $newPath
+Stop-Process -Name explorer -Force
+Start-Process explorer
+
+Write-Host "桌面路徑已更新為 '$newPath'。" -ForegroundColor Green
 Pause

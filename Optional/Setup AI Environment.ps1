@@ -1,13 +1,26 @@
-if (-not (. ..\Common.ps1 -CallerPath $PSCommandPath -SkipAdminCheck)) { return }
+#requires -Version 7.0
+$projectRoot = Split-Path -LiteralPath $PSScriptRoot
+if (-not (. (Join-Path $projectRoot 'Common.ps1') -CallerPath $PSCommandPath -SkipAdminCheck)) { return }
 
-Write-Host 'Setup AI Environment'
+$instructionSource = Join-Path $projectRoot 'AGENTS.md'
+if (-not (Test-Path -LiteralPath $instructionSource -PathType Leaf)) {
+    throw "找不到專案的 AGENTS.md：$instructionSource"
+}
+foreach ($command in @('npx', 'winget')) {
+    if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
+        throw "找不到 $command，請先完成第 0–4 階段，重新開啟 PowerShell 7 後再執行。"
+    }
+}
+$powerShellExecutable = (Get-Process -Id $PID).Path
+
+Write-Host '設定 AI 環境'
 
 # AI CLI 安裝清單：Command 為安裝後的執行檔名稱，已存在就跳過
 $cliInstallers = @(
-    @{ Name = 'Claude Code'; Command = 'claude'; Install = { winget install --id Anthropic.ClaudeCode --accept-package-agreements --accept-source-agreements } }
-    @{ Name = 'Codex'; Command = 'codex'; Install = { Invoke-RestMethod -Uri https://chatgpt.com/codex/install.ps1 | Invoke-Expression } }
-    @{ Name = 'GitHub Copilot'; Command = 'copilot'; Install = { winget install --id GitHub.Copilot --accept-package-agreements --accept-source-agreements } }
-    @{ Name = 'Antigravity'; Command = 'agy'; Install = { Invoke-RestMethod -Uri https://antigravity.google/cli/install.ps1 | Invoke-Expression } }
+    @{ Name = 'Claude Code'; Command = 'claude'; PackageId = 'Anthropic.ClaudeCode' }
+    @{ Name = 'Codex'; Command = 'codex'; InstallerUri = 'https://chatgpt.com/codex/install.ps1' }
+    @{ Name = 'GitHub Copilot'; Command = 'copilot'; PackageId = 'GitHub.Copilot' }
+    @{ Name = 'Antigravity'; Command = 'agy'; InstallerUri = 'https://antigravity.google/cli/install.ps1' }
 )
 
 # 要安裝的 skills 來源：Skills 為 '*' 代表該 repo 的全部 skills
@@ -21,52 +34,73 @@ $skillSources = @(
 $skillAgents = @('claude-code', 'codex', 'github-copilot')
 
 # Antigravity 不讀 ~/.agents/skills，需另外複製一份到它的全域 skills 資料夾
-$agentsSkillsPath = "$env:USERPROFILE\.agents\skills"
-$antigravitySkillsPath = "$env:USERPROFILE\.gemini\config\skills"
+$agentsSkillsPath = Join-Path $env:USERPROFILE '.agents/skills'
+$antigravitySkillsPath = Join-Path $env:USERPROFILE '.gemini/config/skills'
 
 # 各 AI CLI 的全域指令檔，內容皆來自專案根目錄的 AGENTS.md
 $instructionTargets = @(
-    "$env:USERPROFILE\.copilot\copilot-instructions.md"
-    "$env:USERPROFILE\.claude\CLAUDE.md"
-    "$env:USERPROFILE\.codex\AGENTS.md"
-    "$env:USERPROFILE\.gemini\GEMINI.md"
+    (Join-Path $env:USERPROFILE '.copilot/copilot-instructions.md')
+    (Join-Path $env:USERPROFILE '.claude/CLAUDE.md')
+    (Join-Path $env:USERPROFILE '.codex/AGENTS.md')
+    (Join-Path $env:USERPROFILE '.gemini/GEMINI.md')
 )
 
-Write-Host 'Install AI CLI'
+Write-Host '安裝 AI CLI'
 
 foreach ($cli in $cliInstallers) {
     if (Get-Command $cli.Command -ErrorAction SilentlyContinue) {
         Write-Host "$($cli.Name) 已安裝，跳過安裝步驟" -ForegroundColor Yellow
     } else {
-        Write-Host "Install $($cli.Name)"
-        & $cli.Install
+        Write-Host "安裝 $($cli.Name)"
+        if ($cli.ContainsKey('PackageId')) {
+            Invoke-ExternalCommand -FilePath winget -ArgumentList @(
+                'install', '--id', $cli.PackageId, '--exact', '--source', 'winget',
+                '--accept-package-agreements', '--accept-source-agreements'
+            )
+        } else {
+            $installerPath = Join-Path ([System.IO.Path]::GetTempPath()) "refilling-$($cli.Command)-$([guid]::NewGuid().ToString('N')).ps1"
+            try {
+                Invoke-WebRequest -Uri $cli.InstallerUri -OutFile $installerPath
+                Invoke-ExternalCommand -FilePath $powerShellExecutable -ArgumentList @('-NoProfile', '-File', $installerPath)
+            } finally {
+                if (Test-Path -LiteralPath $installerPath) {
+                    Remove-Item -LiteralPath $installerPath -Force
+                }
+            }
+            if ($cli.Command -eq 'agy') {
+                # 官方安裝器可忽略環境設定警告；直接驗證程式，避免依賴父視窗尚未更新的 PATH。
+                $agyPath = Join-Path $env:LOCALAPPDATA 'agy/bin/agy.exe'
+                if (-not (Test-Path -LiteralPath $agyPath -PathType Leaf)) {
+                    throw "Antigravity 安裝後找不到執行檔：$agyPath"
+                }
+                Invoke-ExternalCommand -FilePath $agyPath -ArgumentList @('--version')
+            }
+        }
     }
 }
 
-Write-Host 'Install AI Skills'
-
-if (-not (Get-Command npx -ErrorAction SilentlyContinue)) {
-    Write-Error 'npx 未安裝，請先執行腳本 4 安裝 Node.js'
-    exit 1
-}
+Write-Host '安裝 AI Skills'
 
 # --copy 讓各 agent 取得獨立複本，避免 Windows 非管理員 / 未開啟開發人員模式時無法建立 symlink
 $agentArgs = $skillAgents | ForEach-Object { '-a', $_ }
 foreach ($source in $skillSources) {
     $skillArgs = $source.Skills | ForEach-Object { '--skill', $_ }
-    npx -y skills add $source.Repo @skillArgs @agentArgs -g -y --copy
+    $arguments = @('-y', 'skills', 'add', $source.Repo) + $skillArgs + $agentArgs + @('-g', '-y', '--copy')
+    Invoke-ExternalCommand -FilePath npx -ArgumentList $arguments
 }
 
-Write-Host 'Copy Skills to Antigravity'
+Write-Host '複製 Skills 至 Antigravity'
 
-New-Item -Path $antigravitySkillsPath -ItemType Directory -Force | Out-Null
-Copy-Item -Path "$agentsSkillsPath\*" -Destination $antigravitySkillsPath -Recurse -Force
+[System.IO.Directory]::CreateDirectory($antigravitySkillsPath) | Out-Null
+Get-ChildItem -LiteralPath $agentsSkillsPath -Force | ForEach-Object {
+    Copy-Item -LiteralPath $_.FullName -Destination $antigravitySkillsPath -Recurse -Force
+}
 
-Write-Host 'Sync AGENTS.md'
+Write-Host '同步 AGENTS.md'
 
 foreach ($target in $instructionTargets) {
-    New-Item -Path (Split-Path $target) -ItemType Directory -Force | Out-Null
-    Copy-Item -Path ..\AGENTS.md -Destination $target -Force
+    [System.IO.Directory]::CreateDirectory((Split-Path -LiteralPath $target)) | Out-Null
+    Copy-Item -LiteralPath $instructionSource -Destination $target -Force
     Write-Host "已同步 $target"
 }
 
