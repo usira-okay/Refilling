@@ -28,7 +28,7 @@ $skillSources = @(
     @{ Repo = 'github/awesome-copilot'; Skills = @('copilot-sdk') }
     @{ Repo = 'dotnet/skills'; Skills = @('dotnet-webapi') }
     @{ Repo = 'DietrichGebert/ponytail'; Skills = @('*') }
-    @{ Repo = 'mattpocock/skills'; Skills = @('grill-me', 'grilling') }
+    @{ Repo = 'mattpocock/skills'; Skills = @('grilling') }
     @{ Repo = 'usira-okay/skills'; Skills = @('*') }
 )
 $skillAgents = @('claude-code', 'codex', 'github-copilot')

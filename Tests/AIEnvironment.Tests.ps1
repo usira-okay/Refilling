@@ -148,6 +148,10 @@ return $true
                 $FilePath -eq 'npx' -and $ArgumentList -contains $repo -and $ArgumentList -contains '--copy'
             }
         }
+        Should -Invoke Invoke-ExternalCommand -Times 1 -Exactly -ParameterFilter {
+            $FilePath -eq 'npx' -and $ArgumentList -contains 'mattpocock/skills' -and
+            $ArgumentList -contains 'grilling' -and $ArgumentList -notcontains 'grill-me'
+        }
         Should -Invoke Invoke-ExternalCommand -Times 5 -Exactly -ParameterFilter {
             $FilePath -eq 'npx' -and $ArgumentList -contains 'claude-code' -and
             $ArgumentList -contains 'codex' -and $ArgumentList -contains 'github-copilot'
