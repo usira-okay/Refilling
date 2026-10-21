@@ -20,7 +20,7 @@ Windows 開發環境自動化佈建工具。透過編號化的 PowerShell 腳本
 | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `0 - Set ExecutionPolicy - 手動執行.ps1`             | 設定 PowerShell 執行策略為 ByPass，停用 Print Screen 快捷鍵                                                |
 | `1 - Set System.ps1`                                 | 系統設定：語言（繁中+英文）、電源管理、剪貼板歷史、WSL2/Hyper-V、Explorer 設定                             |
-| `2 - Install Applications (Winget & Chocolatey).ps1` | 透過 Winget 匯入應用清單、安裝 Visual Studio Community、安裝 Chocolatey 及其套件                           |
+| `2 - Install Applications (Winget & Chocolatey).ps1` | 透過 Winget 匯入應用清單、安裝 Visual Studio Build Tools（Rust 編譯用）、安裝 Chocolatey 及其套件          |
 | `3 - Install Applications (Scoop).ps1`               | 安裝 Scoop 套件管理器、Maple Mono NF CN 字型、oh-my-posh                                                   |
 | `4 - nvm.ps1`                                        | 透過 NVM 安裝最新版 Node.js                                                                                |
 | `5 - Other Install And Settings.ps1`                 | NuGet、dotnet-ef、AutoHotKey 啟動、Git 設定、PowerShell Profile、Windows Terminal 設定、git_worktree_copse |

@@ -22,13 +22,10 @@ if (-not (Test-Path $toolsJsonPath)) {
 winget import -i '.\Winget Package\Tools.json' --accept-package-agreements --accept-source-agreements
 
 
-Write-Host 'Visual Studio'
+Write-Host 'Visual Studio Build Tools'
 
-$command = "--allWorkloads --passive --installWhileDownloading --locale en-US --wait --norestart"
-
-winget install --id Microsoft.VisualStudio.Community --override $command --accept-package-agreements --accept-source-agreements
-
-winget install Microsoft.VisualStudio.2022.BuildTools --override "--wait --passive --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
+# Rust（MSVC toolchain）需要 MSVC linker 與 Windows SDK，--includeRecommended 會一併安裝
+winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--wait --passive --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended" --accept-package-agreements --accept-source-agreements
 
 Write-Host 'Install Applications by Chocolatey'
 # Install Applications by Chocolatey

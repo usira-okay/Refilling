@@ -130,6 +130,9 @@
 					"PackageIdentifier": "Microsoft.DotNet.SDK.3_1"
 				},
 				{
+					"PackageIdentifier": "Microsoft.DotNet.SDK.10"
+				},
+				{
 					"PackageIdentifier": "SlackTechnologies.Slack"
 				},
 				{
