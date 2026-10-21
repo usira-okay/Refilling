@@ -141,4 +141,4 @@ $env:REFILLING_AUTOHOTKEY_EXE = 'C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe
 
 順序為 PowerShell 語法解析、PSScriptAnalyzer Error 級規則、Windows 的 AutoHotkey `/Validate`、Pester。安裝、登錄檔、提權與重新啟動操作均使用測試替身；AHK 路徑測試停用熱鍵，只呼叫純字串函式。Linux 明確略過 Windows 專用測試，不代表已通過 Windows 實機驗收。
 
-GitHub Actions 包含 Windows／Linux 工作，另以真正的 Windows PowerShell 5.1 檢查第 0 階段及共用函式的語法與 UTF-8 BOM。實際安裝、登入啟動、Explorer、UAC、防火牆及重新啟動仍須在可拋棄的 Windows 11 Pro x64 VM 逐階段驗收。
+實際安裝、登入啟動、Explorer、UAC、防火牆及重新啟動仍須在可拋棄的 Windows 11 Pro x64 VM 逐階段驗收。
