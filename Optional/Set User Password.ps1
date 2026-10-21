@@ -1,4 +1,4 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 <# .SYNOPSIS 確認兩次密碼完全一致後更新目前帳號，並清除比較用的非受控記憶體。 #>
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 if (-not (. (Join-Path $repositoryRoot 'Common.ps1') -CallerPath $PSCommandPath)) { return }

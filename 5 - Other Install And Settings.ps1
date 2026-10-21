@@ -1,4 +1,4 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 if (-not (. (Join-Path $PSScriptRoot 'Common.ps1') -CallerPath $PSCommandPath -SkipAdminCheck)) { return }
 
 $configPath = Join-Path $PSScriptRoot 'config.ps1'
@@ -11,9 +11,9 @@ foreach ($name in @('GitName', 'GitEmail')) {
         throw "config.ps1 的 $name 不可為空白。"
     }
 }
-foreach ($command in @('dotnet', 'git', 'npx', 'npm', 'oh-my-posh')) {
+foreach ($command in @('pwsh', 'dotnet', 'git', 'npx', 'npm', 'oh-my-posh')) {
     if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
-        throw "找不到 $command，請先完成第 2–4 階段，再重新開啟一般權限的 PowerShell 7。"
+        throw "找不到 $command，請先完成第 0–4 階段，再重新開啟一般權限的 PowerShell。"
     }
 }
 $powerToysPath = Get-RefillingPowerToysPath
@@ -25,7 +25,6 @@ $terminalPackage = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe'
 $settingsPath = Join-Path $env:LOCALAPPDATA "Packages/$terminalPackage/LocalState/settings.json"
 
 Write-Host '安裝工具與設定個人環境'
-Install-PackageProvider -Name NuGet -Scope CurrentUser -Force | Out-Null
 Add-RefillingNuGetSource
 Invoke-ExternalCommand -FilePath dotnet -ArgumentList @('tool', 'install', '--global', 'dotnet-ef')
 
@@ -46,18 +45,25 @@ if ($gitignoreContent -notcontains '*.lscache') {
 }
 Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', 'core.excludesfile', $globalGitignorePath)
 
+# 模組供日常 PowerShell 7 使用，避免從 5.1 安裝到 WindowsPowerShell 的模組目錄。
+$moduleInstallCommand = @'
+$ErrorActionPreference = 'Stop'
+Install-PackageProvider -Name NuGet -Scope CurrentUser -Force | Out-Null
 Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck
-Set-PSReadLineOption -PredictionSource History
 Install-Module -Name Terminal-Icons -Repository PSGallery -Scope CurrentUser -Force
+'@
+$encodedModuleInstallCommand = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($moduleInstallCommand))
+Invoke-ExternalCommand -FilePath pwsh -ArgumentList @('-NoProfile', '-NonInteractive', '-EncodedCommand', $encodedModuleInstallCommand)
 
 if (Test-Path -LiteralPath $profilePath) {
     $backupPath = "$profilePath.backup.$(Get-Date -Format 'yyyyMMdd_HHmmss_fff')"
     Copy-Item -LiteralPath $profilePath -Destination $backupPath
     Write-Host "已備份 Profile 至 $backupPath" -ForegroundColor Yellow
 }
-Set-Content -LiteralPath $profilePath -Encoding utf8NoBOM -Value @'
+$profileContent = @'
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\gmay.omp.json" | Invoke-Expression
-Set-PSReadLineOption -PredictionViewStyle ListView
+Import-Module PSReadLine
+Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
 Import-Module Terminal-Icons
 
 function de {
@@ -107,6 +113,7 @@ function co
     codex --dangerously-bypass-approvals-and-sandbox --dangerously-bypass-hook-trust
 }
 '@
+[System.IO.File]::WriteAllText($profilePath, $profileContent, [System.Text.UTF8Encoding]::new($true))
 
 if (Get-Command cargo -ErrorAction SilentlyContinue) {
     Invoke-ExternalCommand -FilePath cargo -ArgumentList @('install', 'git_worktree_copse')

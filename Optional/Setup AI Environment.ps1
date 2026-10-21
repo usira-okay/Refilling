@@ -1,4 +1,4 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 $projectRoot = Split-Path -LiteralPath $PSScriptRoot
 if (-not (. (Join-Path $projectRoot 'Common.ps1') -CallerPath $PSCommandPath -SkipAdminCheck)) { return }
 
@@ -8,10 +8,15 @@ if (-not (Test-Path -LiteralPath $instructionSource -PathType Leaf)) {
 }
 foreach ($command in @('npx', 'winget')) {
     if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
-        throw "找不到 $command，請先完成第 0–4 階段，重新開啟 PowerShell 7 後再執行。"
+        throw "找不到 $command，請先完成第 0–4 階段，重新開啟終端機後再執行。"
     }
 }
-$powerShellExecutable = (Get-Process -Id $PID).Path
+# 遠端安裝器固定使用第 0 階段安裝的 pwsh，避免受到入口 PowerShell 版本影響。
+$powerShellCommand = Get-Command -Name pwsh -CommandType Application -ErrorAction SilentlyContinue
+if (-not $powerShellCommand) {
+    throw '找不到 pwsh，請先完成第 0 階段安裝 PowerShell 7，並重新開啟終端機後再執行。'
+}
+$powerShellExecutable = $powerShellCommand.Source
 
 Write-Host '設定 AI 環境'
 
@@ -60,7 +65,7 @@ foreach ($cli in $cliInstallers) {
         } else {
             $installerPath = Join-Path ([System.IO.Path]::GetTempPath()) "refilling-$($cli.Command)-$([guid]::NewGuid().ToString('N')).ps1"
             try {
-                Invoke-WebRequest -Uri $cli.InstallerUri -OutFile $installerPath
+                Invoke-WebRequest -Uri $cli.InstallerUri -OutFile $installerPath -UseBasicParsing
                 Invoke-ExternalCommand -FilePath $powerShellExecutable -ArgumentList @('-NoProfile', '-File', $installerPath)
             } finally {
                 if (Test-Path -LiteralPath $installerPath) {

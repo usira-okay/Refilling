@@ -1,4 +1,4 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 if (-not (. (Join-Path $PSScriptRoot 'Common.ps1') -CallerPath $PSCommandPath)) { return }
 
 Write-Host '設定 Windows 系統'

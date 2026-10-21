@@ -1,4 +1,4 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 <# .SYNOPSIS 將來源資料夾中可辨識的私鑰交給 Windows OpenSSH，任一步驟失敗即停止。 #>
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 if (-not (. (Join-Path $repositoryRoot 'Common.ps1') -CallerPath $PSCommandPath)) { return }
@@ -27,7 +27,7 @@ if ($privateKeys.Count -eq 0) {
 
 $gitCommand = Get-Command -Name git -CommandType Application -ErrorAction SilentlyContinue
 if (-not $gitCommand) {
-    throw '找不到 git，請先安裝 Git 並重新開啟 PowerShell 7。'
+    throw '找不到 git，請先安裝 Git 並重新開啟終端機。'
 }
 $openSshDirectory = Join-Path $env:WINDIR 'System32/OpenSSH'
 $sshPath = Join-Path $openSshDirectory 'ssh.exe'
@@ -47,8 +47,8 @@ foreach ($key in $privateKeys) {
 
 Set-Service -Name ssh-agent -StartupType Automatic
 Start-Service -Name ssh-agent
-# Git 與 ssh-add 使用同一套 Windows OpenSSH；外層引號保留含空白的工具路徑。
-$gitSshCommand = '"{0}"' -f $sshPath.Replace('\', '/')
+# Git 與 ssh-add 使用同一套 Windows OpenSSH；shell 單引號避免 5.1 移除內嵌雙引號。
+$gitSshCommand = "'{0}'" -f $sshPath.Replace('\', '/').Replace("'", "'\''")
 Invoke-ExternalCommand -FilePath $gitCommand.Source -ArgumentList @('config', '--global', 'core.sshCommand', $gitSshCommand)
 
 foreach ($key in $privateKeys) {

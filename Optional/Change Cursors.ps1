@@ -1,4 +1,4 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 $projectRoot = Split-Path -LiteralPath $PSScriptRoot
 if (-not (. (Join-Path $projectRoot 'Common.ps1') -CallerPath $PSCommandPath)) { return }
 

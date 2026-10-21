@@ -1,4 +1,4 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 <# .SYNOPSIS 驗證 RDP 連接埠，更新固定名稱的 TCP／UDP 防火牆規則並啟用遠端桌面。 #>
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 if (-not (. (Join-Path $repositoryRoot 'Common.ps1') -CallerPath $PSCommandPath)) { return }

@@ -1,10 +1,10 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 if (-not (. (Join-Path $PSScriptRoot 'Common.ps1') -CallerPath $PSCommandPath)) { return }
 
 Write-Host '透過 WinGet 安裝應用程式'
 
 if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
-    throw '找不到 WinGet，請先完成第 0 階段，再重新開啟 PowerShell 7。'
+    throw '找不到 WinGet，請先完成第 0 階段，再重新開啟 PowerShell。'
 }
 
 $toolsJsonPath = Join-Path $PSScriptRoot 'Winget Package/Tools.json'
@@ -33,7 +33,7 @@ if (Get-Command choco -ErrorAction SilentlyContinue) {
     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
     Invoke-RestMethod -Uri 'https://community.chocolatey.org/install.ps1' | Invoke-Expression
     if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-        throw 'Chocolatey 安裝後仍找不到 choco，請查看安裝輸出並重新開啟 PowerShell 7。'
+        throw 'Chocolatey 安裝後仍找不到 choco，請查看安裝輸出並重新開啟 PowerShell。'
     }
 }
 

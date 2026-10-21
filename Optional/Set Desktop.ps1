@@ -1,4 +1,4 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 <# .SYNOPSIS 將目前使用者的桌面指向既有資料夾，並重新啟動 Explorer 套用設定。 #>
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 if (-not (. (Join-Path $repositoryRoot 'Common.ps1') -CallerPath $PSCommandPath -SkipAdminCheck)) { return }

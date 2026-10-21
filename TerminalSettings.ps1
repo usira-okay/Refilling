@@ -1,4 +1,4 @@
-function Update-RefillingTerminalSettings {
+﻿function Update-RefillingTerminalSettings {
     <#
     .SYNOPSIS
     建立更新後的 Terminal 設定，保留使用者設定且不修改輸入物件。
@@ -131,10 +131,32 @@ function Set-RefillingTerminalSettings {
     )
 
     $ErrorActionPreference = 'Stop'
+    if ($PSVersionTable.PSVersion.Major -lt 7) {
+        $powerShell = Get-Command pwsh -CommandType Application -ErrorAction SilentlyContinue
+        if (-not $powerShell) {
+            throw '找不到 PowerShell 7，請先完成第 0 階段並重新開啟 Windows PowerShell。'
+        }
+        . (Join-Path $PSScriptRoot 'ScriptHelpers.ps1')
+
+        # 由已安裝的 PS7 處理 JSONC；路徑在編碼前先跳脫一般及彎單引號。
+        $escapedPaths = @((Join-Path $PSScriptRoot 'TerminalSettings.ps1'), $SettingsPath, $ProfilePath) |
+            ForEach-Object { [regex]::Replace($_, "['\u2018-\u201B]", '$0$0') }
+        $command = @"
+`$ErrorActionPreference = 'Stop'
+if (`$PSVersionTable.PSVersion.Major -lt 7) { throw 'Terminal 設定需要第 0 階段安裝的 PowerShell 7。' }
+. '$($escapedPaths[0])'
+Set-RefillingTerminalSettings -SettingsPath '$($escapedPaths[1])' -ProfilePath '$($escapedPaths[2])'
+"@
+        $encodedCommand = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($command))
+        Invoke-ExternalCommand -FilePath $powerShell.Source -ArgumentList @('-NoProfile', '-NonInteractive', '-EncodedCommand', $encodedCommand)
+        return
+    }
+
+    # 以下僅在 PS7 執行，保留 JSONC、-AsHashtable 與 File.Move 覆寫多載的支援。
     $settings = @{}
     $settingsExist = Test-Path -LiteralPath $SettingsPath
     if ($settingsExist) {
-        $content = Get-Content -LiteralPath $SettingsPath -Raw
+        $content = Get-Content -LiteralPath $SettingsPath -Raw -Encoding UTF8
         if ([string]::IsNullOrWhiteSpace($content)) {
             throw "Windows Terminal 設定不可為空：$SettingsPath"
         }

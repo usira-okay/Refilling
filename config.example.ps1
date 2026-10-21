@@ -1,4 +1,4 @@
-# Refilling 專案設定檔範本
+﻿# Refilling 專案設定檔範本
 # 使用前請先複製此檔案為 config.ps1，並依個人環境修改以下設定值
 # config.ps1 已被 .gitignore 排除，不會被提交到版本控制
 

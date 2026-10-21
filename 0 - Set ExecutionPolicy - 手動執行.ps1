@@ -35,4 +35,4 @@ if (-not (Get-Command pwsh -ErrorAction SilentlyContinue)) {
     )
 }
 
-Write-Host '引導完成。請關閉此視窗，從開始功能表新開一般權限的 PowerShell 7，再依序執行第 1 階段。'
+Write-Host '引導完成。請關閉此視窗，新開一般權限的 Windows PowerShell 5.1 或 PowerShell 7，再依序執行第 1 階段。'

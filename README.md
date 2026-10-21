@@ -5,12 +5,12 @@ Windows 開發環境佈建腳本。依序完成系統設定、應用程式安裝
 ## 支援範圍
 
 - **Windows 11 Pro x64 乾淨新機**，具備管理員權限及網路連線。
-- 第 0 階段使用內建 Windows PowerShell 5.1 引導安裝；其餘腳本使用 **PowerShell 7**。
+- 所有佈建腳本均可由內建 **Windows PowerShell 5.1** 或 **PowerShell 7** 執行。第 0 階段仍安裝 PowerShell 7，供日常 Terminal、快捷鍵，以及模組安裝、Terminal 設定與 AI 遠端安裝器子程序使用。
 - 本流程以首次佈建為目標。失敗時停止並顯示錯誤；請確認原因後再執行，沒有整批復原或從中斷處自動續跑的機制。
 
 ## 開始使用
 
-1. 將 `config.example.ps1` 複製為 `config.ps1`，填寫 Git 名稱、電子郵件及所需路徑。`config.ps1` 已排除於版本控制。
+1. 將 `config.example.ps1` 複製為 `config.ps1`，填寫 Git 名稱、電子郵件及所需路徑，並維持 **UTF-8 with BOM** 編碼，讓 Windows PowerShell 5.1 正確讀取中文。`config.ps1` 已排除於版本控制。
 2. 在專案目錄開啟內建 Windows PowerShell。首次執行請使用以下包含 `-ExecutionPolicy Bypass` 的完整指令：
 
    ```powershell
@@ -21,7 +21,7 @@ Windows 開發環境佈建腳本。依序完成系統設定、應用程式安裝
 
    引導會先檢查 Windows 版本與架構，再設定目前使用者的執行原則為 `Bypass`、確認 WinGet 並安裝 PowerShell 7。若缺少 App Installer，依錯誤訊息完成安裝後重試。
 
-3. 關閉原視窗，從開始功能表開啟一般權限的 **PowerShell 7**，切換至專案目錄：
+3. 關閉原視窗，從開始功能表新開一般權限的 **Windows PowerShell 5.1**（也可使用 PowerShell 7），切換至專案目錄：
 
    ```powershell
    & '.\1 - Set System.ps1'
@@ -29,7 +29,7 @@ Windows 開發環境佈建腳本。依序完成系統設定、應用程式安裝
 
    第 1、2 階段會自行開啟管理員視窗；請等該視窗中的腳本完成。第 1 階段只有輸入大寫 `Y` 才立即重新啟動，其他輸入都保留工作階段；如略過，請自行儲存工作並重新啟動後再進行第 2 階段。
 
-4. 依序執行以下階段，每個階段完成後才繼續。第 2 階段安裝工具、第 3 階段安裝 Scoop、第 4 階段切換 Node.js 後，重新開啟一般權限的 PowerShell 7，讓後續命令取得新的 PATH。
+4. 依序執行以下階段，每個階段完成後才繼續。第 2 階段安裝工具、第 3 階段安裝 Scoop、第 4 階段切換 Node.js 後，重新開啟一般權限的 PowerShell，讓後續命令取得新的 PATH。
 
    ```powershell
    & '.\2 - Install Applications (Winget & Chocolatey).ps1'
@@ -74,9 +74,9 @@ FileZilla Client 不在 WinGet community 套件庫中，因此保留 Chocolatey�
 
 第 5 階段會將 v2 腳本複製至目前使用者的 Startup，並從實際安裝位置建立 PowerToys 捷徑；不再建立 Flameshot 捷徑。
 
-個人 Profile 位於 `$env:USERPROFILE\Microsoft.PowerShell_profile.ps1`。現有 Profile 會先備份；內容包含 oh-my-posh、Terminal-Icons、Docker、worktree 與原有 AI CLI 快捷函式。
+個人 Profile 位於 `$env:USERPROFILE\Microsoft.PowerShell_profile.ps1`。現有 Profile 會先備份；內容包含 oh-my-posh、Terminal-Icons、Docker、worktree 與原有 AI CLI 快捷函式。第 5 階段會透過 PowerShell 7 子程序安裝其使用者模組，並在新工作階段載入 Profile 時啟用歷史預測，避免使用 5.1 已載入的舊版 PSReadLine。
 
-Terminal 使用穩定版 `Microsoft.WindowsTerminal_8wekyb3d8bbwe` 的 `LocalState\settings.json`，支援首次尚未產生設定檔的情況。更新前先驗證 JSON 與必要結構，保存原始備份，再寫入完整的新設定。損壞或不相容的結構會停止，不會以空設定覆蓋。
+Terminal 使用穩定版 `Microsoft.WindowsTerminal_8wekyb3d8bbwe` 的 `LocalState\settings.json`，支援首次尚未產生設定檔的情況。從 5.1 執行時會交由 PowerShell 7 子程序讀寫，保留含註解的 JSONC 支援。更新前先驗證 JSON 與必要結構，保存原始備份，再寫入完整的新設定。損壞或不相容的結構會停止，不會以空設定覆蓋。
 
 PowerShell 7 與 agent-dev 排在清單前兩位，使用 Maple Mono NF CN，並將 PowerShell 7 設為預設。既有 GUID、其他 profiles 與個人設定會保留；PS7 的個人 Profile 不會套用至舊版 Windows PowerShell。
 
@@ -91,7 +91,7 @@ PowerShell 7 與 agent-dev 排在清單前兩位，使用 Maple Mono NF CN，並
 
 ## 可選腳本
 
-`Optional/` 腳本依需求個別執行，需先完成主流程並使用 PowerShell 7。
+`Optional/` 腳本依需求個別執行，需先完成主流程，可使用 Windows PowerShell 5.1 或 PowerShell 7。
 
 | 腳本 | 工作 |
 | --- | --- |
@@ -110,7 +110,7 @@ SSH 會先確認來源資料夾及可辨識的 OpenSSH／PEM 私鑰，再複製�
 
 密碼確認區分大小寫，BSTR 緩衝區會在成功或失敗時清除。桌面設定必須指向現有資料夾，會修改目前使用者的桌面路徑並重啟 Explorer；請先自行搬移所需的桌面檔案，此腳本可使用一般權限。
 
-AI 安裝流程會先檢查必要工具與指令檔。CLI 或 skills 安裝失敗時會停止後續同步；遠端 PowerShell 安裝器以獨立程序執行，並檢查執行結果。完成後重新開啟終端機以取得更新後的 PATH。
+AI 安裝流程會先檢查必要工具與指令檔。CLI 或 skills 安裝失敗時會停止後續同步；遠端 PowerShell 安裝器固定以 PowerShell 7 獨立程序執行，並檢查執行結果。完成後重新開啟終端機以取得更新後的 PATH。
 
 ## AutoHotkey v2 快捷鍵
 
@@ -131,4 +131,4 @@ AI 安裝流程會先檢查必要工具與指令檔。CLI 或 skills 安裝失�
 
 ## Windows 實機驗收
 
-實際安裝、登入啟動、Explorer、UAC、防火牆及重新啟動仍須在可拋棄的 Windows 11 Pro x64 VM 逐階段驗收。
+實際安裝、登入啟動、Explorer、UAC、防火牆及重新啟動仍須在可拋棄的 Windows 11 Pro x64 VM，分別以 Windows PowerShell 5.1 與 PowerShell 7 逐階段驗收。

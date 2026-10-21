@@ -1,5 +1,5 @@
-#requires -Version 7.0
-<# .SYNOPSIS 使用目前 PowerShell 7 執行檔提權，並以檔案參數傳遞腳本路徑。 #>
+﻿#requires -Version 5.1
+<# .SYNOPSIS 使用目前 PowerShell 執行檔提權，並以檔案參數傳遞腳本路徑。 #>
 param(
     [Parameter(Mandatory = $true)]
     [Alias('p')]

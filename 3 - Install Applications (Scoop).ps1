@@ -1,8 +1,8 @@
-#requires -Version 7.0
+﻿#requires -Version 5.1
 if (-not (. (Join-Path $PSScriptRoot 'Common.ps1') -CallerPath $PSCommandPath -SkipAdminCheck)) { return }
 
 if (Test-IsAdministrator) {
-    throw 'Scoop 必須在一般權限的 PowerShell 7 執行，請關閉此管理員視窗後重試。'
+    throw 'Scoop 必須在一般權限的 PowerShell 執行，請關閉此管理員視窗後重試。'
 }
 
 $configPath = Join-Path $PSScriptRoot 'config.ps1'
@@ -19,7 +19,7 @@ if (Get-Command scoop -ErrorAction SilentlyContinue) {
 } else {
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
     if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
-        throw 'Scoop 安裝後仍找不到 scoop，請查看安裝輸出並重新開啟一般權限的 PowerShell 7。'
+        throw 'Scoop 安裝後仍找不到 scoop，請查看安裝輸出並重新開啟一般權限的 PowerShell。'
     }
 }
 
