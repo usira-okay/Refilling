@@ -127,18 +127,6 @@ AI 安裝流程會先檢查必要工具與指令檔。CLI 或 skills 安裝失�
 
 未處於 Explorer 實體資料夾時使用桌面。路徑中的空白、繁中、單引號與中括號會作為路徑字面值處理。Explorer 多分頁與 UAC 行為需在 Windows 實機驗收。
 
-## 開發驗證
-
-使用 PowerShell 7.2 以上，安裝測試工具後執行：
-
-```powershell
-Install-Module Pester -RequiredVersion 5.7.1 -Scope CurrentUser
-Install-Module PSScriptAnalyzer -RequiredVersion 1.24.0 -Scope CurrentUser
-# Windows 需指定已安裝的 v2 解譯器；請依實際安裝位置調整。
-$env:REFILLING_AUTOHOTKEY_EXE = 'C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe'
-./Tests/Invoke-Checks.ps1
-```
-
-順序為 PowerShell 語法解析、PSScriptAnalyzer Error 級規則、Windows 的 AutoHotkey `/Validate`、Pester。安裝、登錄檔、提權與重新啟動操作均使用測試替身；AHK 路徑測試停用熱鍵，只呼叫純字串函式。Linux 明確略過 Windows 專用測試，不代表已通過 Windows 實機驗收。
+## Windows 實機驗收
 
 實際安裝、登入啟動、Explorer、UAC、防火牆及重新啟動仍須在可拋棄的 Windows 11 Pro x64 VM 逐階段驗收。
