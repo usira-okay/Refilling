@@ -49,7 +49,6 @@ Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', 'core
 # 模組供日常 PowerShell 7 使用，避免從 5.1 安裝到 WindowsPowerShell 的模組目錄。
 $moduleInstallCommand = @'
 $ErrorActionPreference = 'Stop'
-Install-PackageProvider -Name NuGet -Scope CurrentUser -Force | Out-Null
 Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck
 Install-Module -Name Terminal-Icons -Repository PSGallery -Scope CurrentUser -Force
 '@
