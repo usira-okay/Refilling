@@ -90,3 +90,10 @@ if ($restartAnswer -ceq 'Y') {
 } else {
     Write-Host '請儲存工作並手動重新啟動，再繼續第 2 階段。'
 }
+
+
+# 刪除 WindowsUpdate 原則限制
+Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Recurse -ErrorAction SilentlyContinue
+
+# 重新啟用更新服務存取權
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoWindowsUpdate" -Value 0 -ErrorAction SilentlyContinue
