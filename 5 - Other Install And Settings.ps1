@@ -32,6 +32,7 @@ Invoke-ExternalCommand -FilePath npx -ArgumentList @('-y', '@willh/git-setup', '
 Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', '--add', 'safe.directory', '*')
 Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', 'worktree.useRelativePaths', 'true')
 Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', 'core.longpaths', 'true')
+Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', 'fetch.prune', 'true')
 
 # 保留已有排除規則，只補上本專案需要的項目。
 $globalGitignorePath = Join-Path $env:USERPROFILE '.gitignore_global'
