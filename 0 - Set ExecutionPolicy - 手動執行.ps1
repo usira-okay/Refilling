@@ -2,21 +2,6 @@
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'ScriptHelpers.ps1')
 
-# 先確認本專案支援的系統，避免在不相容的電腦留下部分設定。
-$minimumWindows11Build = 22000
-$windowsProSku = 48
-$workstationProductType = 1
-$x64ProcessorArchitecture = 9
-$operatingSystem = Get-CimInstance -ClassName Win32_OperatingSystem
-$processors = @(Get-CimInstance -ClassName Win32_Processor)
-if ([int]$operatingSystem.BuildNumber -lt $minimumWindows11Build -or
-    $operatingSystem.OperatingSystemSKU -ne $windowsProSku -or
-    $operatingSystem.ProductType -ne $workstationProductType -or
-    $processors.Count -eq 0 -or
-    @($processors | Where-Object { $_.Architecture -ne $x64ProcessorArchitecture }).Count -gt 0) {
-    throw '本專案僅支援 Windows 11 Pro x64 乾淨新機，尚未變更執行原則或安裝程式。'
-}
-
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser -Force
 
 if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {

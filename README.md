@@ -19,7 +19,7 @@ Windows 開發環境佈建腳本。依序完成系統設定、應用程式安裝
 
    直接以 `&` 呼叫可能在腳本載入前就被執行原則阻擋，讓腳本內的 `Set-ExecutionPolicy` 無法執行。遇到 `running scripts is disabled` 或 `PSSecurityException` 時，請改用上方完整指令。
 
-   引導會先檢查 Windows 版本與架構，再設定目前使用者的執行原則為 `Bypass`、確認 WinGet 並安裝 PowerShell 7。若缺少 App Installer，依錯誤訊息完成安裝後重試。
+   引導會設定目前使用者的執行原則為 `Bypass`、確認 WinGet 並安裝 PowerShell 7。若缺少 App Installer，依錯誤訊息完成安裝後重試。
 
 3. 關閉原視窗，從開始功能表新開一般權限的 **Windows PowerShell 5.1**（也可使用 PowerShell 7），切換至專案目錄：
 
@@ -46,7 +46,7 @@ Windows 開發環境佈建腳本。依序完成系統設定、應用程式安裝
 
 | 腳本 | 工作 | 權限 |
 | --- | --- | --- |
-| `0 - Set ExecutionPolicy - 手動執行.ps1` | 檢查 Win11 Pro x64、引導 WinGet 與 PowerShell 7 | 一般權限，安裝程式可能要求提權 |
+| `0 - Set ExecutionPolicy - 手動執行.ps1` | 設定執行原則、引導 WinGet 與 PowerShell 7 | 一般權限，安裝程式可能要求提權 |
 | `1 - Set System.ps1` | 繁中／英文鍵盤、電源、剪貼簿、Print Screen、Explorer、長路徑、WSL2／Hyper-V／Sandbox | 自動提權；確認後才重新啟動 |
 | `2 - Install Applications (Winget & Chocolatey).ps1` | WinGet 應用清單、Visual Studio C++ Build Tools、Chocolatey 的 FileZilla | 自動提權 |
 | `3 - Install Applications (Scoop).ps1` | Scoop、Maple Mono NF CN 字型、oh-my-posh | 一般權限 |
