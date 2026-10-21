@@ -60,7 +60,7 @@ Windows 開發環境佈建腳本。依序完成系統設定、應用程式安裝
 | 程式 | 安裝來源 | 套件 |
 | --- | --- | --- |
 | FFmpeg | WinGet community | `Gyan.FFmpeg` |
-| AutoHotkey | WinGet community | `AutoHotkey.AutoHotkey`，固定穩定 v2 `2.0.30` |
+| AutoHotkey | WinGet community | `AutoHotkey.AutoHotkey`，不指定版本，使用來源最新可用版本 |
 | LINE 桌面版 | WinGet Microsoft Store | `XPFCC4CD725961` |
 | FileZilla Client | Chocolatey | `filezilla` |
 

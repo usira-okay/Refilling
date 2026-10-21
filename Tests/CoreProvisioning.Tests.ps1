@@ -214,9 +214,10 @@ Describe '應用程式來源與版本' {
         $script:WingetPackages.PackageIdentifier | Should -Not -Contain 'Microsoft.PowerShell'
     }
 
-    It 'AutoHotkey 固定使用已驗證的穩定 v2' {
+    It 'AutoHotkey 套件存在且未指定版本' {
         $package = $script:WingetPackages | Where-Object { $_.PackageIdentifier -eq 'AutoHotkey.AutoHotkey' }
-        $package.Version | Should -Be '2.0.30'
+        $package | Should -Not -BeNullOrEmpty
+        $package.PSObject.Properties.Name | Should -Not -Contain 'Version'
     }
 
     It 'LINE 使用已查證的 Microsoft Store 桌面版' {
