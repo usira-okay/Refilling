@@ -1,94 +1,65 @@
+#Requires AutoHotkey v2.0
 
-^#!a::
+^#!a::Run "shutdown -a"
+^#!r::Run "shutdown -r -t 10 -f"
+^#!s::Run "shutdown -s -t 10 -f"
 
-Run, shutdown -a
-
-return
-
-^#!r::
-
-Run, shutdown -r -t 10 -f
-
-return
-
-^#!s::
-
-Run, shutdown -s -t 10 -f
-
-return
-
-#!p::
-
-SendInput, {U+FF0C}{U+518D}{U+9EBB}{U+7169}{U+5354}{U+52A9} review {&} merge {U+611F}{U+8B1D}
-
-return
+#!p::SendText "，再麻煩協助 review & merge 感謝"
 
 #!x::
-
-path := GetPath() 
-
-profile := GetPowerShellProfilePath()
-
-Run, "pwsh" -NoExit -Command ". '%profile%' && de agent-dev"
-
-return
+{
+    profile := QuotePowerShellLiteral(GetPowerShellProfilePath())
+    Run '"pwsh" -NoExit -Command ". ' profile ' && de agent-dev"'
+}
 
 #!c::
-
-path := GetPath() 
-
-profile := GetPowerShellProfilePath()
-
-Run, "pwsh" -NoExit -Command ". '%profile%' && cd '%path%'"
-
-return
+{
+    path := QuotePowerShellLiteral(GetActiveExplorerPath())
+    profile := QuotePowerShellLiteral(GetPowerShellProfilePath())
+    Run '"pwsh" -NoExit -Command ". ' profile ' && Set-Location -LiteralPath ' path '"'
+}
 
 #!space::
-
-path := GetPath() 
-
-profile := GetPowerShellProfilePath()
-
-Run, *RunAs "pwsh" -NoExit -Command ". '%profile%' && cd '%path%'"
-
-return
+{
+    path := QuotePowerShellLiteral(GetActiveExplorerPath())
+    profile := QuotePowerShellLiteral(GetPowerShellProfilePath())
+    Run '*RunAs "pwsh" -NoExit -Command ". ' profile ' && Set-Location -LiteralPath ' path '"'
+}
 
 #!v::
+{
+    path := QuotePowerShellLiteral(GetActiveExplorerPath())
+    Run '"pwsh" -NoProfile -WindowStyle Hidden -Command "code ' path '"', , "Hide"
+}
 
-path := GetPath() 
-
-Run, "pwsh" -NoProfile -WindowStyle Hidden -Command "code '%path%'", , Hide
-return
-
+/** 取得活動 Explorer 的實體資料夾，其他視窗或虛擬資料夾則使用桌面。 */
 GetActiveExplorerPath()
 {
-	explorerHwnd := WinActive("ahk_class CabinetWClass")
-	if (explorerHwnd)
-	{
-		for window in ComObjCreate("Shell.Application").Windows
-		{
-			if (window.hwnd==explorerHwnd)
-			{
-				return window.Document.Folder.Self.Path
-			}
-		}
-	}
-    return %A_Desktop%
+    explorerHwnd := WinActive("ahk_class CabinetWClass")
+    if explorerHwnd
+    {
+        for window in ComObject("Shell.Application").Windows()
+        {
+            if window.hwnd = explorerHwnd
+            {
+                folder := window.Document.Folder.Self
+                if folder.IsFileSystem && DirExist(folder.Path)
+                    return folder.Path
+                break
+            }
+        }
+    }
+    return A_Desktop
 }
 
-GetPath()
-{
-	dirpath := GetActiveExplorerPath()
-	
-	return dirpath
-}
-
+/** 取得主安裝流程建立的個人 PowerShell Profile 路徑。 */
 GetPowerShellProfilePath()
 {
-	; 獲取使用者名稱
-	EnvGet, userprofile, USERPROFILE
+    return EnvGet("USERPROFILE") "\Microsoft.PowerShell_profile.ps1"
+}
 
-	profile := userprofile . "\Microsoft.PowerShell_profile.ps1"
-
-	return profile
+/** 將路徑轉成 PowerShell 字串字面值，避免一般及彎單引號終止字串。 */
+QuotePowerShellLiteral(value)
+{
+    return "'" RegExReplace(value, "['‘’‚‛]", "$0$0") "'"
 }

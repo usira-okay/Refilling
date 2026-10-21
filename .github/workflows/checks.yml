@@ -1,0 +1,60 @@
+name: 驗證腳本
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: 確認啟動腳本可由 Windows PowerShell 5.1 解析
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($path in @('0 - Set ExecutionPolicy - 手動執行.ps1', 'ScriptHelpers.ps1')) {
+            $tokens = $null
+            $parseErrors = $null
+            $fullPath = (Resolve-Path -LiteralPath $path).Path
+            $bytes = [System.IO.File]::ReadAllBytes($fullPath)
+            if ([System.BitConverter]::ToString($bytes, 0, 3) -ne 'EF-BB-BF') {
+              throw "$path 必須以 UTF-8 BOM 儲存，確保 Windows PowerShell 5.1 正確讀取中文。"
+            }
+            [void][System.Management.Automation.Language.Parser]::ParseFile($fullPath, [ref]$tokens, [ref]$parseErrors)
+            if ($parseErrors.Count -gt 0) {
+              throw "$path`n$($parseErrors | Out-String)"
+            }
+          }
+      - name: 準備 AutoHotkey v2 語法驗證工具
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $archive = Join-Path $env:RUNNER_TEMP 'AutoHotkey_2.0.30.zip'
+          $directory = Join-Path $env:RUNNER_TEMP 'refilling-autohotkey'
+          Invoke-WebRequest 'https://github.com/AutoHotkey/AutoHotkey/releases/download/v2.0.30/AutoHotkey_2.0.30.zip' -OutFile $archive
+          $expectedHash = '1e0ece7ecb2d5646e55758150472677996a57f9db5c83d2996d8b47b9e2f31a4'
+          if ((Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash -ne $expectedHash) {
+            throw 'AutoHotkey 驗證工具的 SHA256 不符。'
+          }
+          Expand-Archive -LiteralPath $archive -DestinationPath $directory
+          "REFILLING_AUTOHOTKEY_EXE=$(Join-Path $directory 'AutoHotkey64.exe')" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+      - name: 準備隔離的驗證模組並執行檢查
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $modulePath = Join-Path $env:RUNNER_TEMP 'refilling-modules'
+          New-Item -ItemType Directory -Path $modulePath -Force | Out-Null
+          Save-Module Pester -RequiredVersion 5.7.1 -Path $modulePath -Repository PSGallery -Force
+          Save-Module PSScriptAnalyzer -RequiredVersion 1.24.0 -Path $modulePath -Repository PSGallery -Force
+          $env:PSModulePath = "$modulePath$([System.IO.Path]::PathSeparator)$env:PSModulePath"
+          ./Tests/Invoke-Checks.ps1

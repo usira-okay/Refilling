@@ -11,6 +11,10 @@
 				{
 					"//comment": "華碩輸入法",
 					"PackageIdentifier": "9MT4L79Z1G0N"
+				},
+				{
+					"//comment": "LINE 桌面版",
+					"PackageIdentifier": "XPFCC4CD725961"
 				}
 			],
 			"SourceDetails": {
@@ -51,6 +55,13 @@
 				},
 				{
 					"PackageIdentifier": "yt-dlp.yt-dlp"
+				},
+				{
+					"PackageIdentifier": "Gyan.FFmpeg"
+				},
+				{
+					"PackageIdentifier": "AutoHotkey.AutoHotkey",
+					"Version": "2.0.30"
 				},
 				{
 					"PackageIdentifier": "ShareX.ShareX"
@@ -101,9 +112,6 @@
 				},
 				{
 					"PackageIdentifier": "Obsidian.Obsidian"
-				},
-				{
-					"PackageIdentifier": "Microsoft.PowerShell"
 				},
 				{
 					"PackageIdentifier": "Microsoft.NuGet"

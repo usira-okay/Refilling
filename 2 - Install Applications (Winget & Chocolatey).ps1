@@ -1,45 +1,43 @@
-if (-not (. .\Common.ps1 -CallerPath $PSCommandPath)) { return }
+#requires -Version 7.0
+if (-not (. (Join-Path $PSScriptRoot 'Common.ps1') -CallerPath $PSCommandPath)) { return }
 
-Write-Host 'Install Applications by Winget'
+Write-Host '透過 WinGet 安裝應用程式'
 
-# 檢查 Winget 是否已安裝
-if (Get-Command winget -ErrorAction SilentlyContinue) {
-    Write-Host 'Winget 已安裝，跳過安裝步驟' -ForegroundColor Yellow
-} else {
-    $webClient = New-Object System.Net.WebClient
-    $webClient.DownloadFile('https://aka.ms/getwinget', "$env:TEMP\winget.msixbundle")
-    $webClient.DownloadFile('https://aka.ms/windowsappsdk/1.8/latest/windowsappruntimeinstall-x64.exe', "$env:TEMP\WinAppRuntime.exe")
-    Start-Process -FilePath "$env:TEMP\WinAppRuntime.exe" -ArgumentList '--quiet' -Wait
-    Add-AppxPackage -Path "$env:TEMP\winget.msixbundle"
+if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+    throw '找不到 WinGet，請先完成第 0 階段，再重新開啟 PowerShell 7。'
 }
 
-$toolsJsonPath = '.\Winget Package\Tools.json'
-if (-not (Test-Path $toolsJsonPath)) {
-    Write-Error "找不到 $toolsJsonPath"
-    exit 1
+$toolsJsonPath = Join-Path $PSScriptRoot 'Winget Package/Tools.json'
+if (-not (Test-Path -LiteralPath $toolsJsonPath -PathType Leaf)) {
+    throw "找不到套件清單：$toolsJsonPath"
 }
 
-winget import -i '.\Winget Package\Tools.json' --accept-package-agreements --accept-source-agreements
-
+Invoke-ExternalCommand -FilePath winget -ArgumentList @(
+    'import', '-i', $toolsJsonPath, '--accept-package-agreements', '--accept-source-agreements'
+)
 
 Write-Host 'Visual Studio Build Tools'
 
-# Rust（MSVC toolchain）需要 MSVC linker 與 Windows SDK，--includeRecommended 會一併安裝
-winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--wait --passive --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended" --accept-package-agreements --accept-source-agreements
+# Rust 的 MSVC 工具鏈需要連結器與 Windows SDK，推薦元件會一併安裝。
+Invoke-ExternalCommand -FilePath winget -ArgumentList @(
+    'install', '--id', 'Microsoft.VisualStudio.2022.BuildTools', '--exact', '--source', 'winget',
+    '--override', '--wait --passive --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended',
+    '--accept-package-agreements', '--accept-source-agreements'
+)
 
-Write-Host 'Install Applications by Chocolatey'
-# Install Applications by Chocolatey
-# 檢查 Chocolatey 是否已安裝
+Write-Host '透過 Chocolatey 安裝 FileZilla'
 if (Get-Command choco -ErrorAction SilentlyContinue) {
     Write-Host 'Chocolatey 已安裝，跳過安裝步驟' -ForegroundColor Yellow
 } else {
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    Set-ExecutionPolicy Bypass -Scope Process -Force
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
+    Invoke-RestMethod -Uri 'https://community.chocolatey.org/install.ps1' | Invoke-Expression
+    if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
+        throw 'Chocolatey 安裝後仍找不到 choco，請查看安裝輸出並重新開啟 PowerShell 7。'
+    }
 }
 
-choco install ffmpeg `
-    filezilla -y 
+# WinGet 套件庫不提供 FileZilla，僅保留此項使用 Chocolatey。
+Invoke-ExternalCommand -FilePath choco -ArgumentList @('install', 'filezilla', '-y')
 
-choco install autohotkey --version=1.1.37.1 -y 
-choco install line -y --ignore-checksums
-    
 Pause
