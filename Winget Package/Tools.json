@@ -127,7 +127,10 @@
 					"PackageIdentifier": "Microsoft.Coreutils"
 				},
 				{
-					"PackageIdentifier": "Microsoft.DotNet.SDK.3_1"
+					"PackageIdentifier": "Microsoft.DotNet.SDK.8"
+				},
+				{
+					"PackageIdentifier": "Microsoft.DotNet.SDK.9"
 				},
 				{
 					"PackageIdentifier": "Microsoft.DotNet.SDK.10"
