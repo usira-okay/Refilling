@@ -1,8 +1,16 @@
-if (-not (. ..\Common.ps1 -CallerPath $PSCommandPath)) { return }
+﻿#requires -Version 5.1
+$projectRoot = Split-Path -LiteralPath $PSScriptRoot
+if (-not (. (Join-Path $projectRoot 'Common.ps1') -CallerPath $PSCommandPath)) { return }
 
-Write-Host 'Turn off shutdown and sleep btn'
+Write-Host '隱藏關機與睡眠按鈕'
 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Start\HideShutDown /t REG_DWORD /v value /d 1 /f
-reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Start\HideSleep /t REG_DWORD /v value /d 1 /f
+Invoke-ExternalCommand -FilePath reg -ArgumentList @(
+    'add', 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Start\HideShutDown',
+    '/t', 'REG_DWORD', '/v', 'value', '/d', '1', '/f'
+)
+Invoke-ExternalCommand -FilePath reg -ArgumentList @(
+    'add', 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Start\HideSleep',
+    '/t', 'REG_DWORD', '/v', 'value', '/d', '1', '/f'
+)
 
 Pause

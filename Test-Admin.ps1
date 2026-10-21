@@ -1,28 +1,18 @@
-Param(
-    [parameter(Mandatory = $true)]
-    [alias("p")]
-    [string]
-    [ValidateScript( { Test-Path $_ -PathType Leaf } )]
-    $ps1Path)
+﻿#requires -Version 5.1
+<# .SYNOPSIS 使用目前 PowerShell 執行檔提權，並以檔案參數傳遞腳本路徑。 #>
+param(
+    [Parameter(Mandatory = $true)]
+    [Alias('p')]
+    [ValidateScript({ Test-Path -LiteralPath $_ -PathType Leaf })]
+    [string] $Ps1Path
+)
 
+$ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'ScriptHelpers.ps1')
+if (Test-IsAdministrator) { return $true }
 
-Write-Host 'Test-Administrator'
-$user = [Security.Principal.WindowsIdentity]::GetCurrent();
-
-$isAdmin = (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator) 
-
-if (-not $isAdmin) {
-
-    # 防止 UAC 拒絕後的無限遞迴
-    if ($env:REFILLING_ELEVATED -eq '1') {
-        Write-Error '無法取得管理員權限，請以管理員身份執行 PowerShell'
-        return $false
-    }
-
-    # 使用當前 PowerShell 執行檔路徑，同時相容 PowerShell 5.1 (powershell.exe) 和 7+ (pwsh.exe)
-    $psExe = (Get-Process -Id $PID).Path
-    Start-Process $psExe -Verb RunAs -ArgumentList "-NoExit", "-Command", "`$env:REFILLING_ELEVATED='1'; . '$ps1Path'"
-    return $false
-}
-
-return $true
+$psExe = (Get-Process -Id $PID).Path
+# Windows 檔名不允許雙引號；用 -File 避免把單引號等合法路徑字元當成程式碼。
+$arguments = @('-NoLogo', '-NoProfile', '-NoExit', '-File', ('"{0}"' -f $Ps1Path))
+Start-Process -FilePath $psExe -Verb RunAs -ArgumentList $arguments -WorkingDirectory (Split-Path -LiteralPath $Ps1Path)
+return $false

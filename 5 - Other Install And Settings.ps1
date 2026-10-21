@@ -1,224 +1,134 @@
-if (-not (. .\Common.ps1 -CallerPath $PSCommandPath)) { return }
+﻿#requires -Version 5.1
+if (-not (. (Join-Path $PSScriptRoot 'Common.ps1') -CallerPath $PSCommandPath -SkipAdminCheck)) { return }
 
-if (-not (Test-Path .\config.ps1)) {
-    Write-Error '找不到 config.ps1，請先複製 config.example.ps1 為 config.ps1 並填入個人資訊'
-    exit 1
+$configPath = Join-Path $PSScriptRoot 'config.ps1'
+if (-not (Test-Path -LiteralPath $configPath -PathType Leaf)) {
+    throw '找不到 config.ps1，請先複製 config.example.ps1 為 config.ps1 並填入個人資訊。'
 }
-. .\config.ps1
+. $configPath
+foreach ($name in @('GitName', 'GitEmail')) {
+    if ([string]::IsNullOrWhiteSpace($Config[$name])) {
+        throw "config.ps1 的 $name 不可為空白。"
+    }
+}
+foreach ($command in @('pwsh', 'dotnet', 'git', 'npx', 'npm', 'oh-my-posh')) {
+    if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
+        throw "找不到 $command，請先完成第 0–4 階段，再重新開啟一般權限的 PowerShell。"
+    }
+}
+$powerToysPath = Get-RefillingPowerToysPath
 
-Write-Host 'Other install and settings'
+. (Join-Path $PSScriptRoot 'TerminalSettings.ps1')
+$profilePath = Join-Path $env:USERPROFILE 'Microsoft.PowerShell_profile.ps1'
+# 固定使用穩定版的套件資料夾，避免誤改 Preview 的設定。
+$terminalPackage = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe'
+$settingsPath = Join-Path $env:LOCALAPPDATA "Packages/$terminalPackage/LocalState/settings.json"
 
-Write-Host 'PackageProvider Nuget'
-Install-PackageProvider -Name Nuget -Force
+Write-Host '安裝工具與設定個人環境'
+Add-RefillingNuGetSource
+Invoke-ExternalCommand -FilePath dotnet -ArgumentList @('tool', 'install', '--global', 'dotnet-ef')
 
-Write-Host 'Add Nuget Offical Source'
-$existingNugetSources = dotnet nuget list source
-if ($existingNugetSources -notmatch 'nuget\.org') {
-    dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json
+Invoke-ExternalCommand -FilePath npx -ArgumentList @('-y', '@willh/git-setup', '--name', $Config.GitName, '--email', $Config.GitEmail)
+Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', '--add', 'safe.directory', '*')
+Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', 'worktree.useRelativePaths', 'true')
+Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', 'core.longpaths', 'true')
+
+# 保留已有排除規則，只補上本專案需要的項目。
+$globalGitignorePath = Join-Path $env:USERPROFILE '.gitignore_global'
+$gitignoreContent = if (Test-Path -LiteralPath $globalGitignorePath) {
+    Get-Content -LiteralPath $globalGitignorePath
 } else {
-    Write-Host 'nuget.org 來源已存在，跳過' -ForegroundColor Yellow
+    @()
 }
-
-dotnet tool install --global dotnet-ef
-
-Copy-Item .\AutoHotKey\autohotkey.ahk "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\autohotkey.ahk"
-
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PowerToys.lnk")
-$Shortcut.TargetPath = "$env:USERPROFILE\scoop\apps\powertoys\current\PowerToys.exe"
-$Shortcut.Save()
-
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\flameshot.lnk")
-$Shortcut.TargetPath = "C:\Program Files\Flameshot\bin\flameshot.exe"
-$Shortcut.Save()
-
-npx -y @willh/git-setup --name $Config.GitName --email $Config.GitEmail
-git config --global --add safe.directory '*'
-git config --global worktree.useRelativePaths true
-git config --global core.longpaths true
-
-# 全域 gitignore
-$globalGitignorePath = "$env:USERPROFILE\.gitignore_global"
-if (-not (Test-Path $globalGitignorePath)) {
-    New-Item -Path $globalGitignorePath -ItemType File -Force | Out-Null
+if ($gitignoreContent -notcontains '*.lscache') {
+    Add-Content -LiteralPath $globalGitignorePath -Value "`n*.lscache"
 }
-$gitignoreContent = Get-Content -Path $globalGitignorePath -Raw -ErrorAction SilentlyContinue
-if ($gitignoreContent -notmatch '\.lscache') {
-    Add-Content -Path $globalGitignorePath -Value "`n*.lscache"
-}
-git config --global core.excludesfile "$globalGitignorePath"
+Invoke-ExternalCommand -FilePath git -ArgumentList @('config', '--global', 'core.excludesfile', $globalGitignorePath)
 
-# History Autocomplete
-Install-Module PSReadLine -Force -SkipPublisherCheck
-Set-PSReadLineOption -PredictionSource History
+# 模組供日常 PowerShell 7 使用，避免從 5.1 安裝到 WindowsPowerShell 的模組目錄。
+$moduleInstallCommand = @'
+$ErrorActionPreference = 'Stop'
+Install-PackageProvider -Name NuGet -Scope CurrentUser -Force | Out-Null
+Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck
+Install-Module -Name Terminal-Icons -Repository PSGallery -Scope CurrentUser -Force
+'@
+$encodedModuleInstallCommand = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($moduleInstallCommand))
+Invoke-ExternalCommand -FilePath pwsh -ArgumentList @('-NoProfile', '-NonInteractive', '-EncodedCommand', $encodedModuleInstallCommand)
 
-# Terminal-Icons
-Install-Module -Name Terminal-Icons -Repository PSGallery -Force
-
-# 寫 PowerShell_profile
-$profilePath = "$env:USERPROFILE\Microsoft.PowerShell_profile.ps1"
-
-# 備份現有 Profile
-if (Test-Path $profilePath) {
-    $backupPath = "$profilePath.backup.$(Get-Date -Format 'yyyyMMdd_HHmmss')"
-    Copy-Item -Path $profilePath -Destination $backupPath
+if (Test-Path -LiteralPath $profilePath) {
+    $backupPath = "$profilePath.backup.$(Get-Date -Format 'yyyyMMdd_HHmmss_fff')"
+    Copy-Item -LiteralPath $profilePath -Destination $backupPath
     Write-Host "已備份 Profile 至 $backupPath" -ForegroundColor Yellow
 }
-
-New-Item -Path $profilePath -Type File -Force
-Set-Content -Path $profilePath -Value @'
+$profileContent = @'
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\gmay.omp.json" | Invoke-Expression
-Set-PSReadLineOption -PredictionViewStyle ListView
+Import-Module PSReadLine
+Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
 Import-Module Terminal-Icons
 
 function de {
+    <# .SYNOPSIS 進入指定 Docker 容器的互動式 Shell。 #>
     param([string]$container, [string]$shell = "zsh")
     docker exec -it $container $shell
 }
 
 
 function d {
-    Set-Location ([Environment]::GetFolderPath('Desktop'))
+    <# .SYNOPSIS 切換至目前使用者的桌面。 #>
+    Set-Location -LiteralPath ([Environment]::GetFolderPath('Desktop'))
 }
 
 function Invoke-Copse {
+    <# .SYNOPSIS 執行 worktree 工具並切換至工具回報的目錄。 #>
     $output = & "git_worktree_copse" @args
     $output | Write-Output
     $cdLine = $output | Select-String '^COPSE_CD:(.+)$' | Select-Object -Last 1
     if ($cdLine) {
-        Set-Location $cdLine.Matches.Groups[1].Value
+        Set-Location -LiteralPath $cdLine.Matches.Groups[1].Value
     }
 }
 Set-Alias -Name wt -Value Invoke-Copse
 
 function c
 {
+    <# .SYNOPSIS 以既有個人偏好啟動 Copilot。 #>
     copilot --yolo
 }
 
 function a
 {
+    <# .SYNOPSIS 以既有個人偏好啟動 Antigravity。 #>
     agy --dangerously-skip-permissions
 }
 
 function cc
 {
+    <# .SYNOPSIS 以既有個人偏好啟動 Claude Code。 #>
     claude --allow-dangerously-skip-permissions --dangerously-skip-permissions
 }
 
 function co
 {
+    <# .SYNOPSIS 以既有個人偏好啟動 Codex。 #>
     codex --dangerously-bypass-approvals-and-sandbox --dangerously-bypass-hook-trust
 }
-
-
 '@
+[System.IO.File]::WriteAllText($profilePath, $profileContent, [System.Text.UTF8Encoding]::new($true))
 
-# 設定 windows terminal
-$path = "$env:userprofile\AppData\Local\Packages"
-
-# 取得以 Microsoft.WindowsTerminal 開頭的資料夾名稱
-$termonalName = Get-ChildItem -Path $path -Directory | Where-Object { $_.Name -like "Microsoft.WindowsTerminal*" } | Select-Object -ExpandProperty Name
-
-$settingsPath = Join-Path -Path $path -ChildPath $termonalName
-$settingsPath = Join-Path -Path $settingsPath -ChildPath 'LocalState\settings.json'
-
-# 備份 Windows Terminal settings.json
-if (Test-Path $settingsPath) {
-    $backupSettingsPath = "$settingsPath.backup.$(Get-Date -Format 'yyyyMMdd_HHmmss')"
-    Copy-Item -Path $settingsPath -Destination $backupSettingsPath
-    Write-Host "已備份 Terminal settings 至 $backupSettingsPath" -ForegroundColor Yellow
-}
-
-# 讀取現有的 settings.json
-$settings = Get-Content -Raw -Path $settingsPath | ConvertFrom-Json -ErrorAction SilentlyContinue
-
-# 如果讀取失敗，建立新的設定物件
-if (-not $settings) { $settings = @{} }  
-
-# 找到 PowerShell Profile，並修改 commandLine
-$CustProfiles = $settings.profiles.list
-
-foreach ($CustProfile in $CustProfiles) {
-    $command = ""
-    if ($CustProfile.name -eq "Windows PowerShell") {
-        $command = "%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -Command `". $profilePath`""
-    } elseif ($CustProfile.name -eq "PowerShell") {
-        $command = "pwsh -NoExit -Command `". $profilePath`""
-    } else {
-        continue
-    }
-
-    if (-not $CustProfile.PSObject.Properties["commandline"]) {
-        $CustProfile | Add-Member -MemberType NoteProperty -Name "commandline" -Value ""
-    } 
-
-    $CustProfile.commandline = $command
-    
-    # 新增或修改 font.face
-    if (-not $CustProfile.PSObject.Properties["font"]) {
-        $CustProfile | Add-Member -MemberType NoteProperty -Name "font" -Value @{ face = "Maple Mono NF CN" }
-    } else {
-        $CustProfile.font.face = "Maple Mono NF CN"
-    }  
-
-    # 新增或修改預設的 profile
-    if ($CustProfile.name -eq "PowerShell") {
-            
-        if (-not $settings.PSObject.Properties["defaultProfile"]) {
-            $settings | Add-Member -MemberType NoteProperty -Name "defaultProfile" -Value ""
-        }
-        $settings.defaultProfile = $CustProfile.guid
-    }
-}
-
-# 新增 agent-dev profile
-$agentDevProfile = @{
-    "colorScheme" = "Campbell"
-    "commandline" = "pwsh -NoExit -Command `". $profilePath && de agent-dev`""
-    "font" = @{
-        "face" = "Maple Mono NF CN"
-    }
-    "guid" = "{bf89599a-06b4-4ee5-bf49-72e4fb5c0eab}"
-    "hidden" = $false
-    "icon" = "none"
-    "name" = "agent-dev"
-    "startingDirectory" = "%USERPROFILE%"
-}
-
-# 檢查 agent-dev profile 是否已存在
-$agentDevExists = $settings.profiles.list | Where-Object { $_.name -eq "agent-dev" }
-if (-not $agentDevExists) {
-    $settings.profiles.list += $agentDevProfile
-}
-
-# 重新排序 profiles：pwsh 在第一個，agent-dev 在第二個
-$pwshProfile = $settings.profiles.list | Where-Object { $_.name -eq "PowerShell" }
-$agentDevProfile = $settings.profiles.list | Where-Object { $_.name -eq "agent-dev" }
-$otherProfiles = $settings.profiles.list | Where-Object { $_.name -ne "PowerShell" -and $_.name -ne "agent-dev" }
-
-$settings.profiles.list = @()
-if ($pwshProfile) { $settings.profiles.list += $pwshProfile }
-if ($agentDevProfile) { $settings.profiles.list += $agentDevProfile }
-$settings.profiles.list += $otherProfiles
-
-# 將更新後的設定寫回 settings.json
-# 使用 .NET 寫入 UTF-8 無 BOM，避免 PowerShell 5.1 的 Set-Content -Encoding UTF8 會加入 BOM
-$jsonContent = $settings | ConvertTo-Json -Depth 10
-[System.IO.File]::WriteAllText($settingsPath, $jsonContent, [System.Text.UTF8Encoding]::new($false))
-
-Write-Output "Windows Terminal PowerShell 設定已更新！"
-
-# 檢查 Cargo 是否已安裝
 if (Get-Command cargo -ErrorAction SilentlyContinue) {
-    cargo install git_worktree_copse
+    Invoke-ExternalCommand -FilePath cargo -ArgumentList @('install', 'git_worktree_copse')
 } else {
-    Write-Warning 'Cargo 未安裝，跳過 git_worktree_copse 安裝'
+    Write-Warning 'Cargo 未安裝，跳過 git_worktree_copse 安裝。'
 }
+Invoke-ExternalCommand -FilePath npm -ArgumentList @('install', '-g', 'yarn')
 
-New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
-
-npm install -g yarn
-
+# Profile 與工具準備完成後，才建立會使用它們的登入啟動與 Terminal 設定。
+$startupPath = [Environment]::GetFolderPath('Startup')
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'AutoHotKey/autohotkey.ahk') -Destination (Join-Path $startupPath 'autohotkey.ahk')
+$wshShell = New-Object -ComObject WScript.Shell
+$shortcut = $wshShell.CreateShortcut((Join-Path $startupPath 'PowerToys.lnk'))
+$shortcut.TargetPath = $powerToysPath
+$shortcut.Save()
+Set-RefillingTerminalSettings -SettingsPath $settingsPath -ProfilePath $profilePath
+Write-Host '個人環境與 Windows Terminal 設定已完成。請重新開啟 Terminal 以載入設定。'
 Pause
