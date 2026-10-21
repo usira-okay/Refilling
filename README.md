@@ -11,11 +11,13 @@ Windows 開發環境佈建腳本。依序完成系統設定、應用程式安裝
 ## 開始使用
 
 1. 將 `config.example.ps1` 複製為 `config.ps1`，填寫 Git 名稱、電子郵件及所需路徑。`config.ps1` 已排除於版本控制。
-2. 在專案目錄開啟內建 Windows PowerShell，執行引導腳本：
+2. 在專案目錄開啟內建 Windows PowerShell。首次執行請使用以下包含 `-ExecutionPolicy Bypass` 的完整指令：
 
    ```powershell
    powershell.exe -NoProfile -ExecutionPolicy Bypass -File '.\0 - Set ExecutionPolicy - 手動執行.ps1'
    ```
+
+   直接以 `&` 呼叫可能在腳本載入前就被執行原則阻擋，讓腳本內的 `Set-ExecutionPolicy` 無法執行。遇到 `running scripts is disabled` 或 `PSSecurityException` 時，請改用上方完整指令。
 
    引導會先檢查 Windows 版本與架構，再設定目前使用者的執行原則為 `Bypass`、確認 WinGet 並安裝 PowerShell 7。若缺少 App Installer，依錯誤訊息完成安裝後重試。
 
