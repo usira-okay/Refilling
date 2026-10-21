@@ -4,7 +4,7 @@ Windows 開發環境佈建腳本。依序完成系統設定、應用程式安裝
 
 ## 支援範圍
 
-- **Windows 11 Pro x64 乾淨新機**，具備管理員權限及網路連線。
+- **Windows**，具備管理員權限及網路連線。
 - 所有佈建腳本均可由內建 **Windows PowerShell 5.1** 或 **PowerShell 7** 執行。第 0 階段仍安裝 PowerShell 7，供日常 Terminal、快捷鍵，以及模組安裝、Terminal 設定與 AI 遠端安裝器子程序使用。
 - 本流程以首次佈建為目標。失敗時停止並顯示錯誤；請確認原因後再執行，沒有整批復原或從中斷處自動續跑的機制。
 
@@ -131,4 +131,4 @@ AI 安裝流程會先檢查必要工具與指令檔。CLI 或 skills 安裝失�
 
 ## Windows 實機驗收
 
-實際安裝、登入啟動、Explorer、UAC、防火牆及重新啟動仍須在可拋棄的 Windows 11 Pro x64 VM，分別以 Windows PowerShell 5.1 與 PowerShell 7 逐階段驗收。
+實際安裝、登入啟動、Explorer、UAC、防火牆及重新啟動仍須在可拋棄的 Windows VM，分別以 Windows PowerShell 5.1 與 PowerShell 7 逐階段驗收。
