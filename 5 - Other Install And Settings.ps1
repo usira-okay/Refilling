@@ -80,7 +80,7 @@ function d {
 
 function Invoke-Copse {
     <# .SYNOPSIS 執行 worktree 工具並切換至工具回報的目錄。 #>
-    $output = & "git_worktree_copse" @args
+    $output = & "copse" @args
     $output | Write-Output
     $cdLine = $output | Select-String '^COPSE_CD:(.+)$' | Select-Object -Last 1
     if ($cdLine) {
